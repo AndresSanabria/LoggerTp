@@ -1,0 +1,19 @@
+### Java ###
+*.class
+ 
+# Package Files #
+*.jar
+*.war
+*.ear
+*.db 
+ 
+# Eclipse #
+/build/
+/bin/ 
+.classpath
+.project
+.settings/
+ 
+# Maven
+log/
+target/
