@@ -1,25 +1,14 @@
 package main.java.logger;
 
-public class InfoLogger extends Logger  {
-	
-	@Override
-	public void info(String logMsg){
-		log("INFO",logMsg);
+public class InfoLogger extends Logger {
+
+	public InfoLogger(Formatter formatter) {
+		super(formatter);
 	}
-	
+
 	@Override
-	public void warn(String logMsg){
-		log("WARN",logMsg);
+	protected boolean shouldDebug() {
+		return false;
 	}
-	
-	@Override
-	public void error(String logMsg){
-		log("ERROR",logMsg);
-	}
-	
-	@Override
-	public void fatal(String logMsg){
-		log("FATAL",logMsg);
-	}
-	
+
 }

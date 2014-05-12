@@ -1,20 +1,19 @@
 package main.java.logger;
 
 public class WarnLogger extends Logger {
-	
-	@Override
-	public void warn(String logMsg){
-		log("WARN",logMsg);
+
+	public WarnLogger(Formatter formatter) {
+		super(formatter);
 	}
-	
+
 	@Override
-	public void error(String logMsg){
-		log("ERROR",logMsg);
+	protected boolean shouldDebug() {
+		return false;
 	}
-	
+
 	@Override
-	public void fatal(String logMsg){
-		log("FATAL",logMsg);
+	protected boolean shouldInfo() {
+		return false;
 	}
 
 }
