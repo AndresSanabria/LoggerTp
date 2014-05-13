@@ -1,6 +1,6 @@
 package main.java.logger;
 
-public class Console implements Writable {
+public class ConsoleOutput implements Writable {
 	
 	public static final String INVALID_STRING = "Invalid string"; 
 

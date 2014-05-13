@@ -3,9 +3,10 @@ package test.java;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
-import main.java.logger.Console;
+import main.java.logger.ConsoleOutput;
 import main.java.logger.Writable;
 
 import org.junit.After;
@@ -30,18 +31,18 @@ public class TestConsole {
 	}
 
 	@Test
-	public void writeString() {
+	public void writeString() throws IOException {
 		String text = "test";
-		Writable console = new Console();
+		Writable console = new ConsoleOutput();
 		console.write(text);
 		assertTrue(outContent.toString().contains(text));
 	}
 	
 	@Test
-	public void writeTwoStrings() {
+	public void writeTwoStrings() throws IOException {
 		String text1 = "test1";
 		String text2 = "test2";
-		Writable console = new Console();
+		Writable console = new ConsoleOutput();
 		console.write(text1);
 		console.write(text2);
 		assertTrue(outContent.toString().contains(text1));
@@ -49,11 +50,11 @@ public class TestConsole {
 	}
 	
 	@Test
-	public void writeNullString() {
+	public void writeNullString() throws IOException {
 		String text = null;
-		Writable console = new Console();
+		Writable console = new ConsoleOutput();
 		console.write(text);
-		assertTrue(outContent.toString().contains(Console.INVALID_STRING));
+		assertTrue(outContent.toString().contains(ConsoleOutput.INVALID_STRING));
 	}
 
 }
