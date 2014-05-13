@@ -1,44 +1,70 @@
 package main.java.logger;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public abstract class Logger {
 
 	private Formatter formatter;
+	private ArrayList<Writable> outputs;
+	private boolean consoleActive;
+	private static final String TAG_DEBUG = "DEBUG";
+	private static final String TAG_INFO = "INFO";
+	private static final String TAG_WARN = "WARN";
+	private static final String TAG_ERROR = "ERROR";
+	private static final String TAG_FATAL = "FATAL";
 
 	public Logger(Formatter formatter) {
 		super();
 		this.formatter = formatter;
+		this.outputs = new ArrayList<Writable>();
+		consoleActive = false;
+	}
+	
+	public void addConsoleOutput() {
+		if (!consoleActive) {
+			outputs.add(new ConsoleOutput());
+			consoleActive = true;
+		}
+	}
+	
+	public void addFileOutput(String filePath) throws IOException {
+		outputs.add(new FileOutput(filePath));
 	}
 
-	public void debug(String logMsg) {
+	public void debug(String logMsg) throws WriteException {
 		if (shouldDebug()) {
-			log("DEBUG", logMsg);
+			log(TAG_DEBUG, logMsg);
 		}
 	}
 
-	public void info(String logMsg) {
+	public void info(String logMsg) throws WriteException {
 		if (shouldInfo()) {
-			log("INFO", logMsg);
+			log(TAG_INFO, logMsg);
 		}
 	}
 
-	public void warn(String logMsg) {
+	public void warn(String logMsg) throws WriteException {
 		if (shouldWarn()) {
-			log("WARN", logMsg);
+			log(TAG_WARN, logMsg);
 		}
 	}
 
-	public void error(String logMsg) {
+	public void error(String logMsg) throws WriteException {
 		if (shouldError()) {
-			log("ERROR", logMsg);
+			log(TAG_ERROR, logMsg);
 		}
 	}
 
-	public void fatal(String logMsg) {
+	public void fatal(String logMsg) throws WriteException {
 		if (shouldFatal()) {
-			log("FATAL", logMsg);
+			log(TAG_FATAL, logMsg);
 		}
 	}
 
+	/*
+	 * Se imprime en todos los output, no hay que decidir en cual dando metodos distintos
+	 * 
 	public void debug(String logMsg, String fileName, String methodName,
 			Integer lineNumber) {
 		if (shouldDebug()) {
@@ -73,7 +99,8 @@ public abstract class Logger {
 			log("FATAL", logMsg, fileName, methodName, lineNumber);
 		}
 	}
-
+	*/
+	
 	protected boolean shouldDebug() {
 		return true;
 	}
@@ -94,12 +121,18 @@ public abstract class Logger {
 		return true;
 	}
 
-	private void log(String level, String logMsg) {
+	private void log(String level, String logMsg) throws WriteException {
+		// El formatter deberia recibir el level y ya formar el mensaje final
 		String formatedLog = formatter.giveFormat(level, logMsg);
-		// TODO:Escribir en los outputs el msg
-		System.out.println("[" + level + "]:" + formatedLog);
+		// Esta logica deberia ir adentro del formatter
+		String finalMsg = "[" + level + "]:" + formatedLog;
+		for (Writable output: outputs) {
+			output.write(finalMsg);
+		}
 	}
 
+	/*
+	// Este metodo ya no tiene sentido, tenes una lista generica de outputs no hay que distinguir con file y console
 	private void log(String level, String logMsg, String fileName,
 			String methodName, Integer lineNumber) {
 		String formatedLog = formatter.giveFormat(level, logMsg, fileName,
@@ -107,5 +140,5 @@ public abstract class Logger {
 		// TODO:Escribir en los outputs el msg
 		System.out.println("[" + level + "]:" + formatedLog);
 	}
-
+	*/
 }
