@@ -32,7 +32,7 @@ public class FileOutput implements Writable {
 	}
 	
 	// TODO: Handle exception without modifying interface
-	public void write(String text) {        
+	public void write(String text) throws WriteException {        
         try {
         	FileWriter fileWriter = new FileWriter(path,true);
         	BufferedWriter writer = new BufferedWriter(fileWriter);
@@ -41,6 +41,7 @@ public class FileOutput implements Writable {
 	        writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new WriteException();
 		}
         
 	}

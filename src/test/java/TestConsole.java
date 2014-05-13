@@ -3,11 +3,11 @@ package test.java;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 
 import main.java.logger.ConsoleOutput;
 import main.java.logger.Writable;
+import main.java.logger.WriteException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,7 +31,7 @@ public class TestConsole {
 	}
 
 	@Test
-	public void writeString() throws IOException {
+	public void writeString() throws WriteException {
 		String text = "test";
 		Writable console = new ConsoleOutput();
 		console.write(text);
@@ -39,7 +39,7 @@ public class TestConsole {
 	}
 	
 	@Test
-	public void writeTwoStrings() throws IOException {
+	public void writeTwoStrings() throws WriteException{
 		String text1 = "test1";
 		String text2 = "test2";
 		Writable console = new ConsoleOutput();
@@ -50,7 +50,7 @@ public class TestConsole {
 	}
 	
 	@Test
-	public void writeNullString() throws IOException {
+	public void writeNullString() throws WriteException {
 		String text = null;
 		Writable console = new ConsoleOutput();
 		console.write(text);

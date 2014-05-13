@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import main.java.logger.FileOutput;
 import main.java.logger.Writable;
+import main.java.logger.WriteException;
 
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class TestFile {
 	}
 
 	@Test
-	public void testWriteOneString() throws IOException {
+	public void testWriteOneString() throws WriteException, IOException {
 		String path = "log.txt";
 		String text = "test";
 		File file = new File(path);
@@ -39,7 +40,7 @@ public class TestFile {
 	}
 	
 	@Test
-	public void testWriteTwoStrings() throws IOException {
+	public void testWriteTwoStrings() throws WriteException, IOException {
 		String path = "log.txt";
 		File file = new File(path);
 		file.delete();
