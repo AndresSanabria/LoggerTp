@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+
 public class Configuration {
 	
 	private static final String FILE_SEPARATOR = ";";

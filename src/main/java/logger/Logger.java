@@ -3,22 +3,33 @@ package main.java.logger;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 public abstract class Logger {
 
 	private Formatter formatter;
 	private ArrayList<Writable> outputs;
 	private boolean consoleActive;
+	private Level configLevel;
 	private static final String TAG_DEBUG = "DEBUG";
 	private static final String TAG_INFO = "INFO";
 	private static final String TAG_WARN = "WARN";
 	private static final String TAG_ERROR = "ERROR";
 	private static final String TAG_FATAL = "FATAL";
+	private static final String TAG_OFF = "OFF";
+	private static final int DEBUG_VALUE = 5;
+	private static final int INFO_VALUE = 4;
+	private static final int WARN_VALUE = 3;
+	private static final int ERROR_VALUE = 2;
+	private static final int FATAL_VALUE = 1;
+	private static final int OFF_VALUE = 0;
 
+	
 	public Logger(Formatter formatter) {
 		super();
 		this.formatter = formatter;
 		this.outputs = new ArrayList<Writable>();
-		consoleActive = false;
+		this.consoleActive = false;
+		this.configLevel = new Level(TAG_OFF, OFF_VALUE);
 	}
 	
 	public void addConsoleOutput() {
@@ -31,96 +42,49 @@ public abstract class Logger {
 	public void addFileOutput(String filePath) throws IOException {
 		outputs.add(new FileOutput(filePath));
 	}
-
+	
 	public void debug(String logMsg) throws WriteException {
-		if (shouldDebug()) {
-			log(TAG_DEBUG, logMsg);
+		Level level = new Level(TAG_DEBUG, DEBUG_VALUE);
+		if (shouldLog(level)) {
+			log(level.getName(), logMsg);
 		}
 	}
 
 	public void info(String logMsg) throws WriteException {
-		if (shouldInfo()) {
-			log(TAG_INFO, logMsg);
+		Level level = new Level(TAG_INFO, INFO_VALUE);
+		if (shouldLog(level)) {
+			log(level.getName(), logMsg);
 		}
 	}
 
 	public void warn(String logMsg) throws WriteException {
-		if (shouldWarn()) {
-			log(TAG_WARN, logMsg);
+		Level level = new Level(TAG_WARN, WARN_VALUE);
+		if (shouldLog(level)) {
+			log(level.getName(), logMsg);
 		}
 	}
 
 	public void error(String logMsg) throws WriteException {
-		if (shouldError()) {
-			log(TAG_ERROR, logMsg);
+		Level level = new Level(TAG_ERROR, ERROR_VALUE);
+		if (shouldLog(level)) {
+			log(level.getName(), logMsg);
 		}
 	}
 
 	public void fatal(String logMsg) throws WriteException {
-		if (shouldFatal()) {
-			log(TAG_FATAL, logMsg);
+		Level level = new Level(TAG_FATAL, FATAL_VALUE);
+		if (shouldLog(level)) {
+			log(level.getName(), logMsg);
 		}
 	}
-
-	/*
-	 * Se imprime en todos los output, no hay que decidir en cual dando metodos distintos
-	 * 
-	public void debug(String logMsg, String fileName, String methodName,
-			Integer lineNumber) {
-		if (shouldDebug()) {
-			log("DEBUG", logMsg, fileName, methodName, lineNumber);
-		}
-	}
-
-	public void info(String logMsg, String fileName, String methodName,
-			Integer lineNumber) {
-		if (shouldInfo()) {
-			log("INFO", logMsg, fileName, methodName, lineNumber);
-		}
-	}
-
-	public void warn(String logMsg, String fileName, String methodName,
-			Integer lineNumber) {
-		if (shouldWarn()) {
-			log("WARN", logMsg, fileName, methodName, lineNumber);
-		}
-	}
-
-	public void error(String logMsg, String fileName, String methodName,
-			Integer lineNumber) {
-		if (shouldError()) {
-			log("ERROR", logMsg, fileName, methodName, lineNumber);
-		}
-	}
-
-	public void fatal(String logMsg, String fileName, String methodName,
-			Integer lineNumber) {
-		if (shouldFatal()) {
-			log("FATAL", logMsg, fileName, methodName, lineNumber);
-		}
-	}
-	*/
 	
-	protected boolean shouldDebug() {
-		return true;
+	private Boolean shouldLog(Level level) {
+		if (level.getValue() <= this.configLevel.getValue()) {
+			return true;			
+		}
+		return false;
 	}
-
-	protected boolean shouldInfo() {
-		return true;
-	}
-
-	protected boolean shouldWarn() {
-		return true;
-	}
-
-	protected boolean shouldError() {
-		return true;
-	}
-
-	protected boolean shouldFatal() {
-		return true;
-	}
-
+	
 	private void log(String level, String logMsg) throws WriteException {
 		// El formatter deberia recibir el level y ya formar el mensaje final
 		String formatedLog = formatter.giveFormat(level, logMsg);
@@ -131,14 +95,4 @@ public abstract class Logger {
 		}
 	}
 
-	/*
-	// Este metodo ya no tiene sentido, tenes una lista generica de outputs no hay que distinguir con file y console
-	private void log(String level, String logMsg, String fileName,
-			String methodName, Integer lineNumber) {
-		String formatedLog = formatter.giveFormat(level, logMsg, fileName,
-				methodName, lineNumber);
-		// TODO:Escribir en los outputs el msg
-		System.out.println("[" + level + "]:" + formatedLog);
-	}
-	*/
 }
