@@ -39,8 +39,10 @@ public class LoggerManager {
 			this.logger.addConsoleOutput();
 		}
 		String[] fileOutputs = this.configLoader.getLogToFiles();
-		for (int i = 0; i < (fileOutputs.length - 1); i++) {
-			this.logger.addFileOutput(fileOutputs[i]);
+		if (fileOutputs != null) {
+			for (int i = 0; i < (fileOutputs.length - 1); i++) {
+				this.logger.addFileOutput(fileOutputs[i]);
+			}
 		}
 	}
 	

@@ -20,6 +20,7 @@ public class ConfigurationLoader {
 		this.level = "OFF";
 		this.messageFormat = "";
 		this.messageSeparator = "";
+		this.logToFiles = null;
 		this.logToConsole = false;
 	}
 	
@@ -29,11 +30,11 @@ public class ConfigurationLoader {
 		try {
 			configFile = new FileInputStream(configFilePath);
 			properties.load(configFile);
-			this.level = properties.getProperty("level");
-			this.messageFormat = properties.getProperty("messageFormat");
-			this.messageSeparator = properties.getProperty("messageSeparator");
-			this.logToFiles = properties.getProperty("logToFiles").split(FILE_SEPARATOR);
-			this.logToConsole = Boolean.valueOf(properties.getProperty("logToConsole"));
+			this.level = this.getLevelPropertyValue(properties);
+			this.messageFormat = this.getPropertyValue(properties, "messageFormat");
+			this.messageSeparator = this.getPropertyValue(properties, "messageSeparator");
+			this.logToFiles = this.getPropertyValue(properties, "logToFiles").split(FILE_SEPARATOR);
+			this.logToConsole = this.getLogToConsolePropertyValue(properties);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -59,6 +60,30 @@ public class ConfigurationLoader {
 
 	public Boolean getLogToConsole() {
 		return this.logToConsole;
+	}
+	
+	private String getPropertyValue(Properties properties, String key) {
+		String value = properties.getProperty(key);
+		if (value != null) {
+			return value;
+		}
+		return "";
+	}
+	
+	private String getLevelPropertyValue(Properties properties) {
+		String value = this.getPropertyValue(properties, "level");
+		if (value.isEmpty()) {
+			value = "OFF";
+		}
+		return value;
+	}
+	
+	private Boolean getLogToConsolePropertyValue(Properties properties) {
+		String value = this.getPropertyValue(properties, "logToConsole");
+		if (value.isEmpty()) {
+			return false;
+		}
+		return Boolean.valueOf(value);
 	}
 	
 }

@@ -18,14 +18,21 @@ public class TestConfigurationLoader {
 	public void testLoadMessageFormatLevelFromConfiguration() {
 		ConfigurationLoader config = new ConfigurationLoader();
 		config.loadConfiguration("testConfig.properties");
-		assertEquals(config.getMessageFormat(), "%{HH:mm:ss} %n %p %n %t %n %m");
+		assertEquals(config.getMessageFormat(), "%p %n %m");
 	}
 	
 	@Test
 	public void testLoadLogToFilesFromConfiguration() {
 		ConfigurationLoader config = new ConfigurationLoader();
 		config.loadConfiguration("testConfig.properties");
-		assertEquals(config.getLogToFiles()[1], "/home/log2.txt");
+		assertEquals(config.getLogToFiles()[1], "log2.txt");
+	}
+	
+	@Test
+	public void testLoadMissingLogToFilesFromConfiguration() {
+		ConfigurationLoader config = new ConfigurationLoader();
+		config.loadConfiguration("testConfig2.properties");
+		assertEquals(config.getLogToFiles()[0], "");
 	}
 	
 }

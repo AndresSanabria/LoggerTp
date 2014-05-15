@@ -10,34 +10,6 @@ import java.util.ArrayList;
 
 
 public class Logger {
-	
-/*	private static boolean stringInFile(String text, File file) throws FileNotFoundException {
-		Scanner fileScanner = new Scanner(file);
-		boolean found = false;
-		while(fileScanner.hasNextLine()){
-		     if(text.equals(fileScanner.nextLine().trim())){
-		        found = true;
-		        break;
-		      }
-		 }
-		fileScanner.close();
-		return found;
-	}
-	
-	public static void main(String [ ] args)throws IOException,WriteException
-	{
-		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %L","-");
-		String path = "log.txt";
-		File file = new File(path);
-		file.delete();
-		String msg = "Este es mi mensaje";
-		Logger logger=new Logger(formatter);
-		logger.addFileOutput(path);
-		logger.debug(msg);
-		Integer lineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber()-1;//-1 pues el logger give format esta en la linea anterior
-		String text = "Test" + " - " + msg + " - " + lineNumber;
-		assertTrue(stringInFile(text,file));
-	}*/
 
 	private Formatter formatter;
 	private ArrayList<Writable> outputs;
