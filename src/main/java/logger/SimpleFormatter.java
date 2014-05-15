@@ -4,6 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SimpleFormatter extends Formatter {
+
+	public SimpleFormatter(String format) {
+		super(format);
+	}
 	
 	public SimpleFormatter(String format, String separator) {
 		super(format, separator);

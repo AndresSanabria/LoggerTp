@@ -37,7 +37,7 @@ public class TestLogger {
 		File file = new File(path);
 		file.delete();
 		String msg = "Este es mi mensaje";
-		Logger logger=new Logger(formatter);
+		Logger logger=new Logger(formatter, "DEBUG");
 		logger.addFileOutput(path);
 		logger.debug(msg);
 		Integer lineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber()-1;//-1 pues el logger give format esta en la linea anterior
@@ -52,7 +52,7 @@ public class TestLogger {
 		File file = new File(path);
 		file.delete();
 		String msg = "Este es mi mensaje";
-		Logger logger=new Logger(formatter);
+		Logger logger=new Logger(formatter, "DEBUG");
 		logger.addFileOutput(path);
 		logger.debug(msg);
 		String text = "Test" + " - " + msg + " - " + "testLoggerCallingMethodNameLog";
@@ -66,7 +66,7 @@ public class TestLogger {
 		File file = new File(path);
 		file.delete();
 		String msg = "Este es mi mensaje";
-		Logger logger=new Logger(formatter);
+		Logger logger=new Logger(formatter, "DEBUG");
 		logger.addFileOutput(path);
 		logger.debug(msg);
 		String text = "Test" + " - " + msg + " - " + "TestLogger.java";

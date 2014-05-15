@@ -20,4 +20,8 @@ public class Level {
 		return value;
 	}
 	
+	public Boolean isGreaterThan(Level level) {
+		return (this.getValue() >= level.getValue());
+	}
+	
 }

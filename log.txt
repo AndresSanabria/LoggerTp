@@ -1,2 +1,1 @@
-test1
-test2
+Test - Este es mi mensaje - TestLogger.java

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-public class Configuration {
+public class ConfigurationLoader {
 	
 	private static final String FILE_SEPARATOR = ";";
 	
@@ -16,7 +16,7 @@ public class Configuration {
 	private Boolean logToConsole;
 	
 	
-	public Configuration() {
+	public ConfigurationLoader() {
 		this.level = "OFF";
 		this.messageFormat = "";
 		this.messageSeparator = "";
