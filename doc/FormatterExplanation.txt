@@ -1,0 +1,14 @@
+-------------------
+ Responsabilidades
+-------------------
+
+Encargado de generar el mensaje a logguear a partir de un mensaje a loggear recibido, un nivel de loggueo y un formato de generación del mensaje.
+
+----------
+ Herencia
+----------
+
+Para esta primera entrega, solo se pedían formatos simples de texto. Podría suceder que más adelante nos pidan otros formatos posibles como json, xml, etc. Es por ello que se pensó en una clase abstracta Formatter, la cual recibe el formato (En todos los casos se necesitará un formato) y de ella Heredan todas las clases concretas( Por el momento sólo SimpleFormatter) que implementan el método giveFormat.
+Esto no se hizo con una interfaz, pues todas las clases que hereden de Formatter deberán tener un atributo format y separator( podrían tener además más cosas en común más adelante), y en definitiva son Formatters.
+
+
