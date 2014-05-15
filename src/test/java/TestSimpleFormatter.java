@@ -54,22 +54,6 @@ public class TestSimpleFormatter {
 	}
 	
 	@Test
-	public void testSimpleFormatterCallingMethodName() {
-		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %M","-");
-		String msg = "Este es mi mensaje";
-		String formattedMsg = formatter.giveFormat("WARN", msg);
-		assertEquals(formattedMsg,"Test" + " - " + msg + " - " + "testSimpleFormatterCallingMethodName");
-	}
-	
-	@Test
-	public void testSimpleFormatterCallingFileName() {
-		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %F","-");
-		String msg = "Este es mi mensaje";
-		String formattedMsg = formatter.giveFormat("WARN", msg);
-		assertEquals(formattedMsg,"Test" + " - " + msg + " - " + "TestSimpleFormatter.java");
-	}
-	
-	@Test
 	public void testSimpleFormatterWrittingLogLevel() {
 		SimpleFormatter formatter = new SimpleFormatter("Test[%p]: %m","-");
 		String msg = "Este es mi mensaje";
@@ -92,15 +76,6 @@ public class TestSimpleFormatter {
 		String formattedMsg = formatter.giveFormat("WARN", msg);
 		assertEquals(formattedMsg,"");
 	}	
-	
-	@Test
-	public void testSimpleFormatterCallingLineNumber() {
-		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %L","-");
-		String msg = "Este es mi mensaje";
-		String formattedMsg = formatter.giveFormat("WARN", msg);
-		Integer lineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber()-1;//-1 pues el logger give format esta en la linea anterior
-		assertEquals(formattedMsg,"Test" + " - " + msg + " - " + lineNumber);
-	}
 	
 	
 
