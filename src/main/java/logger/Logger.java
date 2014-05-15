@@ -1,10 +1,43 @@
 package main.java.logger;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
-public abstract class Logger {
+public class Logger {
+	
+	private static boolean stringInFile(String text, File file) throws FileNotFoundException {
+		Scanner fileScanner = new Scanner(file);
+		boolean found = false;
+		while(fileScanner.hasNextLine()){
+		     if(text.equals(fileScanner.nextLine().trim())){
+		        found = true;
+		        break;
+		      }
+		 }
+		fileScanner.close();
+		return found;
+	}
+	
+	public static void main(String [ ] args)throws IOException,WriteException
+	{
+		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %L","-");
+		String path = "log.txt";
+		File file = new File(path);
+		file.delete();
+		String msg = "Este es mi mensaje";
+		Logger logger=new Logger(formatter);
+		logger.addFileOutput(path);
+		logger.debug(msg);
+		Integer lineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber()-1;//-1 pues el logger give format esta en la linea anterior
+		String text = "Test" + " - " + msg + " - " + lineNumber;
+		assertTrue(stringInFile(text,file));
+	}
 
 	private Formatter formatter;
 	private ArrayList<Writable> outputs;
@@ -86,12 +119,9 @@ public abstract class Logger {
 	}
 	
 	private void log(String level, String logMsg) throws WriteException {
-		// El formatter deberia recibir el level y ya formar el mensaje final
 		String formatedLog = formatter.giveFormat(level, logMsg);
-		// Esta logica deberia ir adentro del formatter
-		String finalMsg = "[" + level + "]:" + formatedLog;
 		for (Writable output: outputs) {
-			output.write(finalMsg);
+			output.write(formatedLog);
 		}
 	}
 

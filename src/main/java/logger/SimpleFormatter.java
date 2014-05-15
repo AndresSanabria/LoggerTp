@@ -17,9 +17,9 @@ public class SimpleFormatter extends Formatter {
 		formattedLog = formattedLog.replaceAll("%m", logMsg);
 
 		formattedLog = formattedLog.replaceAll("%t", Thread.currentThread().getName());
-		formattedLog = formattedLog.replaceAll("%L", String.valueOf((Thread.currentThread().getStackTrace()[2].getLineNumber())));
-		formattedLog = formattedLog.replaceAll("%F", String.valueOf((Thread.currentThread().getStackTrace()[2].getFileName())));
-		formattedLog = formattedLog.replaceAll("%M", String.valueOf((Thread.currentThread().getStackTrace()[2].getMethodName())));
+		formattedLog = formattedLog.replaceAll("%L", String.valueOf((Thread.currentThread().getStackTrace()[4].getLineNumber())));
+		formattedLog = formattedLog.replaceAll("%F", String.valueOf((Thread.currentThread().getStackTrace()[4].getFileName())));
+		formattedLog = formattedLog.replaceAll("%M", String.valueOf((Thread.currentThread().getStackTrace()[4].getMethodName())));
 		
 		formattedLog = replaceDate(formattedLog);
 		formattedLog = formattedLog.replaceAll("%%", "%");
