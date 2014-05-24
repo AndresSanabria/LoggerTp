@@ -14,7 +14,7 @@ public class TestSimpleFormatter {
 	
 
 	@Test
-	public void testSimpleFormatterContainingDate() {
+	public void simpleFormatterContainingDate() {
 		SimpleFormatter formatter = new SimpleFormatter("%d{HH:mm:ss} %n %m","-");
 		String msg = "Este es mi mensaje";
 		String formattedMsg = formatter.giveFormat("WARN", msg);
@@ -25,7 +25,7 @@ public class TestSimpleFormatter {
 	}
 	
 	@Test
-	public void testSimpleFormatterContainingTwoDatesInDifferentFormat() {
+	public void simpleFormatterContainingTwoDatesInDifferentFormat() {
 		SimpleFormatter formatter = new SimpleFormatter("%d{HH:mm:ss} %n %m %n %d{h:mm a}","-");
 		String msg = "Este es mi mensaje";
 		String formattedMsg = formatter.giveFormat("WARN", msg);
@@ -38,7 +38,7 @@ public class TestSimpleFormatter {
 	}
 	
 	@Test
-	public void testSimpleFormatterLogMessageAndSeparator() {
+	public void simpleFormatterLogMessageAndSeparator() {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %m",":");
 		String msg = "Este es mi mensaje";
 		String formattedMsg = formatter.giveFormat("WARN", msg);
@@ -46,7 +46,7 @@ public class TestSimpleFormatter {
 	}
 	
 	@Test
-	public void testSimpleFormatterContainingThreadName() {
+	public void simpleFormatterContainingThreadName() {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %t","-");
 		String msg = "Este es mi mensaje";
 		String formattedMsg = formatter.giveFormat("WARN", msg);
@@ -54,7 +54,7 @@ public class TestSimpleFormatter {
 	}
 	
 	@Test
-	public void testSimpleFormatterWrittingLogLevel() {
+	public void simpleFormatterWrittingLogLevel() {
 		SimpleFormatter formatter = new SimpleFormatter("Test[%p]: %m","-");
 		String msg = "Este es mi mensaje";
 		String formattedMsg = formatter.giveFormat("WARN", msg);
@@ -62,7 +62,7 @@ public class TestSimpleFormatter {
 	}	
 	
 	@Test
-	public void testSimpleFormatterEscappingPorciento() {
+	public void simpleFormatterEscappingPercentSign() {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %%","-");
 		String msg = "Este es mi mensaje";
 		String formattedMsg = formatter.giveFormat("WARN", msg);
@@ -70,7 +70,7 @@ public class TestSimpleFormatter {
 	}	
 	
 	@Test
-	public void testSimpleFormatterWithoutMsg() {
+	public void simpleFormatterWithoutMsg() {
 		SimpleFormatter formatter = new SimpleFormatter("","");
 		String msg = "Este es mi mensaje";
 		String formattedMsg = formatter.giveFormat("WARN", msg);

@@ -32,7 +32,7 @@ public class TestLogger {
 	}
 	
 	@Test
-	public void testLoggerCallingLineNumber()throws IOException,WriteException {
+	public void loggerCallingLineNumber()throws IOException,WriteException {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %L","-");
 		String path = "log.txt";
 		File file = new File(path);
@@ -47,7 +47,7 @@ public class TestLogger {
 	}
 	
 	@Test
-	public void testLoggerCallingMethodNameLog() throws IOException,WriteException {
+	public void loggerCallingMethodNameLog() throws IOException,WriteException {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %M","-");
 		String path = "log.txt";
 		File file = new File(path);
@@ -56,12 +56,12 @@ public class TestLogger {
 		Logger logger = new Logger(formatter, "DEBUG");
 		logger.addFileOutput(path);
 		logger.debug(msg);
-		String text = "Test" + " - " + msg + " - " + "testLoggerCallingMethodNameLog";
+		String text = "Test" + " - " + msg + " - " + "loggerCallingMethodNameLog";
 		assertTrue(stringInFile(text,file));
 	}
 	
 	@Test
-	public void testLoggerCallingFileName() throws IOException,WriteException {
+	public void loggerCallingFileName() throws IOException,WriteException {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %F","-");
 		String path = "log.txt";
 		File file = new File(path);
@@ -75,7 +75,7 @@ public class TestLogger {
 	}
 	
 	@Test
-	public void testLogInLevelDebug() throws IOException,WriteException {
+	public void logInLevelDebug() throws IOException,WriteException {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %p %n %m","-");
 		String path = "log.txt";
 		File file = new File(path);
@@ -91,7 +91,7 @@ public class TestLogger {
 	}
 	
 	@Test
-	public void testLogInLevelInfo() throws IOException,WriteException {
+	public void logInLevelInfo() throws IOException,WriteException {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %p %n %m","-");
 		String path = "log.txt";
 		File file = new File(path);
@@ -107,7 +107,7 @@ public class TestLogger {
 	}
 	
 	@Test
-	public void testLogInLevelOff() throws IOException,WriteException {
+	public void logInLevelOff() throws IOException,WriteException {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %p %n %m","-");
 		String path = "log.txt";
 		File file = new File(path);
@@ -123,7 +123,7 @@ public class TestLogger {
 	}
 	
 	@Test
-	public void testSettingLoggerOffAndOn() throws IOException,WriteException {
+	public void settingLoggerOffAndOn() throws IOException,WriteException {
 		SimpleFormatter formatter = new SimpleFormatter("Test %n %p %n %m","-");
 		String path = "log.txt";
 		File file = new File(path);

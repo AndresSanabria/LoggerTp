@@ -31,7 +31,7 @@ public class TestLoggerManager {
 	}
 	
 	@Test
-	public void testLoadConfiguration() throws IOException, WriteException {
+	public void loadConfiguration() throws IOException, WriteException {
 		String path = "log.txt";
 		File file = new File(path);
 		file.delete();

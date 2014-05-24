@@ -8,28 +8,28 @@ import org.junit.Test;
 public class TestConfigurationLoader {
 
 	@Test
-	public void testLoadLevelFromConfiguration() {
+	public void loadLevelFromConfiguration() {
 		ConfigurationLoader config = new ConfigurationLoader();
 		config.loadConfiguration("testConfig.properties");
 		assertEquals(config.getLevel(), "INFO");
 	}
 	
 	@Test
-	public void testLoadMessageFormatLevelFromConfiguration() {
+	public void loadMessageFormatLevelFromConfiguration() {
 		ConfigurationLoader config = new ConfigurationLoader();
 		config.loadConfiguration("testConfig.properties");
 		assertEquals(config.getMessageFormat(), "%p %n %m");
 	}
 	
 	@Test
-	public void testLoadLogToFilesFromConfiguration() {
+	public void loadLogToFilesFromConfiguration() {
 		ConfigurationLoader config = new ConfigurationLoader();
 		config.loadConfiguration("testConfig.properties");
 		assertEquals(config.getLogToFiles()[1], "log2.txt");
 	}
 	
 	@Test
-	public void testLoadMissingLogToFilesFromConfiguration() {
+	public void loadMissingLogToFilesFromConfiguration() {
 		ConfigurationLoader config = new ConfigurationLoader();
 		config.loadConfiguration("testConfig2.properties");
 		assertEquals(config.getLogToFiles()[0], "");

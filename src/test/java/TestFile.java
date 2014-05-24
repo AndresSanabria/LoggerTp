@@ -29,7 +29,7 @@ public class TestFile {
 	}
 
 	@Test
-	public void testWriteOneString() throws WriteException, IOException {
+	public void writeOneString() throws WriteException, IOException {
 		String path = "log.txt";
 		String text = "test";
 		File file = new File(path);
@@ -40,7 +40,7 @@ public class TestFile {
 	}
 	
 	@Test
-	public void testWriteTwoStrings() throws WriteException, IOException {
+	public void writeTwoStrings() throws WriteException, IOException {
 		String path = "log.txt";
 		File file = new File(path);
 		file.delete();
@@ -54,7 +54,7 @@ public class TestFile {
 	}
 	
 	@Test
-	public void testNullFile() throws IOException {
+	public void nullFile() throws IOException {
 		try {
 			new FileOutput(null);
 		} catch (Exception e) {
