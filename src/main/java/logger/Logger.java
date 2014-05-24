@@ -13,12 +13,6 @@ public class Logger {
 	private enum levelValues {
 		OFF, FATAL, ERROR, WARN, INFO, DEBUG
 	}
-	private static final String TAG_DEBUG = "DEBUG";
-	private static final String TAG_INFO = "INFO";
-	private static final String TAG_WARN = "WARN";
-	private static final String TAG_ERROR = "ERROR";
-	private static final String TAG_FATAL = "FATAL";
-	private static final String TAG_OFF = "OFF";
 
 	
 	public Logger(Formatter formatter, String levelName) {
@@ -46,39 +40,39 @@ public class Logger {
 	}
 	
 	public void off() {
-		this.currentLevel = new Level(TAG_OFF, levelValues.valueOf(TAG_OFF).ordinal());
+		this.currentLevel = new Level(levelValues.OFF.name(), levelValues.OFF.ordinal());
 	}
 	
 	public void debug(String logMsg) throws WriteException {
-		Level level = new Level(TAG_DEBUG, levelValues.valueOf(TAG_DEBUG).ordinal());
+		Level level = new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal());
 		if (shouldLog(level)) {
 			log(level.getName(), logMsg);
 		}
 	}
 
 	public void info(String logMsg) throws WriteException {
-		Level level = new Level(TAG_INFO, levelValues.valueOf(TAG_INFO).ordinal());
+		Level level = new Level(levelValues.INFO.name(), levelValues.INFO.ordinal());
 		if (shouldLog(level)) {
 			log(level.getName(), logMsg);
 		}
 	}
 
 	public void warn(String logMsg) throws WriteException {
-		Level level = new Level(TAG_WARN, levelValues.valueOf(TAG_WARN).ordinal());
+		Level level = new Level(levelValues.WARN.name(), levelValues.WARN.ordinal());
 		if (shouldLog(level)) {
 			log(level.getName(), logMsg);
 		}
 	}
 
 	public void error(String logMsg) throws WriteException {
-		Level level = new Level(TAG_ERROR, levelValues.valueOf(TAG_ERROR).ordinal());
+		Level level = new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal());
 		if (shouldLog(level)) {
 			log(level.getName(), logMsg);
 		}
 	}
 
 	public void fatal(String logMsg) throws WriteException {
-		Level level = new Level(TAG_FATAL, levelValues.valueOf(TAG_FATAL).ordinal());
+		Level level = new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal());
 		if (shouldLog(level)) {
 			log(level.getName(), logMsg);
 		}
