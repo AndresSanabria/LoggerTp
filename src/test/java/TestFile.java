@@ -53,15 +53,10 @@ public class TestFile {
 		assertTrue(stringInFile(text2,file));
 	}
 	
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void nullFile() throws IOException {
-		try {
-			new FileOutput(null);
-		} catch (Exception e) {
-			assertTrue(true);
-			return;
-		}
-		assertTrue(false); // should never reach here
+		new FileOutput(null);
+		fail("Did not throw exception");
 	}
 
 }

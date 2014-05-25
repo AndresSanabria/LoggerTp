@@ -37,12 +37,12 @@ public class LoggerManager {
 	private void initializeLogger(ConfigurationLoader configLoader, Formatter formatter) throws IOException {
 		this.logger = new Logger(formatter, configLoader.getLevel());
 		if (configLoader.getLogToConsole()) {
-			this.logger.addConsoleOutput();
+			this.logger.enableConsoleOutput();
 		}
 		String[] fileOutputs = configLoader.getLogToFiles();
 		if (fileOutputs != null) {
-			for (int i = 0; i < (fileOutputs.length - 1); i++) {
-				this.logger.addFileOutput(fileOutputs[i]);
+			for (String fileOutput: fileOutputs) {
+				this.logger.addOutput(new FileOutput(fileOutput));
 			}
 		}
 	}
