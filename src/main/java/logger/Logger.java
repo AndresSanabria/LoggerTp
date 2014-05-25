@@ -52,35 +52,35 @@ public class Logger {
 	public void debug(String logMsg) {
 		Level level = new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal());
 		if (shouldLog(level)) {
-			log(level.getName(), logMsg);
+			log(level, logMsg);
 		}
 	}
 
 	public void info(String logMsg) {
 		Level level = new Level(levelValues.INFO.name(), levelValues.INFO.ordinal());
 		if (shouldLog(level)) {
-			log(level.getName(), logMsg);
+			log(level, logMsg);
 		}
 	}
 
 	public void warn(String logMsg) throws WriteException {
 		Level level = new Level(levelValues.WARN.name(), levelValues.WARN.ordinal());
 		if (shouldLog(level)) {
-			log(level.getName(), logMsg);
+			log(level, logMsg);
 		}
 	}
 
 	public void error(String logMsg) {
 		Level level = new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal());
 		if (shouldLog(level)) {
-			log(level.getName(), logMsg);
+			log(level, logMsg);
 		}
 	}
 
 	public void fatal(String logMsg) {
 		Level level = new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal());
 		if (shouldLog(level)) {
-			log(level.getName(), logMsg);
+			log(level, logMsg);
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class Logger {
 		return this.currentLevel.isGreaterThan(level);
 	}
 	
-	private void log(String level, String logMsg) {
+	private void log(Level level, String logMsg) {
 		String formatedLog = formatter.giveFormat(level, logMsg);
 		for (Writable output: outputs) {
 			try {

@@ -20,10 +20,10 @@ public class SimpleFormatter implements Formatter {
 		this.separator = separator;
 	}
 
-	public String giveFormat(String level, String logMsg) {
+	public String giveFormat(Level level, String logMsg) {
 		String formattedLog = new String(this.format);
 		formattedLog = formattedLog.replaceAll("%n", separator);
-		formattedLog = formattedLog.replaceAll("%p", level);
+		formattedLog = formattedLog.replaceAll("%p", level.getName());
 		formattedLog = formattedLog.replaceAll("%m", logMsg);
 
 		formattedLog = formattedLog.replaceAll("%t", Thread.currentThread().getName());
