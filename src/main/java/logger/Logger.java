@@ -36,6 +36,10 @@ public class Logger {
 		outputs.add(new FileOutput(filePath));
 	}
 	
+	public void addOutput(Writable newOutput) {
+		outputs.add(newOutput);
+	}
+	
 	public void on() {
 		this.currentLevel = this.configLevel;
 	}
