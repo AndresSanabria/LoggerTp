@@ -36,7 +36,7 @@ public class LoggerManager {
 	private void initializeLogger(ConfigurationLoader configLoader, Formatter formatter) throws IOException {
 		this.logger = new Logger(formatter, configLoader.getLevel());
 		if (configLoader.getLogToConsole()) {
-			this.logger.addConsoleOutput();
+			this.logger.enableConsoleOutput();
 		}
 		String[] fileOutputs = configLoader.getLogToFiles();
 		if (fileOutputs != null) {

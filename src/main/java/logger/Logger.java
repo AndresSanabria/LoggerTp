@@ -25,7 +25,7 @@ public class Logger {
 		this.currentLevel = this.configLevel;
 	}
 	
-	public void addConsoleOutput() {
+	public void enableConsoleOutput() {
 		if (!consoleActive) {
 			outputs.add(new ConsoleOutput());
 			consoleActive = true;
