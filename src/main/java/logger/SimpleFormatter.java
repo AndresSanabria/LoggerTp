@@ -3,17 +3,23 @@ package main.java.logger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SimpleFormatter extends Formatter {
+public class SimpleFormatter implements Formatter {
+	
+	private String format;
+	private String separator = "-" ;
+	private Integer callerStackDistance;//4
 
-	public SimpleFormatter(String format) {
-		super(format);
+	public SimpleFormatter(String format, Integer callerStackDistance) {
+		this.callerStackDistance = callerStackDistance;
+		this.format = format;
 	}
 	
-	public SimpleFormatter(String format, String separator) {
-		super(format, separator);
+	public SimpleFormatter(String format, Integer callerStackDistance, String separator) {
+		this.callerStackDistance = callerStackDistance;
+		this.format = format;
+		this.separator = separator;
 	}
 
-	@Override
 	public String giveFormat(String level, String logMsg) {
 		String formattedLog = new String(this.format);
 		formattedLog = formattedLog.replaceAll("%n", separator);
@@ -21,9 +27,9 @@ public class SimpleFormatter extends Formatter {
 		formattedLog = formattedLog.replaceAll("%m", logMsg);
 
 		formattedLog = formattedLog.replaceAll("%t", Thread.currentThread().getName());
-		formattedLog = formattedLog.replaceAll("%L", String.valueOf((Thread.currentThread().getStackTrace()[4].getLineNumber())));
-		formattedLog = formattedLog.replaceAll("%F", String.valueOf((Thread.currentThread().getStackTrace()[4].getFileName())));
-		formattedLog = formattedLog.replaceAll("%M", String.valueOf((Thread.currentThread().getStackTrace()[4].getMethodName())));
+		formattedLog = formattedLog.replaceAll("%L", String.valueOf((Thread.currentThread().getStackTrace()[this.callerStackDistance].getLineNumber())));
+		formattedLog = formattedLog.replaceAll("%F", String.valueOf((Thread.currentThread().getStackTrace()[this.callerStackDistance].getFileName())));
+		formattedLog = formattedLog.replaceAll("%M", String.valueOf((Thread.currentThread().getStackTrace()[this.callerStackDistance].getMethodName())));
 		
 		formattedLog = replaceDate(formattedLog);
 		formattedLog = formattedLog.replaceAll("%%", "%");

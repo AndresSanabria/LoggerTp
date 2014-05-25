@@ -7,6 +7,7 @@ public class LoggerManager {
 	
 	Logger logger;
 	
+	final Integer DISTANCE_CALLER_GIVE_FORMAT = 4;
 	
 	public LoggerManager() { }
 	
@@ -26,9 +27,9 @@ public class LoggerManager {
 		String format = configLoader.getMessageFormat();
 		String separator = configLoader.getMessageSeparator();
 		if (separator != null && !separator.isEmpty()) {
-			formatter = new SimpleFormatter(format, separator);
+			formatter = new SimpleFormatter(format, DISTANCE_CALLER_GIVE_FORMAT, separator);
 		} else {
-			formatter = new SimpleFormatter(format);
+			formatter = new SimpleFormatter(format, DISTANCE_CALLER_GIVE_FORMAT);
 		}
 		return formatter;
 	}
