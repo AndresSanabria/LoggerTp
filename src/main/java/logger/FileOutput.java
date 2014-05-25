@@ -46,4 +46,9 @@ public class FileOutput implements Writable {
         
 	}
 
+	@Override
+	public String getStringId() {
+		return "File: " + getPath();
+	}
+
 }

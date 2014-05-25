@@ -12,4 +12,9 @@ public class ConsoleOutput implements Writable {
 		System.out.println(text);
 	}
 
+	@Override
+	public String getStringId() {
+		return "Console";
+	}
+
 }
