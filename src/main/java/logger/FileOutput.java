@@ -31,17 +31,24 @@ public class FileOutput implements Writable {
 		}			
 	}
 	
-	// TODO: Handle exception without modifying interface
-	public void write(String text) throws WriteException {        
+	public void write(String text) throws WriteException {  
+		FileWriter fileWriter = null;
+		BufferedWriter writer = null;
         try {
-        	FileWriter fileWriter = new FileWriter(path,true);
-        	BufferedWriter writer = new BufferedWriter(fileWriter);
+        	fileWriter = new FileWriter(path,true);
+        	writer = new BufferedWriter(fileWriter);
 			writer.append(text);
 			writer.newLine();
-	        writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new WriteException();
+		} finally {
+			try {
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new WriteException();
+			}
 		}
         
 	}

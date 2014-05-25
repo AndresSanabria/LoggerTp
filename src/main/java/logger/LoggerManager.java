@@ -40,8 +40,8 @@ public class LoggerManager {
 		}
 		String[] fileOutputs = configLoader.getLogToFiles();
 		if (fileOutputs != null) {
-			for (int i = 0; i < (fileOutputs.length - 1); i++) {
-				this.logger.addFileOutput(fileOutputs[i]);
+			for (String fileOutput: fileOutputs) {
+				this.logger.addOutput(new FileOutput(fileOutput));
 			}
 		}
 	}
