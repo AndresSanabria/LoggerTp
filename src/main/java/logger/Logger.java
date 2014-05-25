@@ -1,12 +1,13 @@
 package main.java.logger;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Logger {
 
 	private Formatter formatter;
-	private ArrayList<Writable> outputs;
+	private List<Writable> outputs;
 	private boolean consoleActive;
 	private Level configLevel;
 	private Level currentLevel;
@@ -19,7 +20,7 @@ public class Logger {
 	public Logger(Formatter formatter, String levelName) {
 		super();
 		this.formatter = formatter;
-		this.outputs = new ArrayList<Writable>();
+		this.outputs = new ArrayList<>();
 		this.consoleActive = false;
 		this.configLevel = new Level(levelName, levelValues.valueOf(levelName).ordinal());
 		this.currentLevel = this.configLevel;
