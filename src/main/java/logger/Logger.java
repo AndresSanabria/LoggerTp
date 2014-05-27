@@ -10,7 +10,6 @@ public class Logger {
 	private List<Writable> outputs;
 	private boolean consoleActive;
 	private Level configLevel;
-	private Level currentLevel;
 	private enum levelValues {
 		OFF, FATAL, ERROR, WARN, INFO, DEBUG
 	}
@@ -23,7 +22,6 @@ public class Logger {
 		this.outputs = new ArrayList<>();
 		this.consoleActive = false;
 		this.configLevel = new Level(levelName, levelValues.valueOf(levelName).ordinal());
-		this.currentLevel = this.configLevel;
 	}
 	
 	public void enableConsoleOutput() {
@@ -39,14 +37,6 @@ public class Logger {
 	
 	public void addOutput(Writable newOutput) {
 		outputs.add(newOutput);
-	}
-	
-	public void on() {
-		this.currentLevel = this.configLevel;
-	}
-	
-	public void off() {
-		this.currentLevel = new Level(levelValues.OFF.name(), levelValues.OFF.ordinal());
 	}
 	
 	public void debug(String logMsg) {
@@ -85,7 +75,7 @@ public class Logger {
 	}
 	
 	private Boolean shouldLog(Level level) {
-		return this.currentLevel.isGreaterThan(level);
+		return this.configLevel.isGreaterThan(level);
 	}
 	
 	private void log(Level level, String logMsg) {
