@@ -7,6 +7,7 @@ import java.util.List;
 public class Logger {
 
 	private Formatter formatter;
+	private ConfigurationLoader configLoader;
 	private List<Writable> outputs;
 	private boolean consoleActive;
 	private Level configLevel;
@@ -16,26 +17,37 @@ public class Logger {
 	private static final String WRITE_ERROR = "An error occured when writing log";
 
 	
-	public Logger(Formatter formatter, String levelName) {
+	public Logger(String configFilePath) throws IOException {
 		super();
-		this.formatter = formatter;
-		this.outputs = new ArrayList<>();
+		this.configLoader = new ConfigurationLoader(configFilePath);
+		this.initializeOutputs();
+		this.formatter = this.configLoader.initializeFormatter();
 		this.consoleActive = false;
+		String levelName = this.configLoader.getLevel();
 		this.configLevel = new Level(levelName, levelValues.valueOf(levelName).ordinal());
 	}
 	
-	public void enableConsoleOutput() {
+	private void initializeOutputs() throws IOException {
+		this.outputs = new ArrayList<>();
+		if (this.configLoader.getLogToConsole()) {
+			this.enableConsoleOutput();
+		}
+		String[] fileOutputs = configLoader.getLogToFiles();
+		if (fileOutputs != null) {
+			for (String fileOutput: fileOutputs) {
+				this.addOutput(new FileOutput(fileOutput));
+			}
+		}
+	}
+	
+	private void enableConsoleOutput() {
 		if (!consoleActive) {
 			outputs.add(new ConsoleOutput());
 			consoleActive = true;
 		}
 	}
 	
-	public void addFileOutput(String filePath) throws IOException {
-		outputs.add(new FileOutput(filePath));
-	}
-	
-	public void addOutput(Writable newOutput) {
+	private void addOutput(Writable newOutput) {
 		outputs.add(newOutput);
 	}
 	

@@ -9,6 +9,8 @@ public class ConfigurationLoader {
 	
 	private static final String FILE_SEPARATOR = ";";
 	
+	final Integer DISTANCE_CALLER_GIVE_FORMAT = 4;
+	
 	private String level;
 	private String messageFormat;
 	private String messageSeparator;
@@ -16,30 +18,20 @@ public class ConfigurationLoader {
 	private Boolean logToConsole;
 	
 	
-	public ConfigurationLoader() {
-		this.level = "OFF";
-		this.messageFormat = "";
-		this.messageSeparator = "";
-		this.logToFiles = null;
-		this.logToConsole = false;
+	public ConfigurationLoader(String configFilePath) {
+		this.loadConfiguration(configFilePath);
 	}
 	
-	public void loadConfiguration(String configFilePath) {
-		Properties properties = new Properties();
-		FileInputStream configFile;
-		try {
-			configFile = new FileInputStream(configFilePath);
-			properties.load(configFile);
-			this.level = this.getLevelPropertyValue(properties);
-			this.messageFormat = this.getPropertyValue(properties, "messageFormat");
-			this.messageSeparator = this.getPropertyValue(properties, "messageSeparator");
-			this.logToFiles = this.getPropertyValue(properties, "logToFiles").split(FILE_SEPARATOR);
-			this.logToConsole = this.getLogToConsolePropertyValue(properties);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+	public Formatter initializeFormatter() {
+		Formatter formatter;
+		String format = this.getMessageFormat();
+		String separator = this.getMessageSeparator();
+		if (separator != null && !separator.isEmpty()) {
+			formatter = new SimpleFormatter(format, DISTANCE_CALLER_GIVE_FORMAT, separator);
+		} else {
+			formatter = new SimpleFormatter(format, DISTANCE_CALLER_GIVE_FORMAT);
 		}
+		return formatter;
 	}
 
 	public String getLevel() {
@@ -60,6 +52,24 @@ public class ConfigurationLoader {
 
 	public Boolean getLogToConsole() {
 		return this.logToConsole;
+	}
+	
+	private void loadConfiguration(String configFilePath) {
+		Properties properties = new Properties();
+		FileInputStream configFile;
+		try {
+			configFile = new FileInputStream(configFilePath);
+			properties.load(configFile);
+			this.level = this.getLevelPropertyValue(properties);
+			this.messageFormat = this.getPropertyValue(properties, "messageFormat");
+			this.messageSeparator = this.getPropertyValue(properties, "messageSeparator");
+			this.logToFiles = this.getPropertyValue(properties, "logToFiles").split(FILE_SEPARATOR);
+			this.logToConsole = this.getLogToConsolePropertyValue(properties);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private String getPropertyValue(Properties properties, String key) {
