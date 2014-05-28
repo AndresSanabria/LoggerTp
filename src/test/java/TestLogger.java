@@ -32,7 +32,7 @@ public class TestLogger {
 		return found;
 	}
 	
-/*	@Test
+	@Test
 	public void loggerCallerDistanceToGiveFormatMethodInStack()throws IOException,WriteException {
 		String path = "log.txt";
 		File file = new File(path);
@@ -42,7 +42,7 @@ public class TestLogger {
 		Integer lineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber()-1;//-1 pues el logger give format esta en la linea anterior
 		String text = "Test" + " - " + MESSAGE + " - "+ "TestLogger.java" + " - " + "loggerCallerDistanceToGiveFormatMethodInStack" + " - " + lineNumber;
 		assertTrue(stringInFile(text,file));
-	}*/
+	}
 	
 	@Test
 	public void logInLevelDebug() throws IOException,WriteException {
