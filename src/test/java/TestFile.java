@@ -3,9 +3,7 @@ package test.java;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 import main.java.logger.FileOutput;
 import main.java.logger.Writable;

@@ -17,10 +17,16 @@ public class Logger {
 	private static final String WRITE_ERROR = "An error occured when writing log";
 
 	
-	public Logger(String configFilePath) throws IOException {
+	public Logger(String configFilePath) {
 		super();
 		this.configLoader = new ConfigurationLoader(configFilePath);
-		this.initializeOutputs();
+		try{
+			this.initializeOutputs();
+		}
+		catch(IOException e){
+			System.out.println("There was an Error in Outputs Initialization:"+ e.getMessage());
+			System.out.println("Check your Configuration file");
+		}
 		this.formatter = this.configLoader.initializeFormatter();
 		this.consoleActive = false;
 		String levelName = this.configLoader.getLevel();
