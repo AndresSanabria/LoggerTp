@@ -66,9 +66,11 @@ public class ConfigurationLoader {
 			this.logToFiles = this.getPropertyValue(properties, "logToFiles").split(FILE_SEPARATOR);
 			this.logToConsole = this.getLogToConsolePropertyValue(properties);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.err.println("File: "+ configFilePath + "was not found: "+ e.getMessage());
+			System.err.println("Check your Configuration file");
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("There was an IOException when Loading Configuration: "+ e.getMessage());
+			System.err.println("Check your Configuration file");
 		}
 	}
 	

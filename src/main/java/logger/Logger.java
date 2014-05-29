@@ -24,8 +24,8 @@ public class Logger {
 			this.initializeOutputs();
 		}
 		catch(IOException e){
-			System.out.println("There was an Error in Outputs Initialization:"+ e.getMessage());
-			System.out.println("Check your Configuration file");
+			handleException("There was an IOException when Intializing outputs: "+ e.getMessage());
+			handleException("Check your Configuration file");
 		}
 		this.formatter = this.configLoader.initializeFormatter();
 		this.consoleActive = false;
