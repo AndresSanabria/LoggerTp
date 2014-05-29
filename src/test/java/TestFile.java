@@ -14,20 +14,9 @@ import main.java.logger.WriteException;
 import org.junit.Test;
 
 public class TestFile {
-	
-	private boolean stringInFile(String text, File file) throws FileNotFoundException {
-		Scanner fileScanner = new Scanner(file);
-		boolean found = false;
-		while(fileScanner.hasNextLine()){
-		     if(text.equals(fileScanner.nextLine().trim())){
-		        found = true;
-		        break;
-		      }
-		 }
-		fileScanner.close();
-		return found;
-	}
 
+	private HelperForTests helper = new HelperForTests();
+	
 	@Test
 	public void writeOneString() throws WriteException, IOException {
 		String path = "log.txt";
@@ -36,7 +25,7 @@ public class TestFile {
 		file.delete();
 		Writable fileOutput = new FileOutput(path);
 		fileOutput.write(text);		
-		assertTrue(stringInFile(text,file));
+		assertTrue(helper.stringInFile(text,file));
 	}
 	
 	@Test
@@ -49,8 +38,8 @@ public class TestFile {
 		Writable fileOutput = new FileOutput(path);
 		fileOutput.write(text1);
 		fileOutput.write(text2);
-		assertTrue(stringInFile(text1,file));
-		assertTrue(stringInFile(text2,file));
+		assertTrue(helper.stringInFile(text1,file));
+		assertTrue(helper.stringInFile(text2,file));
 	}
 	
 	@Test(expected = NullPointerException.class)
