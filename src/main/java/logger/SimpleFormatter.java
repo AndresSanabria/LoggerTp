@@ -3,17 +3,39 @@ package main.java.logger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The Class SimpleFormatter give format to messages replacing pseudo-variables 
+ * in the format pattern with corresponding content.
+ */
 public class SimpleFormatter implements Formatter {
 	
+	/** The format pattern. */
 	private String format;
+	
+	/** The separator field. */
 	private String separator = "-" ;
-	private Integer callerStackDistance;//4
+	
+	/** The caller stack distance. */
+	private Integer callerStackDistance;
 
+	/**
+	 * Instantiates a new simple formatter.
+	 *
+	 * @param format the format pattern
+	 * @param callerStackDistance the caller stack distance
+	 */
 	public SimpleFormatter(String format, Integer callerStackDistance) {
 		this.callerStackDistance = callerStackDistance;
 		this.format = format;
 	}
 	
+	/**
+	 * Instantiates a new simple formatter.
+	 *
+	 * @param format the format pattern
+	 * @param callerStackDistance the caller stack distance
+	 * @param separator the separator to use
+	 */
 	public SimpleFormatter(String format, Integer callerStackDistance, String separator) {
 		this.callerStackDistance = callerStackDistance;
 		this.format = format;
@@ -36,6 +58,12 @@ public class SimpleFormatter implements Formatter {
 		return formattedLog;
 	}
 
+	/**
+	 * Replace date pseudo-variables in log message with actual data.
+	 *
+	 * @param log the log message that is being formatted
+	 * @return the log message with dates already formatted
+	 */
 	private String replaceDate(String log) {
 		String formattedLog = new String(log);
 		String regex = "(.*)(%d\\{)([^\\}]*)(\\})(.*)";
