@@ -65,4 +65,16 @@ public class TestLogger {
 		assertTrue(!helper.stringInFile(text1,file) && !helper.stringInFile(text2,file));
 	}
 	
+	@Test
+	public void logInLevelTrace() throws IOException,WriteException {
+		File file = new File(LOG_PATH);
+		file.delete();
+		Logger logger = new Logger(TEST_FILES_PATH + "testLogInLevelTrace.properties");
+		logger.trace(MESSAGE);
+		logger.info(MESSAGE);
+		String text1 = "Test" + " - TRACE - " + MESSAGE;
+		String text2 = "Test" + " - INFO - " + MESSAGE;
+		assertTrue(helper.stringInFile(text1,file) && helper.stringInFile(text2,file));
+	}
+	
 }

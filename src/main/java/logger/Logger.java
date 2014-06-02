@@ -32,7 +32,8 @@ public class Logger {
 		ERROR, 
 		WARN, 
 		INFO, 
-		DEBUG
+		DEBUG,
+		TRACE
 	}
 	
 	/** The Constant WRITE_ERROR. */
@@ -94,6 +95,18 @@ public class Logger {
 	 */
 	private void addOutput(Writable newOutput) {
 		outputs.add(newOutput);
+	}
+	
+	/**
+	 * Log in Trace Level.
+	 *
+	 * @param logMsg the message to log
+	 */
+	public void trace(String logMsg) {
+		Level level = new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal());
+		if (shouldLog(level)) {
+			log(level, logMsg);
+		}
 	}
 	
 	/**
