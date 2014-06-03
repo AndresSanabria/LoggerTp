@@ -7,6 +7,9 @@ import java.util.List;
  * The Class Logger logs messages in the given outputs with the proper format.
  */
 public class Logger {
+	
+	/** The name. */
+	private String name;
 
 	/** The formatter. */
 	private Formatter formatter;
@@ -38,15 +41,15 @@ public class Logger {
 	
 	/** The Constant WRITE_ERROR. */
 	private static final String WRITE_ERROR = "An error occured when writing log";
-
 	
 	/**
 	 * Instantiates a new logger.
 	 *
 	 * @param configFilePath the configuration file path
 	 */
-	public Logger() {
+	public Logger(String name) {
 		super();
+		this.name = name;
 		this.configLoader = new ConfigurationLoader();
 		try{
 			this.initializeOutputs();
@@ -205,5 +208,22 @@ public class Logger {
 	private void handleException(String errorMessage) {
 		System.err.println(errorMessage);
 	}
+	
+	/**
+	 * Handle exception caught.
+	 * 
+	 * @return the logger name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Handle exception caught.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 }
