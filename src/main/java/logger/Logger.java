@@ -45,9 +45,9 @@ public class Logger {
 	 *
 	 * @param configFilePath the configuration file path
 	 */
-	public Logger(String configFilePath) {
+	public Logger() {
 		super();
-		this.configLoader = new ConfigurationLoader(configFilePath);
+		this.configLoader = new ConfigurationLoader();
 		try{
 			this.initializeOutputs();
 		}
@@ -56,7 +56,7 @@ public class Logger {
 		}
 		this.formatter = this.configLoader.initializeFormatter();
 		this.consoleActive = false;
-		String levelName = this.configLoader.getLevel();
+		String levelName = this.configLoader.getConfiguration().getLevel();
 		this.configLevel = new Level(levelName, levelValues.valueOf(levelName).ordinal());
 	}
 	
@@ -67,10 +67,10 @@ public class Logger {
 	 */
 	private void initializeOutputs() throws IOException {
 		this.outputs = new ArrayList<>();
-		if (this.configLoader.getLogToConsole()) {
+		if (this.configLoader.getConfiguration().getLogToConsole()) {
 			this.enableConsoleOutput();
 		}
-		String[] fileOutputs = configLoader.getLogToFiles();
+		String[] fileOutputs = configLoader.getConfiguration().getLogToFiles();
 		if (fileOutputs != null) {
 			for (String fileOutput: fileOutputs) {
 				this.addOutput(new FileOutput(fileOutput));

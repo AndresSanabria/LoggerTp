@@ -2,7 +2,11 @@ package test.java;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+
+import main.java.logger.FileOutput;
+import main.java.logger.WriteException;
 
 public class HelperForTests {
 	
@@ -17,6 +21,13 @@ public class HelperForTests {
 		 }
 		fileScanner.close();
 		return found;
+	}
+	
+	public void writeNewFileWithText(String filePath, String text) throws WriteException, IOException {
+		File file = new File(filePath);
+		file.delete();
+		FileOutput configFile = new FileOutput(filePath);
+		configFile.write(text);
 	}
 
 }
