@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration>
+	<message>
+		<format>%p %n %t %n %m</format>
+		<separator>-</separator>
+	</message>
+	<outputs>
+		<console>true</console>
+	</outputs>
+</configuration>

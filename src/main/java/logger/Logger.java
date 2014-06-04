@@ -42,8 +42,6 @@ public class Logger {
 	
 	/**
 	 * Instantiates a new logger.
-	 *
-	 * @param configFilePath the configuration file path
 	 */
 	public Logger() {
 		super();

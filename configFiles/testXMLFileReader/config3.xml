@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<configuration>
+	<level></level>
+	<message>
+		<format></format>
+		<separator>-</separator>
+	</message>
+	<outputs>
+		<console>true</console>
+	</outputs>
+</configuration>
