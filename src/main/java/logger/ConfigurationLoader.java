@@ -1,9 +1,9 @@
-package main.java.logger;
+package logger;
 
 import java.io.FileNotFoundException;
 
-import main.java.logger.configurationReaders.Configuration;
-import main.java.logger.configurationReaders.PropertiesFileReader;
+import logger.configurationReaders.Configuration;
+import logger.configurationReaders.PropertiesFileReader;
 
 /**
  * The Class ConfigurationLoader load the Configuration of the Logger from the configuration file

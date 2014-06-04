@@ -1,10 +1,10 @@
-package test.java;
+package logger;
 
 import static org.junit.Assert.*;
 
 
-import main.java.logger.Logger;
-import main.java.logger.LoggerCollection;
+import logger.Logger;
+import logger.LoggerCollection;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package main.java.logger;
+package logger;
 
 /**
  * The Interface Formatter thought to give format to messages.

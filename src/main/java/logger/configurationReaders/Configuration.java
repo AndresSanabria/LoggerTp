@@ -1,4 +1,4 @@
-package main.java.logger.configurationReaders;
+package logger.configurationReaders;
 
 /**
  * The Class Configuration stores the configuration of the logger.

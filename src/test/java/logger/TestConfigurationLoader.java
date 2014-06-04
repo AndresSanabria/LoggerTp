@@ -1,11 +1,11 @@
-package test.java;
+package logger;
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import main.java.logger.ConfigurationLoader;
-import main.java.logger.WriteException;
+import logger.ConfigurationLoader;
+import logger.WriteException;
 
 import org.junit.Test;
 
