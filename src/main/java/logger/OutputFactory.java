@@ -2,6 +2,7 @@ package logger;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class OutputFactory {
 	
@@ -9,6 +10,9 @@ public class OutputFactory {
 		Class<?> customClass;
 		try {
 			customClass = Class.forName(implementor);
+			if (!implementsWritable(customClass)) {
+				throw new CustomOutputException();
+			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new CustomOutputException();
@@ -35,6 +39,16 @@ public class OutputFactory {
 			throw new CustomOutputException();
 		} 
 		return customOutput;
+	}
+	
+	private boolean implementsWritable(Class<?> oneClass) {
+		Class<?>[] interfacesImplemented = oneClass.getInterfaces();
+		for (Class<?> oneInterface: interfacesImplemented) {
+			if (oneInterface.getName().equals(Writable.class.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
