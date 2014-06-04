@@ -102,23 +102,36 @@ public class Logger {
 	 * Log in Trace Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable 
 	 */
-	public void trace(String logMsg) {
+	public void trace(String logMsg, Throwable exception) throws Throwable {
 		Level level = new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
-		}
+		log(level, logMsg, exception);
 	}
 	
+	public void trace(String logMsg) {
+		try {
+			trace(logMsg,null);
+		} catch (Throwable e) {
+			// already handled exception in log method
+		}
+	}
+		
 	/**
 	 * Log in Debug Level.
 	 *
 	 * @param logMsg the message to log
 	 */
-	public void debug(String logMsg) {
+	public void debug(String logMsg, Throwable exception) throws Throwable {
 		Level level = new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		log(level, logMsg, exception);
+	}
+	
+	public void debug(String logMsg) {
+		try {
+			debug(logMsg,null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 
@@ -127,10 +140,16 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 */
-	public void info(String logMsg) {
+	public void info(String logMsg, Throwable exception) throws Throwable {
 		Level level = new Level(levelValues.INFO.name(), levelValues.INFO.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		log(level, logMsg, exception);
+	}
+	
+	public void info(String logMsg) {
+		try {
+			info(logMsg,null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 
@@ -139,10 +158,16 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 */
-	public void warn(String logMsg) {
+	public void warn(String logMsg, Throwable exception) throws Throwable {
 		Level level = new Level(levelValues.WARN.name(), levelValues.WARN.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		log(level, logMsg, exception);
+	}
+	
+	public void warn(String logMsg) {
+		try {
+			warn(logMsg,null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 
@@ -151,10 +176,16 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 */
-	public void error(String logMsg) {
+	public void error(String logMsg, Throwable exception) throws Throwable {
 		Level level = new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		log(level, logMsg, exception);
+	}
+	
+	public void error(String logMsg) {
+		try {
+			error(logMsg,null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 
@@ -163,10 +194,16 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 */
-	public void fatal(String logMsg) {
+	public void fatal(String logMsg, Throwable exception) throws Throwable {
 		Level level = new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		log(level, logMsg, exception);
+	}
+	
+	public void fatal(String logMsg) {
+		try {
+			fatal(logMsg,null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 	
@@ -185,15 +222,17 @@ public class Logger {
 	 *
 	 * @param level the level in which to log
 	 * @param logMsg the message to log
+	 * @throws Throwable 
 	 */
-	private void log(Level level, String logMsg) {
+	private void log(Level level, String logMsg, Throwable exception) throws Throwable {
+		if (!shouldLog(level)) return;
 		String formatedLog = formatter.giveFormat(level, logMsg);
 		for (Writable output: outputs) {
 			try {
 				output.write(formatedLog);
 			} catch (WriteException e) {
-				handleException(WRITE_ERROR + " - " + output.getStringId());
 				e.printStackTrace();
+				handleException(output.getStringId(),exception);
 			}
 		}
 	}
@@ -202,9 +241,22 @@ public class Logger {
 	 * Handle exception caught.
 	 *
 	 * @param errorMessage the error message
+	 * @throws Throwable 
 	 */
-	private void handleException(String errorMessage) {
-		System.err.println(errorMessage);
+	private void handleException(String outputName, Throwable exception) throws Throwable {
+		handleException(outputName);
+		if (exception != null) {
+			throw exception;
+		}
+	}
+	
+	/**
+	 * Handle exception caught.
+	 *
+	 * @param errorMessage the error message
+	 */
+	private void handleException(String outputName) {
+		System.err.println(WRITE_ERROR + " - " + outputName);
 	}
 	
 	/**
