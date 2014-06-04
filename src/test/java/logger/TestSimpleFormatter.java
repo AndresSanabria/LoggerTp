@@ -91,6 +91,13 @@ public class TestSimpleFormatter {
 	}
 	
 	@Test
+	public void simpleFormatterWrittingLoggerName() {
+		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %g", DISTANCE_TEST_GIVE_FORMAT,"-","LoggerName");
+		String formattedMsg = formatter.giveFormat(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), MESSAGE);
+		assertEquals(formattedMsg, "Test" + " - " + MESSAGE + " - " + "LoggerName");
+	}
+	
+	@Test
 	public void simpleFormatterWithoutMsg() {
 		SimpleFormatter formatter = new SimpleFormatter("", DISTANCE_TEST_GIVE_FORMAT,"");
 		String formattedMsg = formatter.giveFormat(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), MESSAGE);
