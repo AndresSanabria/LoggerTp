@@ -1,4 +1,4 @@
-package logger;
+package logger.configurationReaders;
 
 import static org.junit.Assert.*;
 
