@@ -1,4 +1,4 @@
-package main.java.logger;
+package logger;
 
 public class CustomOutputException extends Exception {
 
