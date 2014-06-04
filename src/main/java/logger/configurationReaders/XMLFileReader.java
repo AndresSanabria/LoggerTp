@@ -1,4 +1,4 @@
-package main.java.logger.configurationReaders;
+package logger.configurationReaders;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

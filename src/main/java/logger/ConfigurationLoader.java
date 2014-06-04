@@ -1,11 +1,11 @@
-package main.java.logger;
+package logger;
 
 import java.io.IOException;
 
-import main.java.logger.configurationReaders.Configuration;
-import main.java.logger.configurationReaders.ConfigurationReader;
-import main.java.logger.configurationReaders.PropertiesFileReader;
-import main.java.logger.configurationReaders.XMLFileReader;
+import logger.configurationReaders.Configuration;
+import logger.configurationReaders.ConfigurationReader;
+import logger.configurationReaders.PropertiesFileReader;
+import logger.configurationReaders.XMLFileReader;
 
 /**
  * The Class ConfigurationLoader load the Configuration of the Logger from the configuration file

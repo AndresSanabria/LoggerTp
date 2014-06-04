@@ -1,12 +1,12 @@
-package test.java;
+package logger;
 
 import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import main.java.logger.Level;
-import main.java.logger.SimpleFormatter;
+import logger.Level;
+import logger.SimpleFormatter;
 
 import org.junit.Test;
 

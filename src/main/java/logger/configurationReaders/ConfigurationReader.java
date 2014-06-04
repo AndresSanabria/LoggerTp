@@ -1,4 +1,4 @@
-package main.java.logger.configurationReaders;
+package logger.configurationReaders;
 
 import java.io.IOException;
 

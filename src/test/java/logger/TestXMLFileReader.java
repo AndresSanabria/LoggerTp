@@ -1,11 +1,11 @@
-package test.java;
+package logger;
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import main.java.logger.configurationReaders.Configuration;
-import main.java.logger.configurationReaders.XMLFileReader;
+import logger.configurationReaders.Configuration;
+import logger.configurationReaders.XMLFileReader;
 
 import org.junit.Test;
 
