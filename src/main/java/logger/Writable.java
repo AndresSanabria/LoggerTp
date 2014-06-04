@@ -1,4 +1,4 @@
-package main.java.logger;
+package logger;
 
 /**
  * The Interface Writable thought to write messages in different Outputs.

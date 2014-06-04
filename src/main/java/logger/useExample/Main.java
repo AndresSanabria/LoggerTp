@@ -1,6 +1,6 @@
-package main.java.logger.useExample;
+package logger.useExample;
 
-import main.java.logger.Logger;
+import logger.Logger;
 
 
 public class Main {

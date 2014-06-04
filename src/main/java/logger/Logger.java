@@ -1,4 +1,4 @@
-package main.java.logger;
+package logger;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +44,6 @@ public class Logger {
 	
 	/**
 	 * Instantiates a new logger.
-	 *
-	 * @param configFilePath the configuration file path
 	 */
 	public Logger(String name) {
 		super();

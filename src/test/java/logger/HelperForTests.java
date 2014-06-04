@@ -1,12 +1,12 @@
-package test.java;
+package logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import main.java.logger.FileOutput;
-import main.java.logger.WriteException;
+import logger.FileOutput;
+import logger.WriteException;
 
 public class HelperForTests {
 	

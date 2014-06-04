@@ -1,2 +1,0 @@
-Test - TRACE - Este es mi mensaje
-Test - INFO - Este es mi mensaje

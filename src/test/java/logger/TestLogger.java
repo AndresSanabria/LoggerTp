@@ -1,12 +1,12 @@
-package test.java;
+package logger;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
 
-import main.java.logger.Logger;
-import main.java.logger.WriteException;
+import logger.Logger;
+import logger.WriteException;
 
 import org.junit.Test;
 

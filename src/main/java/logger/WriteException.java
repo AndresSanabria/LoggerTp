@@ -1,4 +1,4 @@
-package main.java.logger;
+package logger;
 
 /**
  * The Class WriteException thrown when writing error occurred.

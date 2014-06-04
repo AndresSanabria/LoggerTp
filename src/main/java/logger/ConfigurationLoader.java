@@ -1,9 +1,11 @@
-package main.java.logger;
+package logger;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import main.java.logger.configurationReaders.Configuration;
-import main.java.logger.configurationReaders.PropertiesFileReader;
+import logger.configurationReaders.Configuration;
+import logger.configurationReaders.ConfigurationReader;
+import logger.configurationReaders.PropertiesFileReader;
+import logger.configurationReaders.XMLFileReader;
 
 /**
  * The Class ConfigurationLoader load the Configuration of the Logger from the configuration file
@@ -15,6 +17,9 @@ public class ConfigurationLoader {
 	
 	/** The Constant PROPERTIES_FILE_PATH. */
 	private static final String PROPERTIES_FILE_PATH = "configFiles/config.properties";
+	
+	/** The Constant XML_FILE_PATH. */
+	private static final String XML_FILE_PATH = "configFiles/config.xml";
 
 	/** The configuration */
 	private Configuration configuration;
@@ -22,11 +27,15 @@ public class ConfigurationLoader {
 	
 	/**
 	 * Instantiates a new configuration loader.
-	 *
-	 * @param configFilePath the configuration file path
 	 */
 	public ConfigurationLoader() {
-		this.loadConfiguration();
+		this.loadConfiguration(new PropertiesFileReader(PROPERTIES_FILE_PATH));
+		if (this.configuration == null) {
+			this.loadConfiguration(new XMLFileReader(XML_FILE_PATH));
+			if (this.configuration == null) {
+				this.initializeByDefault();
+			}
+		}
 	}
 	
 	/**
@@ -58,16 +67,24 @@ public class ConfigurationLoader {
 	/**
 	 * Load configuration.
 	 *
-	 * @param configFilePath the configuration file path
+	 * @param configReader the configuration reader
 	 */
-	private void loadConfiguration() {
+	private void loadConfiguration(ConfigurationReader configReader) {
 		try {
-			PropertiesFileReader configReader = new PropertiesFileReader();
-			this.configuration = configReader.readConfiguration(PROPERTIES_FILE_PATH);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			this.configuration = configReader.readConfiguration();
+		} catch (IOException e) { }
+	}
+	
+	/**
+	 * Initializes configuration by default values.
+	 */
+	private void initializeByDefault() {
+		this.configuration = new Configuration();
+		this.configuration.setLevel("OFF");
+		this.configuration.setMessageFormat("%p %n %m");
+		this.configuration.setMessageSeparator("-");
+		this.configuration.setLogToFiles(new String[] {"log.txt"});
+		this.configuration.setLogToConsole(false);
 	}
 	
 }
