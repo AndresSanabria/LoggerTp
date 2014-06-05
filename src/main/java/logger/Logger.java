@@ -103,9 +103,7 @@ public class Logger {
 		if (customOutputs != null) {
 			CustomFactory outputFactory = new CustomFactory();
 			for (String[] customOutput: customOutputs) {
-				if (!customOutput[0].isEmpty()) {
-					this.addOutput(outputFactory.createCustomOutput(customOutput[0], java.util.Arrays.copyOfRange(customOutput, 1, customOutput.length)));
-				}
+				this.addOutput(outputFactory.createCustomOutput(customOutput[0], java.util.Arrays.copyOfRange(customOutput, 1, customOutput.length)));
 			}
 		}
 	}
@@ -127,9 +125,9 @@ public class Logger {
 	 */
 	private void initializeFilter() throws CustomFilterException {
 		String regExFilter = this.configLoader.getConfiguration().getRegExFilter();
-		if (regExFilter.isEmpty()) {
+		if (regExFilter == null) {
 			String[] customFilter = this.configLoader.getConfiguration().getCustomFilter();
-			if (customFilter[0].isEmpty()) {
+			if (customFilter == null) {
 				this.filter = null;
 			} else {
 				CustomFactory filterFactory = new CustomFactory();

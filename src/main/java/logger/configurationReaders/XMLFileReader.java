@@ -28,6 +28,9 @@ public class XMLFileReader implements ConfigurationReader {
 	
 	/** The Constant DEFAULT_LEVEL. */
 	private static final String DEFAULT_LEVEL = "OFF";
+
+	/** The Constant DEFAULT_MESSAGE_FORMAT_LEVEL. */
+	private static final String DEFAULT_MESSAGE_FORMAT = "%p %n %t %n %m";
 	
 	/** The Constant LEVEL_TAG. */
 	private static final String LEVEL_TAG = "level";
@@ -132,13 +135,17 @@ public class XMLFileReader implements ConfigurationReader {
 	private String getMessageFormatNodeValue(Document doc) {
 		Node messageNode = this.getFirstLevelNodeByTag(doc, MESSAGE_TAG);
 		if (messageNode == null) {
-			return "";
+			return DEFAULT_MESSAGE_FORMAT;
 		}
 		Node formatNode = this.getNodeByTagInNode(messageNode, MESSAGE_FORMAT_TAG);
 		if (formatNode == null) {
-			return "";
+			return DEFAULT_MESSAGE_FORMAT;
 		}
-		return this.getNodeValue(formatNode);
+		String value = this.getNodeValue(formatNode);
+		if (value.isEmpty()) {
+			value = DEFAULT_MESSAGE_FORMAT;
+		}
+		return value;
 	}
 	
 	/**
@@ -150,13 +157,17 @@ public class XMLFileReader implements ConfigurationReader {
 	private String getMessageSeparatorNodeValue(Document doc) {
 		Node messageNode = this.getFirstLevelNodeByTag(doc, MESSAGE_TAG);
 		if (messageNode == null) {
-			return "";
+			return null;
 		}
 		Node separatorNode = this.getNodeByTagInNode(messageNode, MESSAGE_SEPARATOR_TAG);
 		if (separatorNode == null) {
-			return "";
+			return null;
 		}
-		return this.getNodeValue(separatorNode);
+		String value = this.getNodeValue(separatorNode);
+		if (value.isEmpty()) {
+			value = null;
+		}
+		return value;
 	}
 
 	/**
@@ -169,7 +180,7 @@ public class XMLFileReader implements ConfigurationReader {
 		List<String> values = new ArrayList<String>();
 		Node outputsNode = this.getFirstLevelNodeByTag(doc, OUTPUTS_TAG);
 		if (outputsNode == null) {
-			return values.toArray(new String[values.size()]);
+			return null;
 		}
 		NodeList fileNodes = this.getNodeListByTagInNode(outputsNode, FILE_TAG);
 		for (int i = 0; i < fileNodes.getLength(); i++) {
@@ -177,6 +188,9 @@ public class XMLFileReader implements ConfigurationReader {
 			if (!value.isEmpty()) {
 				values.add(value);
 			}
+		}
+		if (values.size() == 0) {
+			return null;
 		}
 		return values.toArray(new String[values.size()]);
 	}
@@ -191,7 +205,7 @@ public class XMLFileReader implements ConfigurationReader {
 		List<String[]> customOutputs = new ArrayList<String[]>();
 		Node outputsNode = this.getFirstLevelNodeByTag(doc, OUTPUTS_TAG);
 		if (outputsNode == null) {
-			return customOutputs;
+			return null;
 		}
 		NodeList customNodes = this.getNodeListByTagInNode(outputsNode, CUSTOM_TAG);
 		for (int i = 0; i < customNodes.getLength(); i++) {
@@ -214,6 +228,9 @@ public class XMLFileReader implements ConfigurationReader {
 			}
 			
 			customOutputs.add(values.toArray(new String[values.size()]));
+		}
+		if (customOutputs.size() == 0) {
+			return null;
 		}
 		return customOutputs;
 	}
@@ -249,13 +266,17 @@ public class XMLFileReader implements ConfigurationReader {
 	private String getRegExFilterNodeValue(Document doc) {
 		Node filterNode = this.getFirstLevelNodeByTag(doc, FILTER_TAG);
 		if (filterNode == null) {
-			return "";
+			return null;
 		}
 		Node regExFilterNode = this.getNodeByTagInNode(filterNode, REGEX_FILTER_TAG);
 		if (regExFilterNode == null) {
-			return "";
+			return null;
 		}
-		return this.getNodeValue(regExFilterNode);
+		String value = this.getNodeValue(regExFilterNode);
+		if (value.isEmpty()) {
+			value = null;
+		}
+		return value;
 	}
 
 	/**
@@ -268,20 +289,20 @@ public class XMLFileReader implements ConfigurationReader {
 		List<String> values = new ArrayList<String>();
 		Node filterNode = this.getFirstLevelNodeByTag(doc, FILTER_TAG);
 		if (filterNode == null) {
-			return values.toArray(new String[values.size()]);
+			return null;
 		}
 		Node customFilterNode = this.getNodeByTagInNode(filterNode, CUSTOM_TAG);
 		if (customFilterNode == null) {
-			return values.toArray(new String[values.size()]);
+			return null;
 		}
 		
 		Node implementorNode = this.getNodeByTagInNode(customFilterNode, IMPLEMENTOR_TAG);
 		if (implementorNode == null) {
-			return values.toArray(new String[values.size()]);
+			return null;
 		}
 		String implementorValue = this.getNodeValue(implementorNode);
 		if (implementorValue.isEmpty()) {
-			return values.toArray(new String[values.size()]);
+			return null;
 		}
 		values.add(implementorValue);
 		

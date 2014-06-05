@@ -57,14 +57,14 @@ public class TestXMLFileReader {
 	public void loadCustomOutputsMissingImplementorFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
 		Configuration config = reader.readConfiguration();
-		assertEquals(config.getCustomOutputs().size(), 0);
+		assertNull(config.getCustomOutputs());
 	}
 	
 	@Test
 	public void loadMissingLogToFilesNodeFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
 		Configuration config = reader.readConfiguration();
-		assertEquals(config.getLogToFiles().length, 0);
+		assertNull(config.getLogToFiles());
 	}
 	
 	@Test
@@ -85,7 +85,7 @@ public class TestXMLFileReader {
 	public void loadEmptyMessageFormatNodeFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config3.xml");
 		Configuration config = reader.readConfiguration();
-		assertEquals(config.getMessageFormat(), "");
+		assertEquals(config.getMessageFormat(), "%p %n %t %n %m");
 	}
 	
 }

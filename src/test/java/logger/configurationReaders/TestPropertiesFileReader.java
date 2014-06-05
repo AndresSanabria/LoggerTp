@@ -58,11 +58,11 @@ public class TestPropertiesFileReader {
 	public void loadMissingLogToFilesFromPropertiesFile() throws IOException {
 		PropertiesFileReader reader = new PropertiesFileReader("configFiles/testPropertiesFileReader/config2.properties");
 		Configuration config = reader.readConfiguration();
-		assertEquals(config.getLogToFiles()[0], "");
+		assertNull(config.getLogToFiles());
 	}
 	
 	@Test
-	public void loadEmptyLevelFromXMLFile() throws IOException {
+	public void loadEmptyLevelFromPropertiesFile() throws IOException {
 		PropertiesFileReader reader = new PropertiesFileReader("configFiles/testPropertiesFileReader/config2.properties");
 		Configuration config = reader.readConfiguration();
 		assertEquals(config.getLevel(), "OFF");

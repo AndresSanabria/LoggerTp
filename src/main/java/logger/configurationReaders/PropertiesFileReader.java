@@ -18,10 +18,13 @@ public class PropertiesFileReader implements ConfigurationReader {
 	private static final String PARAM_SEPARATOR = ",";
 	
 	/** The Constant DEFAULT_CONSOLE. */
-	private static final Boolean DEFAULT_CONSOLE = false;
+	private static final String DEFAULT_CONSOLE = "false";
 	
 	/** The Constant DEFAULT_LEVEL. */
 	private static final String DEFAULT_LEVEL = "OFF";
+
+	/** The Constant DEFAULT_MESSAGE_FORMAT_LEVEL. */
+	private static final String DEFAULT_MESSAGE_FORMAT = "%p %n %t %n %m";
 	
 	/** The Constant LEVEL_TAG. */
 	private static final String LEVEL_TAG = "level";
@@ -67,58 +70,45 @@ public class PropertiesFileReader implements ConfigurationReader {
 		FileInputStream configFile;
 		configFile = new FileInputStream(this.filePath);
 		properties.load(configFile);
-		config.setLevel(this.getLevelPropertyValue(properties));
-		config.setMessageFormat(this.getPropertyValue(properties, MESSAGE_FORMAT_TAG));
-		config.setMessageSeparator(this.getPropertyValue(properties, MESSAGE_SEPARATOR_TAG));
-		config.setLogToFiles(this.getPropertyValue(properties, LOG_TO_FILES_TAG).split(OUTPUT_SEPARATOR));
-		config.setLogToConsole(this.getLogToConsolePropertyValue(properties));
+		config.setLevel(this.getPropertyValue(properties, LEVEL_TAG, DEFAULT_LEVEL));
+		config.setMessageFormat(this.getPropertyValue(properties, MESSAGE_FORMAT_TAG, DEFAULT_MESSAGE_FORMAT));
+		config.setMessageSeparator(this.getPropertyValue(properties, MESSAGE_SEPARATOR_TAG, null));
+		config.setLogToFiles(this.getLogToFilesPropertyValue(properties));
+		config.setLogToConsole(Boolean.valueOf(this.getPropertyValue(properties, LOG_TO_CONSOLE_TAG, DEFAULT_CONSOLE)));
 		config.setCustomOutputs(this.getCustomOutputsPropertyValue(properties));
-		config.setRegExFilter(this.getPropertyValue(properties, REGEX_FILTER_TAG));
-		config.setCustomFilter(this.getPropertyValue(properties, CUSTOM_FILTER_TAG).split(PARAM_SEPARATOR));
+		config.setRegExFilter(this.getPropertyValue(properties, REGEX_FILTER_TAG, null));
+		config.setCustomFilter(this.getCustomFilterPropertyValue(properties));
 		return config;
 	}
-
+	
 	/**
 	 * Gets the property value.
 	 *
 	 * @param properties the properties parsed
-	 * @param key the property key
 	 * @return the property value
 	 */
-	private String getPropertyValue(Properties properties, String key) {
-		String value = properties.getProperty(key);
-		if (value != null) {
-			return value;
-		}
-		return "";
-	}
-	
-	/**
-	 * Gets the level property value.
-	 *
-	 * @param properties the properties parsed
-	 * @return the level property value
-	 */
-	private String getLevelPropertyValue(Properties properties) {
-		String value = this.getPropertyValue(properties, LEVEL_TAG);
-		if (value.isEmpty()) {
-			value = DEFAULT_LEVEL;
+	private String getPropertyValue(Properties properties, String propertyTag, String defaultValue) {
+		String value = properties.getProperty(propertyTag);
+		if (value == null) {
+			value = defaultValue;
+		} else if (value.isEmpty()) {
+			value = defaultValue;
 		}
 		return value;
 	}
 	
 	/**
-	 * Gets the log to console property value.
+	 * Gets the log to files property value.
 	 *
 	 * @param properties the properties parsed
-	 * @return the log to console property value
+	 * @return the log to files property value
 	 */
-	private Boolean getLogToConsolePropertyValue(Properties properties) {
-		String value = this.getPropertyValue(properties, LOG_TO_CONSOLE_TAG);
-		if (value.isEmpty()) {
-			return DEFAULT_CONSOLE;
+	private String[] getLogToFilesPropertyValue(Properties properties) {
+		String values = this.getPropertyValue(properties, LOG_TO_FILES_TAG, null);
+		if (values == null) {
+			return null;
 		}
-		return Boolean.valueOf(value);
+		return values.split(OUTPUT_SEPARATOR);
 	}
 	
 	/**
@@ -129,11 +119,29 @@ public class PropertiesFileReader implements ConfigurationReader {
 	 */
 	private List<String[]> getCustomOutputsPropertyValue(Properties properties) {
 		List<String[]> customOutputs = new ArrayList<String[]>();
-		String[] values = this.getPropertyValue(properties, CUSTOM_OUTPUTS_TAG).split(OUTPUT_SEPARATOR);
-		for (String value: values) {
+		String values = this.getPropertyValue(properties, CUSTOM_OUTPUTS_TAG, null);
+		if (values == null) {
+			return null;
+		}
+		String [] outputs = values.split(OUTPUT_SEPARATOR);
+		for (String value: outputs) {
 			customOutputs.add(value.split(PARAM_SEPARATOR));
 		}
 		return customOutputs;
+	}
+	
+	/**
+	 * Gets the custom filter property value.
+	 *
+	 * @param properties the properties parsed
+	 * @return the custom filter property value
+	 */
+	private String[] getCustomFilterPropertyValue(Properties properties) {
+		String values = this.getPropertyValue(properties, CUSTOM_FILTER_TAG, null);
+		if (values == null) {
+			return null;
+		}
+		return values.split(PARAM_SEPARATOR);
 	}
 
 }

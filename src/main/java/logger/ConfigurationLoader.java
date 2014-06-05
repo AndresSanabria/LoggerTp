@@ -22,6 +22,15 @@ public class ConfigurationLoader {
 	
 	/** The Constant XML_FILE_PATH. */
 	private static final String XML_FILE_PATH = "configFiles/config.xml";
+	
+	/** The Constant DEFAULT_CONSOLE. */
+	private static final Boolean DEFAULT_CONSOLE = true;
+	
+	/** The Constant DEFAULT_LEVEL. */
+	private static final String DEFAULT_LEVEL = "OFF";
+
+	/** The Constant DEFAULT_MESSAGE_FORMAT_LEVEL. */
+	private static final String DEFAULT_MESSAGE_FORMAT = "%p %n %t %n %m";
 
 	/** The configuration */
 	private Configuration configuration;
@@ -49,7 +58,7 @@ public class ConfigurationLoader {
 		Formatter formatter;
 		String format = this.getConfiguration().getMessageFormat();
 		String separator = this.getConfiguration().getMessageSeparator();
-		if (separator != null && !separator.isEmpty()) {
+		if (separator != null) {
 			formatter = new SimpleFormatter(format, DISTANCE_CALLER_GIVE_FORMAT, separator);
 		} else {
 			formatter = new SimpleFormatter(format, DISTANCE_CALLER_GIVE_FORMAT);
@@ -82,14 +91,14 @@ public class ConfigurationLoader {
 	 */
 	private void initializeByDefault() {
 		this.configuration = new Configuration();
-		this.configuration.setLevel("OFF");
-		this.configuration.setMessageFormat("%p %n %m");
-		this.configuration.setMessageSeparator("-");
-		this.configuration.setLogToFiles(new String[] {"log.txt"});
-		this.configuration.setLogToConsole(false);
+		this.configuration.setLevel(DEFAULT_LEVEL);
+		this.configuration.setMessageFormat(DEFAULT_MESSAGE_FORMAT);
+		this.configuration.setMessageSeparator(null);
+		this.configuration.setLogToFiles(null);
+		this.configuration.setLogToConsole(DEFAULT_CONSOLE);
 		this.configuration.setCustomOutputs(null);
-		this.configuration.setRegExFilter("");
-		this.configuration.setCustomFilter(new String[] {""});
+		this.configuration.setRegExFilter(null);
+		this.configuration.setCustomFilter(null);
 	}
 	
 }
