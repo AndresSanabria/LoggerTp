@@ -29,18 +29,18 @@ public class Logger {
 	/**
 	 * The Enum levelValues.
 	 */
-	private enum levelValues {
-		OFF,
-		FATAL, 
-		ERROR, 
-		WARN, 
-		INFO, 
-		DEBUG,
-		TRACE
+	private enum levelValues {	OFF,
+								FATAL, 
+								ERROR, 
+								WARN, 
+								INFO, 
+								DEBUG,
+								TRACE
 	}
 	
 	/** The Constant WRITE_ERROR. */
 	private static final String WRITE_ERROR = "An error occured when writing log";
+	
 	
 	/**
 	 * Instantiates a new logger.
@@ -102,16 +102,20 @@ public class Logger {
 	 * Log in Trace Level.
 	 *
 	 * @param logMsg the message to log
-	 * @throws Throwable 
+	 * @throws Throwable
 	 */
 	public void trace(String logMsg, Throwable exception) throws Throwable {
-		Level level = new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal());
-		log(level, logMsg, exception);
+		log(new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal()), logMsg, exception);
 	}
 	
+	/**
+	 * Log in Trace Level.
+	 *
+	 * @param logMsg the message to log
+	 */
 	public void trace(String logMsg) {
 		try {
-			trace(logMsg,null);
+			log(new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal()), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -121,15 +125,20 @@ public class Logger {
 	 * Log in Debug Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
 	 */
 	public void debug(String logMsg, Throwable exception) throws Throwable {
-		Level level = new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal());
-		log(level, logMsg, exception);
+		log(new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal()), logMsg, exception);
 	}
 	
+	/**
+	 * Log in Debug Level.
+	 *
+	 * @param logMsg the message to log
+	 */
 	public void debug(String logMsg) {
 		try {
-			debug(logMsg,null);
+			log(new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal()), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -139,15 +148,20 @@ public class Logger {
 	 * Log in Info Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
 	 */
 	public void info(String logMsg, Throwable exception) throws Throwable {
-		Level level = new Level(levelValues.INFO.name(), levelValues.INFO.ordinal());
-		log(level, logMsg, exception);
+		log(new Level(levelValues.INFO.name(), levelValues.INFO.ordinal()), logMsg, exception);
 	}
 	
+	/**
+	 * Log in Info Level.
+	 *
+	 * @param logMsg the message to log
+	 */
 	public void info(String logMsg) {
 		try {
-			info(logMsg,null);
+			log(new Level(levelValues.INFO.name(), levelValues.INFO.ordinal()), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -157,15 +171,20 @@ public class Logger {
 	 * Log in Warn Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
 	 */
 	public void warn(String logMsg, Throwable exception) throws Throwable {
-		Level level = new Level(levelValues.WARN.name(), levelValues.WARN.ordinal());
-		log(level, logMsg, exception);
+		log(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), logMsg, exception);
 	}
 	
+	/**
+	 * Log in Warn Level.
+	 *
+	 * @param logMsg the message to log
+	 */
 	public void warn(String logMsg) {
 		try {
-			warn(logMsg,null);
+			log(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -175,15 +194,20 @@ public class Logger {
 	 * Log in Error Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
 	 */
 	public void error(String logMsg, Throwable exception) throws Throwable {
-		Level level = new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal());
-		log(level, logMsg, exception);
+		log(new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal()), logMsg, exception);
 	}
 	
+	/**
+	 * Log in Error Level.
+	 *
+	 * @param logMsg the message to log
+	 */
 	public void error(String logMsg) {
 		try {
-			error(logMsg,null);
+			log(new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal()), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -193,15 +217,20 @@ public class Logger {
 	 * Log in Fatal Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
 	 */
 	public void fatal(String logMsg, Throwable exception) throws Throwable {
-		Level level = new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal());
-		log(level, logMsg, exception);
+		log(new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal()), logMsg, exception);
 	}
 	
+	/**
+	 * Log in Fatal Level.
+	 *
+	 * @param logMsg the message to log
+	 */
 	public void fatal(String logMsg) {
 		try {
-			fatal(logMsg,null);
+			log(new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal()), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
