@@ -1,6 +1,5 @@
 package logger.filters;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RegexFilter determine if a message must be filter when it matches a regular expression.
  */
