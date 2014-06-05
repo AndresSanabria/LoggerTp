@@ -128,9 +128,9 @@ public class Logger {
 	 */
 	private void initializeFilter() throws CustomFilterException {
 		String regExFilter = this.configLoader.getConfiguration().getRegExFilter();
-		if (regExFilter.isEmpty() || (regExFilter == null)) {
+		if (regExFilter.isEmpty()) {
 			String[] customFilter = this.configLoader.getConfiguration().getCustomFilter();
-			if (customFilter[0].isEmpty() || customFilter == null) {
+			if (customFilter[0].isEmpty()) {
 				this.filter = null;
 			} else {
 				FilterFactory filterFactory = new FilterFactory();
