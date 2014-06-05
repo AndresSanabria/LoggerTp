@@ -1,20 +1,22 @@
-package logger.filters;
+package logger.customFactory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class FilterFactory {
+import logger.writables.Writable;
+
+public class OutputFactory {
 	
-	public Filterer createCustomFilter(String implementor, String[] params) throws CustomFilterException {
+	public Writable createCustomOutput(String implementor, String[] params) throws CustomOutputException {
 		Class<?> customClass;
 		try {
 			customClass = Class.forName(implementor);
-			if (!implementsFilterer(customClass)) {
-				throw new CustomFilterException();
+			if (!implementsWritable(customClass)) {
+				throw new CustomOutputException();
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new CustomFilterException();
+			throw new CustomOutputException();
 		}
 		Constructor<?>[] allConstructors;
 		Constructor<?> constructor = null;
@@ -27,23 +29,23 @@ public class FilterFactory {
 			}
 		} catch (SecurityException e1) {
 			e1.printStackTrace();
-			throw new CustomFilterException();
+			throw new CustomOutputException();
 		}
-		Filterer customFilter;
+		Writable customOutput;
 		try {
-			customFilter = (Filterer)constructor.newInstance((Object[])params);
+			customOutput = (Writable)constructor.newInstance((Object[])params);
 		} catch (InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
-			throw new CustomFilterException();
+			throw new CustomOutputException();
 		} 
-		return customFilter;
+		return customOutput;
 	}
 	
-	private boolean implementsFilterer(Class<?> oneClass) {
+	private boolean implementsWritable(Class<?> oneClass) {
 		Class<?>[] interfacesImplemented = oneClass.getInterfaces();
 		for (Class<?> oneInterface: interfacesImplemented) {
-			if (oneInterface.getName().equals(Filterer.class.getName())) {
+			if (oneInterface.getName().equals(Writable.class.getName())) {
 				return true;
 			}
 		}

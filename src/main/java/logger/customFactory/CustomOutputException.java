@@ -1,4 +1,4 @@
-package logger.writables;
+package logger.customFactory;
 
 /**
  * The Class CustomOutputException thrown when customOutput creation error occurred.
