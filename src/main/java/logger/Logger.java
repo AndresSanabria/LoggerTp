@@ -29,23 +29,21 @@ public class Logger {
 	/**
 	 * The Enum levelValues.
 	 */
-	private enum levelValues {
-		OFF,
-		FATAL, 
-		ERROR, 
-		WARN, 
-		INFO, 
-		DEBUG,
-		TRACE
+	private enum levelValues {	OFF,
+								FATAL, 
+								ERROR, 
+								WARN, 
+								INFO, 
+								DEBUG,
+								TRACE
 	}
 	
 	/** The Constant WRITE_ERROR. */
 	private static final String WRITE_ERROR = "An error occured when writing log";
 	
+	
 	/**
 	 * Instantiates a new logger.
-	 *
-	 * @param configFilePath the configuration file path
 	 */
 	public Logger(String name) {
 		super();
@@ -104,12 +102,33 @@ public class Logger {
 	 * Log in Trace Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
+	 */
+	public void trace(String logMsg, Throwable exception) throws Throwable {
+		log(new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal()), logMsg, exception);
+	}
+	
+	/**
+	 * Log in Trace Level.
+	 *
+	 * @param logMsg the message to log
 	 */
 	public void trace(String logMsg) {
-		Level level = new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		try {
+			log(new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal()), logMsg, null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
+	}
+		
+	/**
+	 * Log in Debug Level.
+	 *
+	 * @param logMsg the message to log
+	 * @throws Throwable
+	 */
+	public void debug(String logMsg, Throwable exception) throws Throwable {
+		log(new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal()), logMsg, exception);
 	}
 	
 	/**
@@ -118,9 +137,10 @@ public class Logger {
 	 * @param logMsg the message to log
 	 */
 	public void debug(String logMsg) {
-		Level level = new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		try {
+			log(new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal()), logMsg, null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 
@@ -128,11 +148,22 @@ public class Logger {
 	 * Log in Info Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
+	 */
+	public void info(String logMsg, Throwable exception) throws Throwable {
+		log(new Level(levelValues.INFO.name(), levelValues.INFO.ordinal()), logMsg, exception);
+	}
+	
+	/**
+	 * Log in Info Level.
+	 *
+	 * @param logMsg the message to log
 	 */
 	public void info(String logMsg) {
-		Level level = new Level(levelValues.INFO.name(), levelValues.INFO.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		try {
+			log(new Level(levelValues.INFO.name(), levelValues.INFO.ordinal()), logMsg, null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 
@@ -140,11 +171,22 @@ public class Logger {
 	 * Log in Warn Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
+	 */
+	public void warn(String logMsg, Throwable exception) throws Throwable {
+		log(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), logMsg, exception);
+	}
+	
+	/**
+	 * Log in Warn Level.
+	 *
+	 * @param logMsg the message to log
 	 */
 	public void warn(String logMsg) {
-		Level level = new Level(levelValues.WARN.name(), levelValues.WARN.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		try {
+			log(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), logMsg, null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 
@@ -152,11 +194,22 @@ public class Logger {
 	 * Log in Error Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
+	 */
+	public void error(String logMsg, Throwable exception) throws Throwable {
+		log(new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal()), logMsg, exception);
+	}
+	
+	/**
+	 * Log in Error Level.
+	 *
+	 * @param logMsg the message to log
 	 */
 	public void error(String logMsg) {
-		Level level = new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		try {
+			log(new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal()), logMsg, null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 
@@ -164,11 +217,22 @@ public class Logger {
 	 * Log in Fatal Level.
 	 *
 	 * @param logMsg the message to log
+	 * @throws Throwable
+	 */
+	public void fatal(String logMsg, Throwable exception) throws Throwable {
+		log(new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal()), logMsg, exception);
+	}
+	
+	/**
+	 * Log in Fatal Level.
+	 *
+	 * @param logMsg the message to log
 	 */
 	public void fatal(String logMsg) {
-		Level level = new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal());
-		if (shouldLog(level)) {
-			log(level, logMsg);
+		try {
+			log(new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal()), logMsg, null);
+		} catch (Throwable e) {
+			// already handled exception in log method
 		}
 	}
 	
@@ -187,15 +251,17 @@ public class Logger {
 	 *
 	 * @param level the level in which to log
 	 * @param logMsg the message to log
+	 * @throws Throwable 
 	 */
-	private void log(Level level, String logMsg) {
+	private void log(Level level, String logMsg, Throwable exception) throws Throwable {
+		if (!shouldLog(level)) return;
 		String formatedLog = formatter.giveFormat(level, logMsg);
 		for (Writable output: outputs) {
 			try {
 				output.write(formatedLog);
 			} catch (WriteException e) {
-				handleException(WRITE_ERROR + " - " + output.getStringId());
 				e.printStackTrace();
+				handleException(output.getStringId(),exception);
 			}
 		}
 	}
@@ -204,9 +270,22 @@ public class Logger {
 	 * Handle exception caught.
 	 *
 	 * @param errorMessage the error message
+	 * @throws Throwable 
 	 */
-	private void handleException(String errorMessage) {
-		System.err.println(errorMessage);
+	private void handleException(String outputName, Throwable exception) throws Throwable {
+		handleException(outputName);
+		if (exception != null) {
+			throw exception;
+		}
+	}
+	
+	/**
+	 * Handle exception caught.
+	 *
+	 * @param errorMessage the error message
+	 */
+	private void handleException(String outputName) {
+		System.err.println(WRITE_ERROR + " - " + outputName);
 	}
 	
 	/**

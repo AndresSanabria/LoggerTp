@@ -1,6 +1,6 @@
 package logger.configurationReaders;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * The Interface ConfigurationReader thought to read configuration files in different formats.
@@ -10,10 +10,9 @@ public interface ConfigurationReader {
 	/**
 	 * Read configuration.
 	 *
-	 * @param configFilePath the configuration file path
 	 * @return Configuration object with the configuration read from file
-	 * @throws FileNotFoundException 
+	 * @throws IOException
 	 */
-	public Configuration readConfiguration(String configFilePath) throws FileNotFoundException;
+	public Configuration readConfiguration() throws IOException;
 
 }
