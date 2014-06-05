@@ -41,6 +41,9 @@ public class PropertiesFileReader implements ConfigurationReader {
 	/** The Constant LOG_TO_CONSOLE_TAG. */
 	private static final String LOG_TO_CONSOLE_TAG = "logToConsole";
 
+	/** The Constant REGEX_FILTER_TAG. */
+	private static final String REGEX_FILTER_TAG = "regExFilter";
+
 	/** The file path. */
 	private String filePath;
 	
@@ -67,6 +70,7 @@ public class PropertiesFileReader implements ConfigurationReader {
 		config.setLogToFiles(this.getPropertyValue(properties, LOG_TO_FILES_TAG).split(OUTPUT_SEPARATOR));
 		config.setLogToConsole(this.getLogToConsolePropertyValue(properties));
 		config.setCustomOutputs(this.getCustomOutputsPropertyValue(properties));
+		config.setRegExFilter(this.getPropertyValue(properties, REGEX_FILTER_TAG));
 		return config;
 	}
 

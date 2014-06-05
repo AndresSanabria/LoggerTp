@@ -40,6 +40,13 @@ public class TestXMLFileReader {
 	}
 	
 	@Test
+	public void loadRexExFilterFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config4.xml");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getRegExFilter(), ".*TRACE.*");
+	}
+	
+	@Test
 	public void loadCustomOutputsMissingImplementorFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
 		Configuration config = reader.readConfiguration();

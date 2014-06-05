@@ -41,6 +41,13 @@ public class TestPropertiesFileReader {
 	}
 	
 	@Test
+	public void loadRegEXFilterFromPropertiesFile() throws IOException {
+		PropertiesFileReader reader = new PropertiesFileReader("configFiles/testPropertiesFileReader/config3.properties");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getRegExFilter(), ".*TRACE.*");
+	}
+	
+	@Test
 	public void loadMissingLogToFilesFromPropertiesFile() throws IOException {
 		PropertiesFileReader reader = new PropertiesFileReader("configFiles/testPropertiesFileReader/config2.properties");
 		Configuration config = reader.readConfiguration();

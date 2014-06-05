@@ -88,6 +88,7 @@ public class ConfigurationLoader {
 		this.configuration.setLogToFiles(new String[] {"log.txt"});
 		this.configuration.setLogToConsole(false);
 		this.configuration.setCustomOutputs(null);
+		this.configuration.setRegExFilter("");
 	}
 	
 }

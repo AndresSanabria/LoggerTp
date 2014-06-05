@@ -24,6 +24,9 @@ public class Configuration {
 	
 	/** Should log to Console?. */
 	private Boolean logToConsole;
+
+	/** The regEx filter. */
+	private String regExFilter;
 	
 	
 	/**
@@ -132,6 +135,24 @@ public class Configuration {
 	 */
 	public void setLogToConsole(Boolean logToConsole) {
 		this.logToConsole = logToConsole;
+	}
+	
+	/**
+	 * Gets the regEx filter.
+	 *
+	 * @return the regEx filter
+	 */
+	public String getRegExFilter() {
+		return this.regExFilter;
+	}
+	
+	/**
+	 * Sets the regEx filter.
+	 *
+	 * @param the regEx filter
+	 */
+	public void setRegExFilter(String regExFilter) {
+		this.regExFilter = regExFilter;
 	}
 	
 }

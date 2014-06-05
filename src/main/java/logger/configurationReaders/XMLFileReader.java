@@ -59,6 +59,12 @@ public class XMLFileReader implements ConfigurationReader {
 	/** The Constant CONSOLE_TAG. */
 	private static final String CONSOLE_TAG = "console";
 	
+	/** The Constant FILTER_TAG. */
+	private static final String FILTER_TAG = "filter";
+
+	/** The Constant REGEX_FILTER_TAG. */
+	private static final String REGEX_FILTER_TAG = "regEx";
+	
 	
 	/**
 	 * Instantiates a new XMLFileReader.
@@ -86,6 +92,7 @@ public class XMLFileReader implements ConfigurationReader {
 			config.setLogToFiles(this.getFileNodesValue(doc));
 			config.setCustomOutputs(this.getCustomOutputNodesValue(doc));
 			config.setLogToConsole(this.getConsoleNodeValue(doc));
+			config.setRegExFilter(this.getRegExFilterNodeValue(doc));
 			return config;
 		} catch (ParserConfigurationException e) {
 			System.err.println("There was a ParserConfigurationException when parsing the configuration: "+ e.getMessage());
@@ -230,6 +237,24 @@ public class XMLFileReader implements ConfigurationReader {
 			return DEFAULT_CONSOLE;
 		}
 		return Boolean.valueOf(value);
+	}
+	
+	/**
+	 * Gets the regEx filter node value.
+	 *
+	 * @param doc the doc parsed
+	 * @return the regEx filter node value
+	 */
+	private String getRegExFilterNodeValue(Document doc) {
+		Node filterNode = this.getFirstLevelNodeByTag(doc, FILTER_TAG);
+		if (filterNode == null) {
+			return "";
+		}
+		Node regExFilterNode = this.getNodeByTagInNode(filterNode, REGEX_FILTER_TAG);
+		if (regExFilterNode == null) {
+			return "";
+		}
+		return this.getNodeValue(regExFilterNode);
 	}
 
 	/**

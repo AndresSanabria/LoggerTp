@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import logger.filters.Filterer;
+import logger.filters.RegexFilter;
 import logger.formatters.Formatter;
 import logger.writables.ConsoleOutput;
 import logger.writables.CustomOutputException;
@@ -24,6 +26,9 @@ public class Logger {
 	
 	/** The configuration loader. */
 	private ConfigurationLoader configLoader;
+
+	/** The filter. */
+	private Filterer filter;
 	
 	/** The outputs where to log */
 	private List<Writable> outputs;
@@ -67,6 +72,7 @@ public class Logger {
 		}
 		this.formatter = this.configLoader.initializeFormatter();
 		this.consoleActive = false;
+		this.initializeFilter();
 		String levelName = this.configLoader.getConfiguration().getLevel();
 		this.configLevel = new Level(levelName, levelValues.valueOf(levelName).ordinal());
 	}
@@ -108,6 +114,18 @@ public class Logger {
 		if (!consoleActive) {
 			outputs.add(new ConsoleOutput());
 			consoleActive = true;
+		}
+	}
+	
+	/**
+	 * Initialize filter.
+	 */
+	private void initializeFilter() {
+		String regExFilter = this.configLoader.getConfiguration().getRegExFilter();
+		if (regExFilter.isEmpty()) {
+			this.filter = null;
+		} else {
+			this.filter = new RegexFilter(regExFilter);
 		}
 	}
 	
@@ -269,6 +287,21 @@ public class Logger {
 	}
 	
 	/**
+	 * Should the message be filtered.
+	 *
+	 * @param msg the message to check if it should be filtered
+	 * @return true if it should be filtered, otherwise false
+	 */
+	private Boolean shouldFilter(String msg) {
+		if ((this.filter != null) && (this.filter.filter(msg))) {
+			return true;
+		} else if (this.filter == null) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Log the message in the given Level.
 	 *
 	 * @param level the level in which to log
@@ -278,12 +311,14 @@ public class Logger {
 	private void log(Level level, String logMsg, Throwable exception) throws Throwable {
 		if (!shouldLog(level)) return;
 		String formatedLog = formatter.giveFormat(level, logMsg);
-		for (Writable output: outputs) {
-			try {
-				output.write(formatedLog);
-			} catch (WriteException e) {
-				e.printStackTrace();
-				handleException(output.getStringId(),exception);
+		if (this.shouldFilter(formatedLog)) {
+			for (Writable output: outputs) {
+				try {
+					output.write(formatedLog);
+				} catch (WriteException e) {
+					e.printStackTrace();
+					handleException(output.getStringId(),exception);
+				}
 			}
 		}
 	}
