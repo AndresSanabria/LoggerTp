@@ -41,10 +41,17 @@ public class TestPropertiesFileReader {
 	}
 	
 	@Test
-	public void loadRegEXFilterFromPropertiesFile() throws IOException {
+	public void loadRegExFilterFromPropertiesFile() throws IOException {
 		PropertiesFileReader reader = new PropertiesFileReader("configFiles/testPropertiesFileReader/config3.properties");
 		Configuration config = reader.readConfiguration();
 		assertEquals(config.getRegExFilter(), ".*TRACE.*");
+	}
+	
+	@Test
+	public void loadCustomFilterFromPropertiesFile() throws IOException {
+		PropertiesFileReader reader = new PropertiesFileReader("configFiles/testPropertiesFileReader/config4.properties");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getCustomFilter()[0], "logger.Filter");
 	}
 	
 	@Test

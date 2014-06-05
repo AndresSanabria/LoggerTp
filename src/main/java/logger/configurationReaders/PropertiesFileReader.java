@@ -44,6 +44,9 @@ public class PropertiesFileReader implements ConfigurationReader {
 	/** The Constant REGEX_FILTER_TAG. */
 	private static final String REGEX_FILTER_TAG = "regExFilter";
 
+	/** The Constant CUSTOM_FILTER_TAG. */
+	private static final String CUSTOM_FILTER_TAG = "customFilter";
+
 	/** The file path. */
 	private String filePath;
 	
@@ -71,6 +74,7 @@ public class PropertiesFileReader implements ConfigurationReader {
 		config.setLogToConsole(this.getLogToConsolePropertyValue(properties));
 		config.setCustomOutputs(this.getCustomOutputsPropertyValue(properties));
 		config.setRegExFilter(this.getPropertyValue(properties, REGEX_FILTER_TAG));
+		config.setCustomFilter(this.getPropertyValue(properties, CUSTOM_FILTER_TAG).split(PARAM_SEPARATOR));
 		return config;
 	}
 

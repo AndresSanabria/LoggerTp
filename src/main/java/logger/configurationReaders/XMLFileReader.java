@@ -93,6 +93,7 @@ public class XMLFileReader implements ConfigurationReader {
 			config.setCustomOutputs(this.getCustomOutputNodesValue(doc));
 			config.setLogToConsole(this.getConsoleNodeValue(doc));
 			config.setRegExFilter(this.getRegExFilterNodeValue(doc));
+			config.setCustomFilter(this.getCustomFilterNodeValue(doc));
 			return config;
 		} catch (ParserConfigurationException e) {
 			System.err.println("There was a ParserConfigurationException when parsing the configuration: "+ e.getMessage());
@@ -255,6 +256,42 @@ public class XMLFileReader implements ConfigurationReader {
 			return "";
 		}
 		return this.getNodeValue(regExFilterNode);
+	}
+
+	/**
+	 * Gets the custom filter node value.
+	 *
+	 * @param doc the doc parsed
+	 * @return the custom filter node value
+	 */
+	private String[] getCustomFilterNodeValue(Document doc) {
+		List<String> values = new ArrayList<String>();
+		Node filterNode = this.getFirstLevelNodeByTag(doc, FILTER_TAG);
+		if (filterNode == null) {
+			return values.toArray(new String[values.size()]);
+		}
+		Node customFilterNode = this.getNodeByTagInNode(filterNode, CUSTOM_TAG);
+		if (customFilterNode == null) {
+			return values.toArray(new String[values.size()]);
+		}
+		
+		Node implementorNode = this.getNodeByTagInNode(customFilterNode, IMPLEMENTOR_TAG);
+		if (implementorNode == null) {
+			return values.toArray(new String[values.size()]);
+		}
+		String implementorValue = this.getNodeValue(implementorNode);
+		if (implementorValue.isEmpty()) {
+			return values.toArray(new String[values.size()]);
+		}
+		values.add(implementorValue);
+		
+		NodeList paramNodes = this.getNodeListByTagInNode(customFilterNode, PARAM_TAG);
+		for (int j = 0; j < paramNodes.getLength(); j++) {
+			String paramValue = this.getNodeValue(paramNodes.item(j));
+			values.add(paramValue);
+		}
+		
+		return values.toArray(new String[values.size()]);
 	}
 
 	/**

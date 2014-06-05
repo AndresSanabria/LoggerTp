@@ -47,6 +47,13 @@ public class TestXMLFileReader {
 	}
 	
 	@Test
+	public void loadCustomFilterFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config5.xml");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getCustomFilter()[0], "logger.Filter");
+	}
+	
+	@Test
 	public void loadCustomOutputsMissingImplementorFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
 		Configuration config = reader.readConfiguration();

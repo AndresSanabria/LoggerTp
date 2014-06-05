@@ -27,6 +27,9 @@ public class Configuration {
 
 	/** The regEx filter. */
 	private String regExFilter;
+
+	/** The custom filter. */
+	private String[] customFilter;
 	
 	
 	/**
@@ -153,6 +156,24 @@ public class Configuration {
 	 */
 	public void setRegExFilter(String regExFilter) {
 		this.regExFilter = regExFilter;
+	}
+
+	/**
+	 * Gets the custom filter.
+	 * 
+	 * @return the custom filter
+	 */
+	public String[] getCustomFilter() {
+		return this.customFilter;
+	}
+
+	/**
+	 * Sets the custom filter.
+	 * 
+	 * @param customFilter the custom filter to set
+	 */
+	public void setCustomFilter(String[] customFilter) {
+		this.customFilter = customFilter;
 	}
 	
 }

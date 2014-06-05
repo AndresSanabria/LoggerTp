@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import logger.filters.CustomFilterException;
+import logger.filters.FilterFactory;
 import logger.filters.Filterer;
 import logger.filters.RegexFilter;
 import logger.formatters.Formatter;
@@ -64,15 +66,17 @@ public class Logger {
 		this.configLoader = new ConfigurationLoader();
 		try{
 			this.initializeOutputs();
+			this.initializeFilter();
 		}
 		catch(IOException e){
 			handleException("There was an IOException when Intializing outputs: "+ e.getMessage()+"\n Check your Configuration file");
 		} catch (CustomOutputException e) {
 			handleException("There was an CustomOutputException when Intializing outputs: "+ e.getMessage()+"\n Check your Configuration file");
+		} catch (CustomFilterException e) {
+			handleException("There was an CustomFilterException when Intializing filter: "+ e.getMessage()+"\n Check your Configuration file");
 		}
 		this.formatter = this.configLoader.initializeFormatter();
 		this.consoleActive = false;
-		this.initializeFilter();
 		String levelName = this.configLoader.getConfiguration().getLevel();
 		this.configLevel = new Level(levelName, levelValues.valueOf(levelName).ordinal());
 	}
@@ -119,11 +123,19 @@ public class Logger {
 	
 	/**
 	 * Initialize filter.
+	 * 
+	 * @throws CustomFilterException 
 	 */
-	private void initializeFilter() {
+	private void initializeFilter() throws CustomFilterException {
 		String regExFilter = this.configLoader.getConfiguration().getRegExFilter();
-		if (regExFilter.isEmpty()) {
-			this.filter = null;
+		if (regExFilter.isEmpty() || (regExFilter == null)) {
+			String[] customFilter = this.configLoader.getConfiguration().getCustomFilter();
+			if (customFilter[0].isEmpty() || customFilter == null) {
+				this.filter = null;
+			} else {
+				FilterFactory filterFactory = new FilterFactory();
+				this.filter = filterFactory.createCustomFilter(customFilter[0], java.util.Arrays.copyOfRange(customFilter, 1, customFilter.length));
+			}
 		} else {
 			this.filter = new RegexFilter(regExFilter);
 		}

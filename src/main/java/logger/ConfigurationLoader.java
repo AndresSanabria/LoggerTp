@@ -89,6 +89,7 @@ public class ConfigurationLoader {
 		this.configuration.setLogToConsole(false);
 		this.configuration.setCustomOutputs(null);
 		this.configuration.setRegExFilter("");
+		this.configuration.setCustomFilter(new String[] {});
 	}
 	
 }
