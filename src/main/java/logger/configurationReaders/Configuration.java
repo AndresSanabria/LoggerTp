@@ -1,5 +1,7 @@
 package logger.configurationReaders;
 
+import java.util.List;
+
 /**
  * The Class Configuration stores the configuration of the logger.
  */
@@ -16,6 +18,9 @@ public class Configuration {
 	
 	/** The files where to log. */
 	private String[] logToFiles;
+	
+	/** The custom outputs where to log. */
+	private List<String[]> customOutputs;
 	
 	/** Should log to Console?. */
 	private Boolean logToConsole;
@@ -91,6 +96,24 @@ public class Configuration {
 	 */
 	public void setLogToFiles(String[] logToFiles) {
 		this.logToFiles = logToFiles;
+	}
+	
+	/**
+	 * Gets custom outputs where to log.
+	 *
+	 * @return the custom outputs to log
+	 */
+	public List<String[]> getCustomOutputs() {
+		return this.customOutputs;
+	}
+	
+	/**
+	 * Sets custom outputs where to log.
+	 *
+	 * @param the custom outputs to log
+	 */
+	public void setCustomOutputs(List<String[]> customOutputs) {
+		this.customOutputs = customOutputs;
 	}
 
 	/**

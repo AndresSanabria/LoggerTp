@@ -33,10 +33,24 @@ public class TestXMLFileReader {
 	}
 	
 	@Test
+	public void loadCustomOutputsFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config1.xml");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getCustomOutputs().get(1)[0], "logger.FileOutput");
+	}
+	
+	@Test
+	public void loadCustomOutputsMissingImplementorFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getCustomOutputs().size(), 0);
+	}
+	
+	@Test
 	public void loadMissingLogToFilesNodeFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
 		Configuration config = reader.readConfiguration();
-		assertEquals(config.getLogToFiles()[0], "");
+		assertEquals(config.getLogToFiles().length, 0);
 	}
 	
 	@Test

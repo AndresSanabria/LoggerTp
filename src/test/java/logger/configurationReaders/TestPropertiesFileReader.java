@@ -34,6 +34,13 @@ public class TestPropertiesFileReader {
 	}
 	
 	@Test
+	public void loadCustomOutputsFromPropertiesFile() throws IOException {
+		PropertiesFileReader reader = new PropertiesFileReader("configFiles/testPropertiesFileReader/config1.properties");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getLogToFiles()[1], "log2.txt");
+	}
+	
+	@Test
 	public void loadMissingLogToFilesFromPropertiesFile() throws IOException {
 		PropertiesFileReader reader = new PropertiesFileReader("configFiles/testPropertiesFileReader/config2.properties");
 		Configuration config = reader.readConfiguration();

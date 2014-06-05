@@ -6,5 +6,9 @@
 	</message>
 	<outputs>
 		<console>true</console>
+		<custom>
+			<param>192.168.1.1</param>
+			<param>juan-perez</param>
+		</custom>
 	</outputs>
 </configuration>
