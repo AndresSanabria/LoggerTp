@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 import logger.Logger;
-import logger.WriteException;
+import logger.writables.WriteException;
 
 import org.junit.Test;
 

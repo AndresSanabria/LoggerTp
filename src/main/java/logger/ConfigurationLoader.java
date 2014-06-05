@@ -6,6 +6,8 @@ import logger.configurationReaders.Configuration;
 import logger.configurationReaders.ConfigurationReader;
 import logger.configurationReaders.PropertiesFileReader;
 import logger.configurationReaders.XMLFileReader;
+import logger.formatters.Formatter;
+import logger.formatters.SimpleFormatter;
 
 /**
  * The Class ConfigurationLoader load the Configuration of the Logger from the configuration file

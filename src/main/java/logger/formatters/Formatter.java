@@ -1,4 +1,6 @@
-package logger;
+package logger.formatters;
+
+import logger.Level;
 
 /**
  * The Interface Formatter thought to give format to messages.

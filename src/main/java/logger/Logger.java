@@ -3,6 +3,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import logger.formatters.Formatter;
+import logger.writables.ConsoleOutput;
+import logger.writables.FileOutput;
+import logger.writables.Writable;
+import logger.writables.WriteException;
+
 /**
  * The Class Logger logs messages in the given outputs with the proper format.
  */

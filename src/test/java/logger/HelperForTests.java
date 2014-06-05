@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import logger.FileOutput;
-import logger.WriteException;
+import logger.writables.FileOutput;
+import logger.writables.WriteException;
 
 public class HelperForTests {
 	

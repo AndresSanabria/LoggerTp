@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import logger.Level;
-import logger.SimpleFormatter;
+import logger.formatters.SimpleFormatter;
 
 import org.junit.Test;
 
@@ -88,6 +88,13 @@ public class TestSimpleFormatter {
 		String formattedMsg = formatter.giveFormat(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), MESSAGE);
 		Integer lineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber()-1; //-1 pues give format esta en la linea anterior
 		assertEquals(formattedMsg, "Test" + " - " + MESSAGE + " - " + lineNumber);
+	}
+	
+	@Test
+	public void simpleFormatterWrittingLoggerName() {
+		SimpleFormatter formatter = new SimpleFormatter("Test %n %m %n %g", DISTANCE_TEST_GIVE_FORMAT,"-","LoggerName");
+		String formattedMsg = formatter.giveFormat(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), MESSAGE);
+		assertEquals(formattedMsg, "Test" + " - " + MESSAGE + " - " + "LoggerName");
 	}
 	
 	@Test

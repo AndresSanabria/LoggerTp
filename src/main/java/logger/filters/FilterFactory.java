@@ -1,20 +1,20 @@
-package logger;
+package logger.filters;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class OutputFactory {
+public class FilterFactory {
 	
-	public Writable createCustomOutput(String implementor, String[] params) throws CustomOutputException {
+	public Filterer createCustomFilter(String implementor, String[] params) throws CustomFilterException {
 		Class<?> customClass;
 		try {
 			customClass = Class.forName(implementor);
-			if (!implementsWritable(customClass)) {
-				throw new CustomOutputException();
+			if (!implementsFilterer(customClass)) {
+				throw new CustomFilterException();
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new CustomOutputException();
+			throw new CustomFilterException();
 		}
 		Constructor<?>[] allConstructors;
 		Constructor<?> constructor = null;
@@ -27,23 +27,23 @@ public class OutputFactory {
 			}
 		} catch (SecurityException e1) {
 			e1.printStackTrace();
-			throw new CustomOutputException();
+			throw new CustomFilterException();
 		}
-		Writable customOutput;
+		Filterer customFilter;
 		try {
-			customOutput = (Writable)constructor.newInstance((Object[])params);
+			customFilter = (Filterer)constructor.newInstance((Object[])params);
 		} catch (InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
-			throw new CustomOutputException();
+			throw new CustomFilterException();
 		} 
-		return customOutput;
+		return customFilter;
 	}
 	
-	private boolean implementsWritable(Class<?> oneClass) {
+	private boolean implementsFilterer(Class<?> oneClass) {
 		Class<?>[] interfacesImplemented = oneClass.getInterfaces();
 		for (Class<?> oneInterface: interfacesImplemented) {
-			if (oneInterface.getName().equals(Writable.class.getName())) {
+			if (oneInterface.getName().equals(Filterer.class.getName())) {
 				return true;
 			}
 		}

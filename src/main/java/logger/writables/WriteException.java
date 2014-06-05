@@ -1,4 +1,4 @@
-package logger;
+package logger.writables;
 
 /**
  * The Class WriteException thrown when writing error occurred.
