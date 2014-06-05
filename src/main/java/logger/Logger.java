@@ -5,7 +5,9 @@ import java.util.List;
 
 import logger.formatters.Formatter;
 import logger.writables.ConsoleOutput;
+import logger.writables.CustomOutputException;
 import logger.writables.FileOutput;
+import logger.writables.OutputFactory;
 import logger.writables.Writable;
 import logger.writables.WriteException;
 
@@ -60,6 +62,8 @@ public class Logger {
 		}
 		catch(IOException e){
 			handleException("There was an IOException when Intializing outputs: "+ e.getMessage()+"\n Check your Configuration file");
+		} catch (CustomOutputException e) {
+			handleException("There was an CustomOutputException when Intializing outputs: "+ e.getMessage()+"\n Check your Configuration file");
 		}
 		this.formatter = this.configLoader.initializeFormatter();
 		this.consoleActive = false;
@@ -71,8 +75,9 @@ public class Logger {
 	 * Initialize outputs.
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws CustomOutputException 
 	 */
-	private void initializeOutputs() throws IOException {
+	private void initializeOutputs() throws IOException, CustomOutputException {
 		this.outputs = new ArrayList<>();
 		if (this.configLoader.getConfiguration().getLogToConsole()) {
 			this.enableConsoleOutput();
@@ -80,7 +85,18 @@ public class Logger {
 		String[] fileOutputs = configLoader.getConfiguration().getLogToFiles();
 		if (fileOutputs != null) {
 			for (String fileOutput: fileOutputs) {
-				this.addOutput(new FileOutput(fileOutput));
+				if (!fileOutput.isEmpty()) {
+					this.addOutput(new FileOutput(fileOutput));
+				}
+			}
+		}
+		List<String[]> customOutputs = this.configLoader.getConfiguration().getCustomOutputs();
+		if (customOutputs != null) {
+			OutputFactory outputFactory = new OutputFactory();
+			for (String[] customOutput: customOutputs) {
+				if (!customOutput[0].isEmpty()) {
+					this.addOutput(outputFactory.createCustomOutput(customOutput[0], java.util.Arrays.copyOfRange(customOutput, 1, customOutput.length)));
+				}
 			}
 		}
 	}

@@ -87,6 +87,7 @@ public class ConfigurationLoader {
 		this.configuration.setMessageSeparator("-");
 		this.configuration.setLogToFiles(new String[] {"log.txt"});
 		this.configuration.setLogToConsole(false);
+		this.configuration.setCustomOutputs(null);
 	}
 	
 }
