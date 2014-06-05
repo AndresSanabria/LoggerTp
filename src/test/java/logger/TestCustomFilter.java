@@ -2,8 +2,8 @@ package logger;
 
 import static org.junit.Assert.*;
 
-import logger.filters.CustomFilterException;
-import logger.filters.FilterFactory;
+import logger.customFactory.CustomFactory;
+import logger.customFactory.CustomFilterException;
 import logger.filters.Filterer;
 import logger.filters.RegexFilter;
 
@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class TestCustomFilter {
 	
-	private FilterFactory factory = new FilterFactory();
+	private CustomFactory factory = new CustomFactory();
 
 	@Test
 	public void createCustomRegexFilter() throws CustomFilterException {

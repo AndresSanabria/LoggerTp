@@ -3,15 +3,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import logger.filters.CustomFilterException;
-import logger.filters.FilterFactory;
+import logger.customFactory.CustomFilterException;
+import logger.customFactory.CustomFactory;
 import logger.filters.Filterer;
 import logger.filters.RegexFilter;
 import logger.formatters.Formatter;
 import logger.writables.ConsoleOutput;
-import logger.writables.CustomOutputException;
+import logger.customFactory.CustomOutputException;
 import logger.writables.FileOutput;
-import logger.writables.OutputFactory;
 import logger.writables.Writable;
 import logger.writables.WriteException;
 
@@ -102,7 +101,7 @@ public class Logger {
 		}
 		List<String[]> customOutputs = this.configLoader.getConfiguration().getCustomOutputs();
 		if (customOutputs != null) {
-			OutputFactory outputFactory = new OutputFactory();
+			CustomFactory outputFactory = new CustomFactory();
 			for (String[] customOutput: customOutputs) {
 				if (!customOutput[0].isEmpty()) {
 					this.addOutput(outputFactory.createCustomOutput(customOutput[0], java.util.Arrays.copyOfRange(customOutput, 1, customOutput.length)));
@@ -133,7 +132,7 @@ public class Logger {
 			if (customFilter[0].isEmpty()) {
 				this.filter = null;
 			} else {
-				FilterFactory filterFactory = new FilterFactory();
+				CustomFactory filterFactory = new CustomFactory();
 				this.filter = filterFactory.createCustomFilter(customFilter[0], java.util.Arrays.copyOfRange(customFilter, 1, customFilter.length));
 			}
 		} else {

@@ -8,9 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 import logger.writables.ConsoleOutput;
-import logger.writables.CustomOutputException;
 import logger.writables.FileOutput;
-import logger.writables.OutputFactory;
+import logger.customFactory.CustomFactory;
+import logger.customFactory.CustomOutputException;
 import logger.writables.Writable;
 import logger.writables.WriteException;
 
@@ -19,7 +19,7 @@ import org.junit.Test;
 public class TestCustomOutput {
 	
 	private HelperForTests helper = new HelperForTests();
-	private OutputFactory factory = new OutputFactory();
+	private CustomFactory factory = new CustomFactory();
 
 	@Test
 	public void createCustomFileOutput() throws CustomOutputException, WriteException, FileNotFoundException {

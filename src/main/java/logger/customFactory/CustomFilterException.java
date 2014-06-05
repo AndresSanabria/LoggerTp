@@ -1,4 +1,4 @@
-package logger.filters;
+package logger.customFactory;
 
 /**
  * The Class CustomFilterException thrown when customFilter creation error occurred.
