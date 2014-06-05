@@ -1,5 +1,6 @@
-package logger;
+package logger.formatters;
 
+import logger.Level;
 import net.sf.json.JSONObject;
 
 import java.text.SimpleDateFormat;

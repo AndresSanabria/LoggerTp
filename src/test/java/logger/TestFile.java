@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
-import logger.FileOutput;
-import logger.Writable;
-import logger.WriteException;
+import logger.writables.FileOutput;
+import logger.writables.Writable;
+import logger.writables.WriteException;
 
 import org.junit.Test;
 

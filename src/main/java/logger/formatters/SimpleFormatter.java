@@ -1,7 +1,9 @@
-package logger;
+package logger.formatters;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import logger.Level;
 
 /**
  * The Class SimpleFormatter give format to messages replacing pseudo-variables 

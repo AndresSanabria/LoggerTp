@@ -1,6 +1,7 @@
 package logger;
 
 import static org.junit.Assert.*;
+import logger.formatters.JsonFormatter;
 
 import org.junit.Test;
 

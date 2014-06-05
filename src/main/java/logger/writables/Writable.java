@@ -1,4 +1,4 @@
-package logger;
+package logger.writables;
 
 /**
  * The Interface Writable thought to write messages in different Outputs.

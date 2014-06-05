@@ -1,4 +1,4 @@
-package logger;
+package logger.writables;
 
 public class CustomOutputException extends Exception {
 

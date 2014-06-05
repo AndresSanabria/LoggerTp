@@ -1,4 +1,4 @@
-package logger;
+package logger.writables;
 
 /**
  * The Class ConsoleOutput manage the write of messages in Console Output.

@@ -1,4 +1,4 @@
-package logger;
+package logger.writables;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

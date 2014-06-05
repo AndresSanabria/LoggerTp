@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import logger.Level;
-import logger.SimpleFormatter;
+import logger.formatters.SimpleFormatter;
 
 import org.junit.Test;
 
