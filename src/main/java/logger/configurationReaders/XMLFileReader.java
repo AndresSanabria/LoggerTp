@@ -177,7 +177,7 @@ public class XMLFileReader implements ConfigurationReader {
 	 * @return the file nodes value
 	 */
 	private String[] getFileNodesValue(Document doc) {
-		List<String> values = new ArrayList<String>();
+		List<String> values = new ArrayList<>();
 		Node outputsNode = this.getFirstLevelNodeByTag(doc, OUTPUTS_TAG);
 		if (outputsNode == null) {
 			return null;
@@ -202,14 +202,14 @@ public class XMLFileReader implements ConfigurationReader {
 	 * @return the custom output nodes value
 	 */
 	private List<String[]> getCustomOutputNodesValue(Document doc) {
-		List<String[]> customOutputs = new ArrayList<String[]>();
+		List<String[]> customOutputs = new ArrayList<>();
 		Node outputsNode = this.getFirstLevelNodeByTag(doc, OUTPUTS_TAG);
 		if (outputsNode == null) {
 			return null;
 		}
 		NodeList customNodes = this.getNodeListByTagInNode(outputsNode, CUSTOM_TAG);
 		for (int i = 0; i < customNodes.getLength(); i++) {
-			List<String> values = new ArrayList<String>();
+			List<String> values = new ArrayList<>();
 			
 			Node implementorNode = this.getNodeByTagInNode(customNodes.item(i), IMPLEMENTOR_TAG);
 			if (implementorNode == null) {
@@ -286,7 +286,7 @@ public class XMLFileReader implements ConfigurationReader {
 	 * @return the custom filter node value
 	 */
 	private String[] getCustomFilterNodeValue(Document doc) {
-		List<String> values = new ArrayList<String>();
+		List<String> values = new ArrayList<>();
 		Node filterNode = this.getFirstLevelNodeByTag(doc, FILTER_TAG);
 		if (filterNode == null) {
 			return null;

@@ -118,7 +118,7 @@ public class PropertiesFileReader implements ConfigurationReader {
 	 * @return the custom outputs property value
 	 */
 	private List<String[]> getCustomOutputsPropertyValue(Properties properties) {
-		List<String[]> customOutputs = new ArrayList<String[]>();
+		List<String[]> customOutputs = new ArrayList<>();
 		String values = this.getPropertyValue(properties, CUSTOM_OUTPUTS_TAG, null);
 		if (values == null) {
 			return null;
