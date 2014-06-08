@@ -1,8 +1,6 @@
 package logger;
 
 import static org.junit.Assert.*;
-
-
 import logger.Logger;
 import logger.LoggerCollection;
 
@@ -20,11 +18,17 @@ public class TestLoggerCollection {
 	/** The Constant OTHER_LOGGER. */
 	private static final String OTHER_LOGGER = "other logger";
 
+	/** The instance of one LoggerManager. */
+	private LoggerManager loggerManager = new LoggerManager(ONE_LOGGER);
+
+	/** The instance of another LoggerManager. */
+	private LoggerManager otherLoggerManager = new LoggerManager(OTHER_LOGGER);
+
 	/** The instance of one Logger. */
-	private Logger oneLogger = new Logger(ONE_LOGGER);
+	private Logger oneLogger = loggerManager.getLogger();
 
 	/** The instance of another Logger. */
-	private Logger otherLogger = new Logger(OTHER_LOGGER);
+	private Logger otherLogger = otherLoggerManager.getLogger();
 
 
 	@Before

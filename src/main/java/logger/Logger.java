@@ -1,16 +1,9 @@
 package logger;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import logger.customFactory.CustomFilterException;
-import logger.customFactory.CustomFactory;
 import logger.filters.Filterer;
-import logger.filters.RegexFilter;
 import logger.formatters.Formatter;
-import logger.writables.ConsoleOutput;
-import logger.customFactory.CustomOutputException;
-import logger.writables.FileOutput;
 import logger.writables.Writable;
 import logger.writables.WriteException;
 
@@ -19,14 +12,14 @@ import logger.writables.WriteException;
  */
 public class Logger {
 
+	/** The Constant WRITE_ERROR. */
+	private static final String WRITE_ERROR = "An error occured when writing log";
+
 	/** The name. */
 	private String name;
 
 	/** The formatter. */
 	private Formatter formatter;
-
-	/** The configuration loader. */
-	private ConfigurationLoader configLoader;
 
 	/** The filter. */
 	private Filterer filter;
@@ -34,111 +27,46 @@ public class Logger {
 	/** The outputs where to log. */
 	private List<Writable> outputs;
 
-	/** Is the console active? */
-	private boolean consoleActive;
-
 	/** The configuration level. */
-	private Level configLevel;
+	private Level level;
 
-	/**
-	 * The Enum levelValues.
-	 */
+	/** The enum levelValues. */
 	private enum levelValues { OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE }
-
-	/** The Constant WRITE_ERROR. */
-	private static final String WRITE_ERROR = "An error occured when writing log";
 
 
 	/**
 	 * Instantiates a new logger.
 	 *
 	 * @param name the name of the logger
+	 * @param level the level of the logger
+	 * @param formatter the formatter to format the messages
 	 */
-	public Logger(final String name) {
+	public Logger(final String name, final String levelName, final Formatter formatter) {
 		super();
 		this.name = name;
-		this.configLoader = new ConfigurationLoader();
-		try {
-			this.initializeOutputs();
-			this.initializeFilter();
-		} catch (IOException e) {
-			handleException("There was an IOException when Intializing outputs: " + e.getMessage() + "\n Check your Configuration file");
-		} catch (CustomOutputException e) {
-			handleException("There was an CustomOutputException when Intializing outputs: " + e.getMessage() + "\n Check your Configuration file");
-		} catch (CustomFilterException e) {
-			handleException("There was an CustomFilterException when Intializing filter: " + e.getMessage() + "\n Check your Configuration file");
-		}
-		this.formatter = this.configLoader.initializeFormatter();
-		this.consoleActive = false;
-		String levelName = this.configLoader.getConfiguration().getLevel();
-		this.configLevel = new Level(levelName, levelValues.valueOf(levelName).ordinal());
-	}
-
-	/**
-	 * Initialize outputs.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws CustomOutputException when an error occurs in the creation of a CustomOutput
-	 */
-	private void initializeOutputs() throws IOException, CustomOutputException {
+		this.formatter = formatter;
+		this.level = new Level(levelName, levelValues.valueOf(levelName).ordinal());
 		this.outputs = new ArrayList<>();
-		if (this.configLoader.getConfiguration().getLogToConsole()) {
-			this.enableConsoleOutput();
-		}
-		String[] fileOutputs = configLoader.getConfiguration().getLogToFiles();
-		if (fileOutputs != null) {
-			for (String fileOutput: fileOutputs) {
-				if (!fileOutput.isEmpty()) {
-					this.addOutput(new FileOutput(fileOutput));
-				}
-			}
-		}
-		List<String[]> customOutputs = this.configLoader.getConfiguration().getCustomOutputs();
-		if (customOutputs != null) {
-			CustomFactory outputFactory = new CustomFactory();
-			for (String[] customOutput: customOutputs) {
-				this.addOutput(outputFactory.createCustomOutput(customOutput[0], java.util.Arrays.copyOfRange(customOutput, 1, customOutput.length)));
-			}
-		}
+		this.filter = null;
 	}
 
-	/**
-	 * Enable console output.
-	 */
-	private void enableConsoleOutput() {
-		if (!consoleActive) {
-			outputs.add(new ConsoleOutput());
-			consoleActive = true;
-		}
-	}
-
-	/**
-	 * Initialize filter.
-	 *
-	 * @throws CustomFilterException when an error occurs in the creation of a CustomFilter
-	 */
-	private void initializeFilter() throws CustomFilterException {
-		String regExFilter = this.configLoader.getConfiguration().getRegExFilter();
-		if (regExFilter == null) {
-			String[] customFilter = this.configLoader.getConfiguration().getCustomFilter();
-			if (customFilter == null) {
-				this.filter = null;
-			} else {
-				CustomFactory filterFactory = new CustomFactory();
-				this.filter = filterFactory.createCustomFilter(customFilter[0], java.util.Arrays.copyOfRange(customFilter, 1, customFilter.length));
-			}
-		} else {
-			this.filter = new RegexFilter(regExFilter);
-		}
-	}
 
 	/**
 	 * Adds the output where to Log.
 	 *
 	 * @param newOutput the new output to be add
 	 */
-	private void addOutput(final Writable newOutput) {
+	public final void addOutput(final Writable newOutput) {
 		outputs.add(newOutput);
+	}
+
+	/**
+	 * Sets the filter.
+	 *
+	 * @param filter the filter to be set
+	 */
+	public final void setFilter(final Filterer filter) {
+		this.filter = filter;
 	}
 
 	/**
@@ -292,7 +220,7 @@ public class Logger {
 	 * @return true if should log, otherwise false
 	 */
 	private Boolean shouldLog(final Level level) {
-		return this.configLevel.isGreaterThan(level);
+		return this.level.isGreaterThan(level);
 	}
 
 	/**

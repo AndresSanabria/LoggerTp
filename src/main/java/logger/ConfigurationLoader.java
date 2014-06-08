@@ -40,9 +40,16 @@ public class ConfigurationLoader {
 	 * Instantiates a new configuration loader.
 	 */
 	public ConfigurationLoader() {
-		this.loadConfiguration(new PropertiesFileReader(PROPERTIES_FILE_PATH));
+		this.configuration = null;
+	}
+
+	/**
+	 * Loads the configuration from .properties or .xml files or by default.
+	 */
+	public final void loadConfiguration() {
+		this.loadConfigurationFromFile(new PropertiesFileReader(PROPERTIES_FILE_PATH));
 		if (this.configuration == null) {
-			this.loadConfiguration(new XMLFileReader(XML_FILE_PATH));
+			this.loadConfigurationFromFile(new XMLFileReader(XML_FILE_PATH));
 			if (this.configuration == null) {
 				this.initializeByDefault();
 			}
@@ -50,9 +57,9 @@ public class ConfigurationLoader {
 	}
 
 	/**
-	 * Initialize formatter.
+	 * Initializes the formatter.
 	 *
-	 * @return the formatter
+	 * @return the formatter initialized
 	 */
 	public final Formatter initializeFormatter() {
 		Formatter formatter;
@@ -80,7 +87,7 @@ public class ConfigurationLoader {
 	 *
 	 * @param configReader the configuration reader
 	 */
-	private void loadConfiguration(final ConfigurationReader configReader) {
+	private void loadConfigurationFromFile(final ConfigurationReader configReader) {
 		try {
 			this.configuration = configReader.readConfiguration();
 		} catch (IOException e) { }

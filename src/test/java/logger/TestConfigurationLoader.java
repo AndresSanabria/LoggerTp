@@ -34,6 +34,7 @@ public class TestConfigurationLoader {
 							+ "logToConsole = false";
 		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
 		ConfigurationLoader config = new ConfigurationLoader();
+		config.loadConfiguration();
 		assertEquals(config.getConfiguration().getLevel(), "INFO");
 	}
 
@@ -50,6 +51,7 @@ public class TestConfigurationLoader {
 							+ "</configuration>";
 		this.helper.writeNewFileWithText(XML_FILE_PATH, textFile);
 		ConfigurationLoader config = new ConfigurationLoader();
+		config.loadConfiguration();
 		assertEquals(config.getConfiguration().getLevel(), "INFO");
 	}
 
@@ -60,6 +62,7 @@ public class TestConfigurationLoader {
 		File xmlFile = new File(XML_FILE_PATH);
 		xmlFile.delete();
 		ConfigurationLoader config = new ConfigurationLoader();
+		config.loadConfiguration();
 		assertEquals(config.getConfiguration().getLevel(), "OFF");
 	}
 

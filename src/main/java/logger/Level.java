@@ -16,7 +16,7 @@ public class Level {
 	 * Instantiates a new level.
 	 *
 	 * @param name the name of the Level
-	 * @param value the value of the Level
+	 * @param value the value of the level
 	 */
 	public Level(final String name, final int value) {
 		this.name = name;
