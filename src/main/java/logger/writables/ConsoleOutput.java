@@ -4,12 +4,12 @@ package logger.writables;
  * The Class ConsoleOutput manage the write of messages in Console Output.
  */
 public class ConsoleOutput implements Writable {
-	
+
 	/** The Constant INVALID_STRING. */
-	public static final String INVALID_STRING = "Invalid string"; 
+	public static final String INVALID_STRING = "Invalid string";
 
 	@Override
-	public void write(String text) {
+	public final void write(final String text) {
 		if (text == null) {
 			System.out.println(INVALID_STRING);
 			return;
@@ -18,7 +18,7 @@ public class ConsoleOutput implements Writable {
 	}
 
 	@Override
-	public String getStringId() {
+	public final String getStringId() {
 		return "Console";
 	}
 

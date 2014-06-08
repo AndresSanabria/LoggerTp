@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * The Class JsonFormatter give json format to messages.
  */
-public class JsonFormatter implements Formatter{
+public class JsonFormatter implements Formatter {
 	
 	/** The logger name. */
 	private String loggerName; 
@@ -24,11 +24,11 @@ public class JsonFormatter implements Formatter{
 	}
 
 	@Override
-	public String giveFormat(Level level, String logMsg) {
+	public final String giveFormat(final Level level, final String logMsg) {
 		JSONObject json = new JSONObject();
-		json.element("datetime",getDate());
+		json.element("datetime", getDate());
 		json.element("level", level.getName());
-		json.element("logger",loggerName);
+		json.element("logger", loggerName);
 		json.element("message", logMsg);
 		return json.toString();
 	}

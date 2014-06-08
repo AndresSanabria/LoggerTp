@@ -13,6 +13,6 @@ public interface ConfigurationReader {
 	 * @return Configuration object with the configuration read from file
 	 * @throws IOException
 	 */
-	public Configuration readConfiguration() throws IOException;
+	Configuration readConfiguration() throws IOException;
 
 }

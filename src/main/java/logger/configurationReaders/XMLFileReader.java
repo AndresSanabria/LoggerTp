@@ -77,9 +77,9 @@ public class XMLFileReader implements ConfigurationReader {
 	public XMLFileReader(String filePath) {
 		this.filePath = filePath;
 	}
-	
+
 	@Override
-	public Configuration readConfiguration() throws IOException {
+	public final Configuration readConfiguration() throws IOException {
 		try {
 			Configuration config = new Configuration();
 			File configFile = new File(this.filePath);
@@ -99,10 +99,10 @@ public class XMLFileReader implements ConfigurationReader {
 			config.setCustomFilter(this.getCustomFilterNodeValue(doc));
 			return config;
 		} catch (ParserConfigurationException e) {
-			System.err.println("There was a ParserConfigurationException when parsing the configuration: "+ e.getMessage());
+			System.err.println("There was a ParserConfigurationException when parsing the configuration: " + e.getMessage());
 			System.err.println("Check your configuration file");
 		} catch (SAXException e) {
-			System.err.println("There was a SAXException when loading the configuration: "+ e.getMessage());
+			System.err.println("There was a SAXException when loading the configuration: " + e.getMessage());
 			System.err.println("Check your configuration file");
 		}
 		return null;

@@ -22,11 +22,11 @@ public class TestConfigurationLoader {
 	
 	@Test
 	public void loadConfigurationFromPropertiesFileFirst() throws IOException, WriteException {
-		String textFile =	"level = INFO\n" +
-							"messageFormat = %p %n %m\n" +
-							"messageSeparator = -\n" +
-							"logToFiles = log.txt;log2.txt\n" +
-							"logToConsole = false";
+		String textFile =	"level = INFO\n"
+							+ "messageFormat = %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = log.txt;log2.txt\n"
+							+ "logToConsole = false";
 		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
 		ConfigurationLoader config = new ConfigurationLoader();
 		assertEquals(config.getConfiguration().getLevel(), "INFO");
@@ -36,13 +36,13 @@ public class TestConfigurationLoader {
 	public void loadConfigurationFromXMLFileSecond() throws WriteException, IOException {
 		File file = new File(PROPERTIES_FILE_PATH);
 		file.delete();
-		String textFile =	"<configuration>" +
-							"<level>INFO</level>" +
-							"<message><format>%p %n %m</format>" +
-							"<separator>-</separator></message>" +
-							"<outputs><logToFiles>log.txt;log2.txt</logToFiles>" +
-							"<logToConsole>false</logToConsole></outputs>" +
-							"</configuration>";
+		String textFile =	"<configuration>"
+							+ "<level>INFO</level>"
+							+ "<message><format>%p %n %m</format>"
+							+ "<separator>-</separator></message>"
+							+ "<outputs><logToFiles>log.txt;log2.txt</logToFiles>"
+							+ "<logToConsole>false</logToConsole></outputs>"
+							+ "</configuration>";
 		this.helper.writeNewFileWithText(XML_FILE_PATH, textFile);
 		ConfigurationLoader config = new ConfigurationLoader();
 		assertEquals(config.getConfiguration().getLevel(), "INFO");

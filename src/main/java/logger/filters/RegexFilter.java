@@ -7,7 +7,7 @@ public class RegexFilter implements Filterer {
 
 	/** The regular expression. */
 	private String regex = ".*";
-	
+
 	/**
 	 * Instantiates a new regex filter.
 	 */
@@ -20,22 +20,22 @@ public class RegexFilter implements Filterer {
 	 *
 	 * @param regex the regex
 	 */
-	public RegexFilter(String regex) {
+	public RegexFilter(final String regex) {
 		super();
 		this.regex = regex;
 	}
-	
+
 	/**
 	 * Sets the regular expression.
 	 *
 	 * @param regex the regex to filter by
 	 */
-	public void setRegex(String regex) {
+	public final void setRegex(final String regex) {
 		this.regex = regex;
 	}
-	
+
 	@Override
-	public Boolean filter(String msg) {
+	public final Boolean filter(final String msg) {
 		return msg.matches(regex);
 	}
 

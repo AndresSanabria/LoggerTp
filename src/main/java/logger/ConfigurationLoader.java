@@ -54,7 +54,7 @@ public class ConfigurationLoader {
 	 *
 	 * @return the formatter
 	 */
-	public Formatter initializeFormatter() {
+	public final Formatter initializeFormatter() {
 		Formatter formatter;
 		String format = this.getConfiguration().getMessageFormat();
 		String separator = this.getConfiguration().getMessageSeparator();
@@ -71,21 +71,21 @@ public class ConfigurationLoader {
 	 *
 	 * @return the configuration
 	 */
-	public Configuration getConfiguration() {
+	public final Configuration getConfiguration() {
 		return this.configuration;
 	}
-	
+
 	/**
 	 * Load configuration.
 	 *
 	 * @param configReader the configuration reader
 	 */
-	private void loadConfiguration(ConfigurationReader configReader) {
+	private void loadConfiguration(final ConfigurationReader configReader) {
 		try {
 			this.configuration = configReader.readConfiguration();
 		} catch (IOException e) { }
 	}
-	
+
 	/**
 	 * Initializes configuration by default values.
 	 */

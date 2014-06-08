@@ -42,7 +42,7 @@ public class TestLoggerCollection {
 	
 	@Test
 	public void getInvalidLogger() {
-		assertEquals(LoggerCollection.getInstance().getLogger("XYZ"),null);
+		assertEquals(LoggerCollection.getInstance().getLogger("XYZ"), null);
 	}
 
 }

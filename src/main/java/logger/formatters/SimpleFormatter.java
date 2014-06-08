@@ -18,7 +18,7 @@ public class SimpleFormatter implements Formatter {
 	private String format;
 	
 	/** The separator field. */
-	private String separator = "-" ;
+	private String separator = "-";
 	
 	/** The caller stack distance. */
 	private Integer callerStackDistance;
@@ -29,11 +29,11 @@ public class SimpleFormatter implements Formatter {
 	 * @param format the format pattern
 	 * @param callerStackDistance the caller stack distance
 	 */
-	public SimpleFormatter(String format, Integer callerStackDistance) {
+	public SimpleFormatter(final String format, final Integer callerStackDistance) {
 		this.callerStackDistance = callerStackDistance;
 		this.format = format;
 	}
-	
+
 	/**
 	 * Instantiates a new simple formatter.
 	 *
@@ -61,7 +61,7 @@ public class SimpleFormatter implements Formatter {
 		this.separator = separator;
 		this.loggerName = loggerName;
 	}
-	
+
 	/**
 	 * Instantiates a new simple formatter.
 	 *
@@ -75,7 +75,14 @@ public class SimpleFormatter implements Formatter {
 		this.loggerName = loggerName;
 	}
 
-	public String giveFormat(Level level, String logMsg) {
+	/**
+	 * Gives format to the message.
+	 *
+	 * @param level the level of the message
+	 * @param logMsg the message to be formatted
+	 * @return the message formatted
+	 */
+	public final String giveFormat(final Level level, final String logMsg) {
 		String formattedLog = new String(this.format);
 		formattedLog = formattedLog.replaceAll("%n", separator);
 		formattedLog = formattedLog.replaceAll("%p", level.getName());
@@ -97,16 +104,16 @@ public class SimpleFormatter implements Formatter {
 	 * @param log the log message that is being formatted
 	 * @return the log message with dates already formatted
 	 */
-	private String replaceDate(String log) {
+	private String replaceDate(final String log) {
 		String formattedLog = new String(log);
 		String regex = "(.*)(%d\\{)([^\\}]*)(\\})(.*)";
 		Date date = new Date();
-		while(formattedLog.matches(regex)){
+		while (formattedLog.matches(regex)) {
 			String pattern = formattedLog.replaceFirst(regex, "$3");
 			SimpleDateFormat format = new SimpleDateFormat(pattern);
-			String date_string = format.format(date);
+			String dateStr = format.format(date);
 			String patron = "%d\\{" + pattern + "\\}";
-			formattedLog = formattedLog.replaceAll(patron, date_string);
+			formattedLog = formattedLog.replaceAll(patron, dateStr);
 		}
 		return formattedLog;
 	}

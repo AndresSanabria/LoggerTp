@@ -23,7 +23,7 @@ public class TestFile {
 		file.delete();
 		Writable fileOutput = new FileOutput(path);
 		fileOutput.write(text);		
-		assertTrue(helper.stringInFile(text,file));
+		assertTrue(helper.stringInFile(text, file));
 	}
 	
 	@Test
@@ -36,8 +36,8 @@ public class TestFile {
 		Writable fileOutput = new FileOutput(path);
 		fileOutput.write(text1);
 		fileOutput.write(text2);
-		assertTrue(helper.stringInFile(text1,file));
-		assertTrue(helper.stringInFile(text2,file));
+		assertTrue(helper.stringInFile(text1, file));
+		assertTrue(helper.stringInFile(text2, file));
 	}
 	
 	@Test(expected = NullPointerException.class)

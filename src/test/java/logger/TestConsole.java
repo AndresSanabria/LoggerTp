@@ -39,7 +39,7 @@ public class TestConsole {
 	}
 	
 	@Test
-	public void writeTwoStrings() throws WriteException{
+	public void writeTwoStrings() throws WriteException {
 		String text1 = "test1";
 		String text2 = "test2";
 		Writable console = new ConsoleOutput();

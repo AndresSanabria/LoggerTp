@@ -62,9 +62,9 @@ public class PropertiesFileReader implements ConfigurationReader {
 	public PropertiesFileReader(String filePath) {
 		this.filePath = filePath;
 	}
-	
+
 	@Override
-	public Configuration readConfiguration() throws IOException {
+	public final Configuration readConfiguration() throws IOException {
 		Configuration config = new Configuration();
 		Properties properties = new Properties();
 		FileInputStream configFile;

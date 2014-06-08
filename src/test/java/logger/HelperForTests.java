@@ -8,13 +8,23 @@ import java.util.Scanner;
 import logger.writables.FileOutput;
 import logger.writables.WriteException;
 
+/**
+ * The Class HelperForTests provides helper methods for tests.
+ */
 public class HelperForTests {
-	
-	public boolean stringInFile(String text, File file) throws FileNotFoundException {
+
+	/**
+	 * Checks if the text is in the file.
+	 *
+	 * @param text the text to be sought
+	 * @param file the file where to seek the text
+	 * @return if the text is in the file
+	 */
+	public final boolean stringInFile(final String text, final File file) throws FileNotFoundException {
 		Scanner fileScanner = new Scanner(file);
 		boolean found = false;
-		while(fileScanner.hasNextLine()){
-		     if(text.equals(fileScanner.nextLine().trim())){
+		while (fileScanner.hasNextLine()) {
+		     if (text.equals(fileScanner.nextLine().trim())) {
 		        found = true;
 		        break;
 		      }
@@ -22,8 +32,16 @@ public class HelperForTests {
 		fileScanner.close();
 		return found;
 	}
-	
-	public void writeNewFileWithText(String filePath, String text) throws WriteException, IOException {
+
+	/**
+	 * Creates and writes a file with text.
+	 *
+	 * @param filePath the path of the file where to write the text
+	 * @param text the text to be written
+	 * @throws WriteException
+	 * @throws IOException
+	 */
+	public final void writeNewFileWithText(final String filePath, final String text) throws WriteException, IOException {
 		File file = new File(filePath);
 		file.delete();
 		FileOutput configFile = new FileOutput(filePath);
