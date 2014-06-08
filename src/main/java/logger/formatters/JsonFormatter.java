@@ -10,16 +10,16 @@ import java.util.Date;
  * The Class JsonFormatter give json format to messages.
  */
 public class JsonFormatter implements Formatter {
-	
+
 	/** The logger name. */
-	private String loggerName; 
-	
+	private String loggerName;
+
 	/**
 	 * Instantiates a new json formatter.
 	 *
 	 * @param loggername the logger name
 	 */
-	public JsonFormatter(String loggername) {
+	public JsonFormatter(final String loggername) {
 		this.loggerName = loggername;
 	}
 
@@ -32,7 +32,7 @@ public class JsonFormatter implements Formatter {
 		json.element("message", logMsg);
 		return json.toString();
 	}
-	
+
 	/**
 	 * Gets the actual date.
 	 *

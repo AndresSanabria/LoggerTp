@@ -43,14 +43,7 @@ public class Logger {
 	/**
 	 * The Enum levelValues.
 	 */
-	private enum levelValues {	OFF,
-								FATAL,
-								ERROR,
-								WARN,
-								INFO,
-								DEBUG,
-								TRACE
-	}
+	private enum levelValues { OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE }
 
 	/** The Constant WRITE_ERROR. */
 	private static final String WRITE_ERROR = "An error occured when writing log";
@@ -58,10 +51,10 @@ public class Logger {
 
 	/**
 	 * Instantiates a new logger.
-	 * 
+	 *
 	 * @param name the name of the logger
 	 */
-	public Logger(String name) {
+	public Logger(final String name) {
 		super();
 		this.name = name;
 		this.configLoader = new ConfigurationLoader();
@@ -85,7 +78,7 @@ public class Logger {
 	 * Initialize outputs.
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws CustomOutputException
+	 * @throws CustomOutputException when an error occurs in the creation of a CustomOutput
 	 */
 	private void initializeOutputs() throws IOException, CustomOutputException {
 		this.outputs = new ArrayList<>();
@@ -122,7 +115,7 @@ public class Logger {
 	/**
 	 * Initialize filter.
 	 *
-	 * @throws CustomFilterException
+	 * @throws CustomFilterException when an error occurs in the creation of a CustomFilter
 	 */
 	private void initializeFilter() throws CustomFilterException {
 		String regExFilter = this.configLoader.getConfiguration().getRegExFilter();
@@ -153,12 +146,12 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 * @param exception the exception to be thrown
-	 * @throws Throwable
+	 * @throws Throwable when there is an exception
 	 */
 	public final void trace(final String logMsg, final Throwable exception) throws Throwable {
 		log(new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal()), logMsg, exception);
 	}
-	
+
 	/**
 	 * Log in Trace Level.
 	 *
@@ -171,18 +164,18 @@ public class Logger {
 			// already handled exception in log method
 		}
 	}
-		
+
 	/**
 	 * Log in Debug Level.
 	 *
 	 * @param logMsg the message to log
 	 * @param exception the exception to be thrown
-	 * @throws Throwable
+	 * @throws Throwable when there is an exception
 	 */
 	public final void debug(final String logMsg, final Throwable exception) throws Throwable {
 		log(new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal()), logMsg, exception);
 	}
-	
+
 	/**
 	 * Log in Debug Level.
 	 *
@@ -201,7 +194,7 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 * @param exception the exception to be thrown
-	 * @throws Throwable
+	 * @throws Throwable when there is an exception
 	 */
 	public final void info(final String logMsg, final Throwable exception) throws Throwable {
 		log(new Level(levelValues.INFO.name(), levelValues.INFO.ordinal()), logMsg, exception);
@@ -225,12 +218,12 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 * @param exception the exception to be thrown
-	 * @throws Throwable
+	 * @throws Throwable when there is an exception
 	 */
 	public final void warn(final String logMsg, final Throwable exception) throws Throwable {
 		log(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), logMsg, exception);
 	}
-	
+
 	/**
 	 * Log in Warn Level.
 	 *
@@ -249,7 +242,7 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 * @param exception the exception to be thrown
-	 * @throws Throwable
+	 * @throws Throwable when there is an exception
 	 */
 	public final void error(final String logMsg, final Throwable exception) throws Throwable {
 		log(new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal()), logMsg, exception);
@@ -273,7 +266,7 @@ public class Logger {
 	 *
 	 * @param logMsg the message to log
 	 * @param exception the exception to be thrown
-	 * @throws Throwable
+	 * @throws Throwable when there is an exception
 	 */
 	public final void fatal(final String logMsg, final Throwable exception) throws Throwable {
 		log(new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal()), logMsg, exception);
@@ -323,7 +316,7 @@ public class Logger {
 	 * @param level the level in which to log
 	 * @param logMsg the message to log
 	 * @param exception the exception to be thrown
-	 * @throws Throwable 
+	 * @throws Throwable when there is an exception
 	 */
 	private void log(final Level level, final String logMsg, final Throwable exception) throws Throwable {
 		if (!shouldLog(level)) {
@@ -347,7 +340,7 @@ public class Logger {
 	 *
 	 * @param outputName the name of the output
 	 * @param exception the exception to be thrown
-	 * @throws Throwable 
+	 * @throws Throwable when there is an exception
 	 */
 	private void handleException(final String outputName, final Throwable exception) throws Throwable {
 		handleException(outputName);
@@ -376,7 +369,7 @@ public class Logger {
 
 	/**
 	 * Handle exception caught.
-	 * 
+	 *
 	 * @param name the name of the logger
 	 */
 	public final void setName(final String name) {

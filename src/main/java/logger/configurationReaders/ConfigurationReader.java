@@ -11,7 +11,7 @@ public interface ConfigurationReader {
 	 * Read configuration.
 	 *
 	 * @return Configuration object with the configuration read from file
-	 * @throws IOException
+	 * @throws IOException when an error occurs in an I/O operation
 	 */
 	Configuration readConfiguration() throws IOException;
 

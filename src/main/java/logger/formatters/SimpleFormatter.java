@@ -6,20 +6,20 @@ import java.util.Date;
 import logger.Level;
 
 /**
- * The Class SimpleFormatter give format to messages replacing pseudo-variables 
+ * The Class SimpleFormatter give format to messages replacing pseudo-variables
  * in the format pattern with corresponding content.
  */
 public class SimpleFormatter implements Formatter {
-	
+
 	/** The logger name. */
 	private String loggerName = "";
-	
+
 	/** The format pattern. */
 	private String format;
-	
+
 	/** The separator field. */
 	private String separator = "-";
-	
+
 	/** The caller stack distance. */
 	private Integer callerStackDistance;
 
@@ -41,12 +41,12 @@ public class SimpleFormatter implements Formatter {
 	 * @param callerStackDistance the caller stack distance
 	 * @param separator the separator to use
 	 */
-	public SimpleFormatter(String format, Integer callerStackDistance, String separator) {
+	public SimpleFormatter(final String format, final Integer callerStackDistance, final String separator) {
 		this.callerStackDistance = callerStackDistance;
 		this.format = format;
 		this.separator = separator;
 	}
-	
+
 	/**
 	 * Instantiates a new simple formatter.
 	 *
@@ -55,7 +55,7 @@ public class SimpleFormatter implements Formatter {
 	 * @param separator the separator to use
 	 * @param loggerName the logger name
 	 */
-	public SimpleFormatter(String format, Integer callerStackDistance, String separator, String loggerName) {
+	public SimpleFormatter(final String format, final Integer callerStackDistance, final String separator, final String loggerName) {
 		this.callerStackDistance = callerStackDistance;
 		this.format = format;
 		this.separator = separator;
@@ -69,7 +69,7 @@ public class SimpleFormatter implements Formatter {
 	 * @param callerStackDistance the caller stack distance
 	 * @param loggerName the logger name
 	 */
-	public SimpleFormatter(String format, String loggerName, Integer callerStackDistance) {
+	public SimpleFormatter(final String format, final String loggerName, final Integer callerStackDistance) {
 		this.callerStackDistance = callerStackDistance;
 		this.format = format;
 		this.loggerName = loggerName;
@@ -92,7 +92,7 @@ public class SimpleFormatter implements Formatter {
 		formattedLog = formattedLog.replaceAll("%L", String.valueOf((Thread.currentThread().getStackTrace()[this.callerStackDistance].getLineNumber())));
 		formattedLog = formattedLog.replaceAll("%F", String.valueOf((Thread.currentThread().getStackTrace()[this.callerStackDistance].getFileName())));
 		formattedLog = formattedLog.replaceAll("%M", String.valueOf((Thread.currentThread().getStackTrace()[this.callerStackDistance].getMethodName())));
-		
+
 		formattedLog = replaceDate(formattedLog);
 		formattedLog = formattedLog.replaceAll("%%", "%");
 		return formattedLog;

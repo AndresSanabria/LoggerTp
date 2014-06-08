@@ -25,19 +25,19 @@ public class XMLFileReader implements ConfigurationReader {
 
 	/** The Constant DEFAULT_CONSOLE. */
 	private static final Boolean DEFAULT_CONSOLE = false;
-	
+
 	/** The Constant DEFAULT_LEVEL. */
 	private static final String DEFAULT_LEVEL = "OFF";
 
 	/** The Constant DEFAULT_MESSAGE_FORMAT_LEVEL. */
 	private static final String DEFAULT_MESSAGE_FORMAT = "%p %n %t %n %m";
-	
+
 	/** The Constant LEVEL_TAG. */
 	private static final String LEVEL_TAG = "level";
-	
+
 	/** The Constant MESSAGE_TAG. */
 	private static final String MESSAGE_TAG = "message";
-	
+
 	/** The Constant MESSAGE_FORMAT_TAG. */
 	private static final String MESSAGE_FORMAT_TAG = "format";
 
@@ -55,26 +55,26 @@ public class XMLFileReader implements ConfigurationReader {
 
 	/** The Constant PARAM_TAG. */
 	private static final String PARAM_TAG = "param";
-	
+
 	/** The Constant FILE_TAG. */
 	private static final String FILE_TAG = "file";
 
 	/** The Constant CONSOLE_TAG. */
 	private static final String CONSOLE_TAG = "console";
-	
+
 	/** The Constant FILTER_TAG. */
 	private static final String FILTER_TAG = "filter";
 
 	/** The Constant REGEX_FILTER_TAG. */
 	private static final String REGEX_FILTER_TAG = "regEx";
-	
-	
+
+
 	/**
 	 * Instantiates a new XMLFileReader.
-	 * 
+	 *
 	 * @param filePath the path to the file to be read
 	 */
-	public XMLFileReader(String filePath) {
+	public XMLFileReader(final String filePath) {
 		this.filePath = filePath;
 	}
 
@@ -88,7 +88,7 @@ public class XMLFileReader implements ConfigurationReader {
 			dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(configFile);
 			doc.getDocumentElement().normalize();
-			
+
 			config.setLevel(this.getLevelNodeValue(doc));
 			config.setMessageFormat(this.getMessageFormatNodeValue(doc));
 			config.setMessageSeparator(this.getMessageSeparatorNodeValue(doc));
@@ -114,7 +114,7 @@ public class XMLFileReader implements ConfigurationReader {
 	 * @param doc the doc parsed
 	 * @return the level node value
 	 */
-	private String getLevelNodeValue(Document doc) {
+	private String getLevelNodeValue(final Document doc) {
 		Node node = this.getFirstLevelNodeByTag(doc, LEVEL_TAG);
 		if (node == null) {
 			return DEFAULT_LEVEL;
@@ -125,14 +125,14 @@ public class XMLFileReader implements ConfigurationReader {
 		}
 		return value;
 	}
-	
+
 	/**
 	 * Gets the message format node value.
 	 *
 	 * @param doc the doc parsed
 	 * @return the message format node value
 	 */
-	private String getMessageFormatNodeValue(Document doc) {
+	private String getMessageFormatNodeValue(final Document doc) {
 		Node messageNode = this.getFirstLevelNodeByTag(doc, MESSAGE_TAG);
 		if (messageNode == null) {
 			return DEFAULT_MESSAGE_FORMAT;
@@ -147,14 +147,14 @@ public class XMLFileReader implements ConfigurationReader {
 		}
 		return value;
 	}
-	
+
 	/**
 	 * Gets the message separator node value.
 	 *
 	 * @param doc the doc parsed
 	 * @return the message separator node value
 	 */
-	private String getMessageSeparatorNodeValue(Document doc) {
+	private String getMessageSeparatorNodeValue(final Document doc) {
 		Node messageNode = this.getFirstLevelNodeByTag(doc, MESSAGE_TAG);
 		if (messageNode == null) {
 			return null;
@@ -176,7 +176,7 @@ public class XMLFileReader implements ConfigurationReader {
 	 * @param doc the doc parsed
 	 * @return the file nodes value
 	 */
-	private String[] getFileNodesValue(Document doc) {
+	private String[] getFileNodesValue(final Document doc) {
 		List<String> values = new ArrayList<>();
 		Node outputsNode = this.getFirstLevelNodeByTag(doc, OUTPUTS_TAG);
 		if (outputsNode == null) {
@@ -194,14 +194,14 @@ public class XMLFileReader implements ConfigurationReader {
 		}
 		return values.toArray(new String[values.size()]);
 	}
-	
+
 	/**
 	 * Gets the custom output nodes value.
 	 *
 	 * @param doc the doc parsed
 	 * @return the custom output nodes value
 	 */
-	private List<String[]> getCustomOutputNodesValue(Document doc) {
+	private List<String[]> getCustomOutputNodesValue(final Document doc) {
 		List<String[]> customOutputs = new ArrayList<>();
 		Node outputsNode = this.getFirstLevelNodeByTag(doc, OUTPUTS_TAG);
 		if (outputsNode == null) {
@@ -210,7 +210,7 @@ public class XMLFileReader implements ConfigurationReader {
 		NodeList customNodes = this.getNodeListByTagInNode(outputsNode, CUSTOM_TAG);
 		for (int i = 0; i < customNodes.getLength(); i++) {
 			List<String> values = new ArrayList<>();
-			
+
 			Node implementorNode = this.getNodeByTagInNode(customNodes.item(i), IMPLEMENTOR_TAG);
 			if (implementorNode == null) {
 				continue;
@@ -220,13 +220,13 @@ public class XMLFileReader implements ConfigurationReader {
 				continue;
 			}
 			values.add(implementorValue);
-			
+
 			NodeList paramNodes = this.getNodeListByTagInNode(customNodes.item(i), PARAM_TAG);
 			for (int j = 0; j < paramNodes.getLength(); j++) {
 				String paramValue = this.getNodeValue(paramNodes.item(j));
 				values.add(paramValue);
 			}
-			
+
 			customOutputs.add(values.toArray(new String[values.size()]));
 		}
 		if (customOutputs.size() == 0) {
@@ -234,14 +234,14 @@ public class XMLFileReader implements ConfigurationReader {
 		}
 		return customOutputs;
 	}
-	
+
 	/**
 	 * Gets the console node value.
 	 *
 	 * @param doc the doc parsed
 	 * @return the console node value
 	 */
-	private Boolean getConsoleNodeValue(Document doc) {
+	private Boolean getConsoleNodeValue(final Document doc) {
 		Node outputsNode = this.getFirstLevelNodeByTag(doc, OUTPUTS_TAG);
 		if (outputsNode == null) {
 			return DEFAULT_CONSOLE;
@@ -256,14 +256,14 @@ public class XMLFileReader implements ConfigurationReader {
 		}
 		return Boolean.valueOf(value);
 	}
-	
+
 	/**
 	 * Gets the regEx filter node value.
 	 *
 	 * @param doc the doc parsed
 	 * @return the regEx filter node value
 	 */
-	private String getRegExFilterNodeValue(Document doc) {
+	private String getRegExFilterNodeValue(final Document doc) {
 		Node filterNode = this.getFirstLevelNodeByTag(doc, FILTER_TAG);
 		if (filterNode == null) {
 			return null;
@@ -285,7 +285,7 @@ public class XMLFileReader implements ConfigurationReader {
 	 * @param doc the doc parsed
 	 * @return the custom filter node value
 	 */
-	private String[] getCustomFilterNodeValue(Document doc) {
+	private String[] getCustomFilterNodeValue(final Document doc) {
 		List<String> values = new ArrayList<>();
 		Node filterNode = this.getFirstLevelNodeByTag(doc, FILTER_TAG);
 		if (filterNode == null) {
@@ -295,7 +295,7 @@ public class XMLFileReader implements ConfigurationReader {
 		if (customFilterNode == null) {
 			return null;
 		}
-		
+
 		Node implementorNode = this.getNodeByTagInNode(customFilterNode, IMPLEMENTOR_TAG);
 		if (implementorNode == null) {
 			return null;
@@ -305,13 +305,13 @@ public class XMLFileReader implements ConfigurationReader {
 			return null;
 		}
 		values.add(implementorValue);
-		
+
 		NodeList paramNodes = this.getNodeListByTagInNode(customFilterNode, PARAM_TAG);
 		for (int j = 0; j < paramNodes.getLength(); j++) {
 			String paramValue = this.getNodeValue(paramNodes.item(j));
 			values.add(paramValue);
 		}
-		
+
 		return values.toArray(new String[values.size()]);
 	}
 
@@ -322,12 +322,12 @@ public class XMLFileReader implements ConfigurationReader {
 	 * @param tag the tag of the node
 	 * @return the first level node
 	 */
-	private Node getFirstLevelNodeByTag(Document doc, String tag) {
+	private Node getFirstLevelNodeByTag(final Document doc, final String tag) {
 		NodeList nodes = doc.getElementsByTagName(tag);
 		Node node = nodes.item(0);
 		return node;
 	}
-	
+
 	/**
 	 * Gets the node list by tag in the upper node.
 	 *
@@ -335,37 +335,37 @@ public class XMLFileReader implements ConfigurationReader {
 	 * @param tag the tag of the node list
 	 * @return the node list
 	 */
-	private NodeList getNodeListByTagInNode(Node node, String tag) {
+	private NodeList getNodeListByTagInNode(final Node node, final String tag) {
 		Element element = (Element) node;
 		NodeList nodes = element.getElementsByTagName(tag);
 		return nodes;
 	}
-	
+
 	/**
 	 * Gets the node by tag in the upper node.
 	 *
-	 * @param node the upper node
+	 * @param upperNode the upper node
 	 * @param tag the tag of the node
 	 * @return the node
 	 */
-	private Node getNodeByTagInNode(Node upperNode, String tag) {
+	private Node getNodeByTagInNode(final Node upperNode, final String tag) {
 		Element element = (Element) upperNode;
 		Node node = element.getElementsByTagName(tag).item(0);
 		return node;
 	}
-	
+
 	/**
 	 * Gets the value of the node.
 	 *
-	 * @param node
+	 * @param node the node from which to get the value
 	 * @return the value of the node
 	 */
-	private String getNodeValue(Node node) {
+	private String getNodeValue(final Node node) {
 		Node nodeValue = node.getChildNodes().item(0);
 		if (nodeValue == null) {
 			return "";
 		}
 		return nodeValue.getNodeValue();
 	}
-	
+
 }

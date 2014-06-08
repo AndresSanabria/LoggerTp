@@ -11,23 +11,28 @@ import logger.writables.WriteException;
 
 import org.junit.Test;
 
+/**
+ * The Class TestFile tests the file output.
+ */
 public class TestFile {
 
+	/** The helper. */
 	private HelperForTests helper = new HelperForTests();
-	
+
+
 	@Test
-	public void writeOneString() throws WriteException, IOException {
+	public final void writeOneString() throws WriteException, IOException {
 		String path = "log.txt";
 		String text = "test";
 		File file = new File(path);
 		file.delete();
 		Writable fileOutput = new FileOutput(path);
-		fileOutput.write(text);		
+		fileOutput.write(text);
 		assertTrue(helper.stringInFile(text, file));
 	}
-	
+
 	@Test
-	public void writeTwoStrings() throws WriteException, IOException {
+	public final void writeTwoStrings() throws WriteException, IOException {
 		String path = "log.txt";
 		File file = new File(path);
 		file.delete();
@@ -39,9 +44,9 @@ public class TestFile {
 		assertTrue(helper.stringInFile(text1, file));
 		assertTrue(helper.stringInFile(text2, file));
 	}
-	
+
 	@Test(expected = NullPointerException.class)
-	public void nullFile() throws IOException {
+	public final void nullFile() throws IOException {
 		new FileOutput(null);
 		fail("Did not throw exception");
 	}

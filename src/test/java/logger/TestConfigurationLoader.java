@@ -10,18 +10,23 @@ import logger.writables.WriteException;
 
 import org.junit.Test;
 
-
+/**
+ * The Class TestConfigurationLoader tests the ConfigurationLoader.
+ */
 public class TestConfigurationLoader {
-	
+
+	/** The Constant PROPERTIES_FILE_PATH. */
 	private static final String PROPERTIES_FILE_PATH = "configFiles/config.properties";
-	
+
+	/** The Constant XML_FILE_PATH. */
 	private static final String XML_FILE_PATH = "configFiles/config.xml";
-	
+
+	/** The helper. */
 	private HelperForTests helper = new HelperForTests();
-	
-	
+
+
 	@Test
-	public void loadConfigurationFromPropertiesFileFirst() throws IOException, WriteException {
+	public final void loadConfigurationFromPropertiesFileFirst() throws IOException, WriteException {
 		String textFile =	"level = INFO\n"
 							+ "messageFormat = %p %n %m\n"
 							+ "messageSeparator = -\n"
@@ -31,9 +36,9 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		assertEquals(config.getConfiguration().getLevel(), "INFO");
 	}
-	
+
 	@Test
-	public void loadConfigurationFromXMLFileSecond() throws WriteException, IOException {
+	public final void loadConfigurationFromXMLFileSecond() throws WriteException, IOException {
 		File file = new File(PROPERTIES_FILE_PATH);
 		file.delete();
 		String textFile =	"<configuration>"
@@ -47,9 +52,9 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		assertEquals(config.getConfiguration().getLevel(), "INFO");
 	}
-	
+
 	@Test
-	public void loadConfigurationFromDefaultThird() {
+	public final void loadConfigurationFromDefaultThird() {
 		File propFile = new File(PROPERTIES_FILE_PATH);
 		propFile.delete();
 		File xmlFile = new File(XML_FILE_PATH);
@@ -57,5 +62,5 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		assertEquals(config.getConfiguration().getLevel(), "OFF");
 	}
-	
+
 }

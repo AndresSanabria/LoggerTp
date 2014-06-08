@@ -152,7 +152,7 @@ public class Configuration {
 	/**
 	 * Sets the regEx filter.
 	 *
-	 * @param the regEx filter
+	 * @param regExFilter the regEx filter
 	 */
 	public final void setRegExFilter(final String regExFilter) {
 		this.regExFilter = regExFilter;

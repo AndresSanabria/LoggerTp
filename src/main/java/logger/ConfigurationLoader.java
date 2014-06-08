@@ -10,32 +10,32 @@ import logger.formatters.Formatter;
 import logger.formatters.SimpleFormatter;
 
 /**
- * The Class ConfigurationLoader load the Configuration of the Logger from the configuration file
+ * The Class ConfigurationLoader load the Configuration of the Logger from the configuration file.
  */
 public class ConfigurationLoader {
-	
+
 	/** The Constant DISTANCE_CALLER_GIVE_FORMAT. */
 	private static final Integer DISTANCE_CALLER_GIVE_FORMAT = 4;
-	
+
 	/** The Constant PROPERTIES_FILE_PATH. */
 	private static final String PROPERTIES_FILE_PATH = "configFiles/config.properties";
-	
+
 	/** The Constant XML_FILE_PATH. */
 	private static final String XML_FILE_PATH = "configFiles/config.xml";
-	
+
 	/** The Constant DEFAULT_CONSOLE. */
 	private static final Boolean DEFAULT_CONSOLE = true;
-	
+
 	/** The Constant DEFAULT_LEVEL. */
 	private static final String DEFAULT_LEVEL = "OFF";
 
 	/** The Constant DEFAULT_MESSAGE_FORMAT_LEVEL. */
 	private static final String DEFAULT_MESSAGE_FORMAT = "%p %n %t %n %m";
 
-	/** The configuration */
+	/** The configuration. */
 	private Configuration configuration;
-	
-	
+
+
 	/**
 	 * Instantiates a new configuration loader.
 	 */
@@ -48,7 +48,7 @@ public class ConfigurationLoader {
 			}
 		}
 	}
-	
+
 	/**
 	 * Initialize formatter.
 	 *
@@ -100,5 +100,5 @@ public class ConfigurationLoader {
 		this.configuration.setRegExFilter(null);
 		this.configuration.setCustomFilter(null);
 	}
-	
+
 }

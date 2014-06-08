@@ -10,17 +10,29 @@ import logger.writables.WriteException;
 
 import org.junit.Test;
 
+/**
+ * The Class TestLogger tests the Logger.
+ */
 public class TestLogger {
-	
+
+	/** The Constant CONFIG_FILE_PATH. */
 	private static final String CONFIG_FILE_PATH = "configFiles/config.properties";
+
+	/** The Constant MESSAGE. */
 	private static final String MESSAGE = "Este es mi mensaje";
+
+	/** The Constant LOG_PATH. */
 	private static final String LOG_PATH = "log.txt";
+
+	/** The Constant DEFAULT_NAME. */
 	private static final String DEFAULT_NAME = "name";
+
+	/** The helper. */
 	private HelperForTests helper = new HelperForTests();
-	
-	
+
+
 	@Test
-	public void loggerCallerDistanceToGiveFormatMethodInStack() throws IOException, WriteException {
+	public final void loggerCallerDistanceToGiveFormatMethodInStack() throws IOException, WriteException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = DEBUG\n"
@@ -35,9 +47,9 @@ public class TestLogger {
 		String text = "Test" + " - " + MESSAGE + " - " + "TestLogger.java" + " - " + "loggerCallerDistanceToGiveFormatMethodInStack" + " - " + lineNumber;
 		assertTrue(helper.stringInFile(text, file));
 	}
-	
+
 	@Test
-	public void logInLevelDebug() throws IOException, WriteException {
+	public final void logInLevelDebug() throws IOException, WriteException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = DEBUG\n"
@@ -53,9 +65,9 @@ public class TestLogger {
 		String text2 = "Test" + " - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text1, file) && helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
-	public void logInLevelInfo() throws IOException, WriteException {
+	public final void logInLevelInfo() throws IOException, WriteException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = INFO\n"
@@ -71,9 +83,9 @@ public class TestLogger {
 		String text2 = "Test" + " - INFO - " + MESSAGE;
 		assertTrue(!helper.stringInFile(text1, file) && helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
-	public void logInLevelOff() throws IOException, WriteException {
+	public final void logInLevelOff() throws IOException, WriteException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = OFF\n"
@@ -89,9 +101,9 @@ public class TestLogger {
 		String text2 = "Test" + " - INFO - " + MESSAGE;
 		assertTrue(!helper.stringInFile(text1, file) && !helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
-	public void logInLevelTrace() throws IOException, WriteException {
+	public final void logInLevelTrace() throws IOException, WriteException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = TRACE\n"
@@ -107,5 +119,5 @@ public class TestLogger {
 		String text2 = "Test" + " - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text1, file) && helper.stringInFile(text2, file));
 	}
-	
+
 }

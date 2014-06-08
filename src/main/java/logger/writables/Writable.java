@@ -6,10 +6,10 @@ package logger.writables;
 public interface Writable {
 
 	/**
-	 * Write the text given in the Output of the Writable
+	 * Write the text given in the Output of the Writable.
 	 *
 	 * @param text the text to write
-	 * @throws WriteException
+	 * @throws WriteException when an error occurs while writing
 	 */
 	void write(String text) throws WriteException;
 

@@ -16,13 +16,19 @@ import logger.writables.WriteException;
 
 import org.junit.Test;
 
+/**
+ * The Class TestCustomOutput tests CustomOutput.
+ */
 public class TestCustomOutput {
-	
+
+	/** The helper. */
 	private HelperForTests helper = new HelperForTests();
+
+	/** The custom factory. */
 	private CustomFactory factory = new CustomFactory();
 
 	@Test
-	public void createCustomFileOutput() throws CustomOutputException, WriteException, FileNotFoundException {
+	public final void createCustomFileOutput() throws CustomOutputException, WriteException, FileNotFoundException {
 		String[] params = new String[1];
 		params[0] = "log.txt";
 		Writable output = factory.createCustomOutput(FileOutput.class.getName(), params);
@@ -31,9 +37,9 @@ public class TestCustomOutput {
 		assertTrue(helper.stringInFile("chau", file));
 		file.delete();
 	}
-	
+
 	@Test
-	public void createCustomConsoleOutput() throws CustomOutputException, WriteException {
+	public final void createCustomConsoleOutput() throws CustomOutputException, WriteException {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		Writable output = factory.createCustomOutput(ConsoleOutput.class.getName(), new String[0]);
@@ -41,10 +47,10 @@ public class TestCustomOutput {
 		assertTrue(outContent.toString().contains("hola"));
 		System.setOut(null);
 	}
-	
-	@Test(expected = CustomOutputException.class) 
-	public void customOutputNotImplementingWritable() throws CustomOutputException {
+
+	@Test(expected = CustomOutputException.class)
+	public final void customOutputNotImplementingWritable() throws CustomOutputException {
 		factory.createCustomOutput(Level.class.getName(), new String[0]);
 	}
-	
+
 }
