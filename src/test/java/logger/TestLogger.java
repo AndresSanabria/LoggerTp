@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
-import logger.Logger;
 import logger.writables.WriteException;
 
 import org.junit.Test;
@@ -41,8 +40,7 @@ public class TestLogger {
 							+ "logToFiles = log.txt\n"
 							+ "logToConsole = false";
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
-		LoggerManager loggerManager = new LoggerManager(DEFAULT_NAME);
-		Logger logger = loggerManager.getLogger();
+		Logger logger = new Logger(DEFAULT_NAME);
 		logger.debug(MESSAGE);
 		Integer lineNumber = Thread.currentThread().getStackTrace()[1].getLineNumber() - 1; //-1 pues el logger give format esta en la linea anterior
 		String text = "Test" + " - " + MESSAGE + " - " + "TestLogger.java" + " - " + "loggerCallerDistanceToGiveFormatMethodInStack" + " - " + lineNumber;
@@ -59,8 +57,7 @@ public class TestLogger {
 							+ "logToFiles = log.txt\n"
 							+ "logToConsole = false";
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
-		LoggerManager loggerManager = new LoggerManager(DEFAULT_NAME);
-		Logger logger = loggerManager.getLogger();
+		Logger logger = new Logger(DEFAULT_NAME);
 		logger.debug(MESSAGE);
 		logger.info(MESSAGE);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
@@ -78,8 +75,7 @@ public class TestLogger {
 							+ "logToFiles = log.txt\n"
 							+ "logToConsole = false";
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
-		LoggerManager loggerManager = new LoggerManager(DEFAULT_NAME);
-		Logger logger = loggerManager.getLogger();
+		Logger logger = new Logger(DEFAULT_NAME);
 		logger.debug(MESSAGE);
 		logger.info(MESSAGE);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
@@ -97,8 +93,7 @@ public class TestLogger {
 							+ "logToFiles = log.txt\n"
 							+ "logToConsole = false";
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
-		LoggerManager loggerManager = new LoggerManager(DEFAULT_NAME);
-		Logger logger = loggerManager.getLogger();
+		Logger logger = new Logger(DEFAULT_NAME);
 		logger.debug(MESSAGE);
 		logger.info(MESSAGE);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
@@ -116,8 +111,7 @@ public class TestLogger {
 							+ "logToFiles = log.txt\n"
 							+ "logToConsole = false";
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
-		LoggerManager loggerManager = new LoggerManager(DEFAULT_NAME);
-		Logger logger = loggerManager.getLogger();
+		Logger logger = new Logger(DEFAULT_NAME);
 		logger.trace(MESSAGE);
 		logger.info(MESSAGE);
 		String text1 = "Test" + " - TRACE - " + MESSAGE;

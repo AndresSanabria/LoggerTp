@@ -14,10 +14,10 @@ import logger.writables.FileOutput;
 /**
  * The Class LoggerManager loads the configurations and initializes the logger.
  */
-public class LoggerManager {
+public class LoggerConfigurator {
 
 	/** The logger. */
-	private Logger logger;
+	private GenericLogger logger;
 
 	/** The configuration loader. */
 	private ConfigurationLoader configLoader;
@@ -25,13 +25,11 @@ public class LoggerManager {
 
 	/**
 	 * Instantiates the LoggerManager.
-	 *
-	 * @param loggerName the name of the logger
 	 */
-	public LoggerManager(final String loggerName) {
+	public LoggerConfigurator() {
 		this.configLoader = new ConfigurationLoader();
 		this.configLoader.loadConfiguration();
-		this.initializeLogger(loggerName);
+		this.initializeLogger();
 	}
 
 	/**
@@ -39,21 +37,19 @@ public class LoggerManager {
 	 *
 	 * @return the logger
 	 */
-	public final Logger getLogger() {
+	public final GenericLogger getLogger() {
 		return this.logger;
 	}
 
 	/**
 	 * Initializes the logger.
-	 *
-	 * @param loggerName the name of the logger
 	 */
-	private void initializeLogger(final String loggerName) {
+	private void initializeLogger() {
 		Formatter formatter = this.configLoader.initializeFormatter();
 		String levelName = this.configLoader.getConfiguration().getLevel();
 		LevelManager levelManager = new LevelManager();
 		Level level = new Level(levelName, levelManager.getLevelValue(levelName));
-		this.logger = new Logger(loggerName, level, formatter);
+		this.logger = new GenericLogger(level, formatter);
 		try {
 			this.initializeOutputs();
 			this.initializeFilter();
