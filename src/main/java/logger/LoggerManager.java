@@ -51,7 +51,9 @@ public class LoggerManager {
 	private void initializeLogger(final String loggerName) {
 		Formatter formatter = this.configLoader.initializeFormatter();
 		String levelName = this.configLoader.getConfiguration().getLevel();
-		this.logger = new Logger(loggerName, levelName, formatter);
+		LevelManager levelManager = new LevelManager();
+		Level level = new Level(levelName, levelManager.getLevelValue(levelName));
+		this.logger = new Logger(loggerName, level, formatter);
 		try {
 			this.initializeOutputs();
 			this.initializeFilter();

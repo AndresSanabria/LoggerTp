@@ -30,8 +30,8 @@ public class Logger {
 	/** The configuration level. */
 	private Level level;
 
-	/** The enum levelValues. */
-	private enum levelValues { OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE }
+	/** The level manager. */
+	private LevelManager levelManager;
 
 
 	/**
@@ -41,11 +41,12 @@ public class Logger {
 	 * @param level the level of the logger
 	 * @param formatter the formatter to format the messages
 	 */
-	public Logger(final String name, final String levelName, final Formatter formatter) {
+	public Logger(final String name, final Level level, final Formatter formatter) {
 		super();
 		this.name = name;
 		this.formatter = formatter;
-		this.level = new Level(levelName, levelValues.valueOf(levelName).ordinal());
+		this.levelManager = new LevelManager();
+		this.level = level;
 		this.outputs = new ArrayList<>();
 		this.filter = null;
 	}
@@ -77,7 +78,7 @@ public class Logger {
 	 * @throws Throwable when there is an exception
 	 */
 	public final void trace(final String logMsg, final Throwable exception) throws Throwable {
-		log(new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal()), logMsg, exception);
+		log(new Level("TRACE", levelManager.getLevelValue("TRACE")), logMsg, exception);
 	}
 
 	/**
@@ -87,7 +88,7 @@ public class Logger {
 	 */
 	public final void trace(final String logMsg) {
 		try {
-			log(new Level(levelValues.TRACE.name(), levelValues.TRACE.ordinal()), logMsg, null);
+			log(new Level("TRACE", levelManager.getLevelValue("TRACE")), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -101,7 +102,7 @@ public class Logger {
 	 * @throws Throwable when there is an exception
 	 */
 	public final void debug(final String logMsg, final Throwable exception) throws Throwable {
-		log(new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal()), logMsg, exception);
+		log(new Level("DEBUG", levelManager.getLevelValue("DEBUG")), logMsg, exception);
 	}
 
 	/**
@@ -111,7 +112,7 @@ public class Logger {
 	 */
 	public final void debug(final String logMsg) {
 		try {
-			log(new Level(levelValues.DEBUG.name(), levelValues.DEBUG.ordinal()), logMsg, null);
+			log(new Level("DEBUG", levelManager.getLevelValue("DEBUG")), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -125,7 +126,7 @@ public class Logger {
 	 * @throws Throwable when there is an exception
 	 */
 	public final void info(final String logMsg, final Throwable exception) throws Throwable {
-		log(new Level(levelValues.INFO.name(), levelValues.INFO.ordinal()), logMsg, exception);
+		log(new Level("INFO", levelManager.getLevelValue("INFO")), logMsg, exception);
 	}
 
 	/**
@@ -135,7 +136,7 @@ public class Logger {
 	 */
 	public final void info(final String logMsg) {
 		try {
-			log(new Level(levelValues.INFO.name(), levelValues.INFO.ordinal()), logMsg, null);
+			log(new Level("INFO", levelManager.getLevelValue("INFO")), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -149,7 +150,7 @@ public class Logger {
 	 * @throws Throwable when there is an exception
 	 */
 	public final void warn(final String logMsg, final Throwable exception) throws Throwable {
-		log(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), logMsg, exception);
+		log(new Level("WARN", levelManager.getLevelValue("WARN")), logMsg, exception);
 	}
 
 	/**
@@ -159,7 +160,7 @@ public class Logger {
 	 */
 	public final void warn(final String logMsg) {
 		try {
-			log(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), logMsg, null);
+			log(new Level("WARN", levelManager.getLevelValue("WARN")), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -173,7 +174,7 @@ public class Logger {
 	 * @throws Throwable when there is an exception
 	 */
 	public final void error(final String logMsg, final Throwable exception) throws Throwable {
-		log(new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal()), logMsg, exception);
+		log(new Level("ERROR", levelManager.getLevelValue("ERROR")), logMsg, exception);
 	}
 
 	/**
@@ -183,7 +184,7 @@ public class Logger {
 	 */
 	public final void error(final String logMsg) {
 		try {
-			log(new Level(levelValues.ERROR.name(), levelValues.ERROR.ordinal()), logMsg, null);
+			log(new Level("ERROR", levelManager.getLevelValue("ERROR")), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -197,7 +198,7 @@ public class Logger {
 	 * @throws Throwable when there is an exception
 	 */
 	public final void fatal(final String logMsg, final Throwable exception) throws Throwable {
-		log(new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal()), logMsg, exception);
+		log(new Level("FATAL", levelManager.getLevelValue("FATAL")), logMsg, exception);
 	}
 
 	/**
@@ -207,7 +208,7 @@ public class Logger {
 	 */
 	public final void fatal(final String logMsg) {
 		try {
-			log(new Level(levelValues.FATAL.name(), levelValues.FATAL.ordinal()), logMsg, null);
+			log(new Level("FATAL", levelManager.getLevelValue("FATAL")), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -303,6 +304,5 @@ public class Logger {
 	public final void setName(final String name) {
 		this.name = name;
 	}
-
 
 }
