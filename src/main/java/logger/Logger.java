@@ -24,7 +24,7 @@ public class Logger {
 		super();
 		this.name = name;
 		this.levelManager = new LevelManager();
-		LoggerConfigurator loggerManager = new LoggerConfigurator();
+		ConfigurationLoader loggerManager = new ConfigurationLoader();
 		this.genericLogger = loggerManager.getLogger();
 	}
 
