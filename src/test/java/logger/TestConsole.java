@@ -6,8 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import logger.writables.ConsoleOutput;
-import logger.writables.Writable;
-import logger.writables.WriteException;
+import logger.writables.Output;
+import logger.writables.OutputException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,18 +37,18 @@ public class TestConsole {
 	}
 
 	@Test
-	public final void writeString() throws WriteException {
+	public final void writeString() throws OutputException {
 		String text = "test";
-		Writable console = new ConsoleOutput();
+		Output console = new ConsoleOutput();
 		console.write(text);
 		assertTrue(outContent.toString().contains(text));
 	}
 
 	@Test
-	public final void writeTwoStrings() throws WriteException {
+	public final void writeTwoStrings() throws OutputException {
 		String text1 = "test1";
 		String text2 = "test2";
-		Writable console = new ConsoleOutput();
+		Output console = new ConsoleOutput();
 		console.write(text1);
 		console.write(text2);
 		assertTrue(outContent.toString().contains(text1));
@@ -56,9 +56,9 @@ public class TestConsole {
 	}
 
 	@Test
-	public final void writeNullString() throws WriteException {
+	public final void writeNullString() throws OutputException {
 		String text = null;
-		Writable console = new ConsoleOutput();
+		Output console = new ConsoleOutput();
 		console.write(text);
 		assertTrue(outContent.toString().contains(ConsoleOutput.INVALID_STRING));
 	}

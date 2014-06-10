@@ -3,7 +3,7 @@ package logger.writables;
 /**
  * The Class ConsoleOutput manage the write of messages in Console Output.
  */
-public class ConsoleOutput implements Writable {
+public class ConsoleOutput implements Output {
 
 	/** The Constant INVALID_STRING. */
 	public static final String INVALID_STRING = "Invalid string";

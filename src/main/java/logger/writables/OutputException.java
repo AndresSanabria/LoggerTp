@@ -1,9 +1,9 @@
 package logger.writables;
 
 /**
- * The Class WriteException thrown when writing error occurred.
+ * The Class OutputException thrown when writing error occurred.
  */
-public class WriteException extends Exception {
+public class OutputException extends Exception {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

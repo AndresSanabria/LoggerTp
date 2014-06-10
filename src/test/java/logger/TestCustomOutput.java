@@ -11,8 +11,8 @@ import logger.writables.ConsoleOutput;
 import logger.writables.FileOutput;
 import logger.customFactory.CustomFactory;
 import logger.customFactory.CustomOutputException;
-import logger.writables.Writable;
-import logger.writables.WriteException;
+import logger.writables.Output;
+import logger.writables.OutputException;
 
 import org.junit.Test;
 
@@ -28,10 +28,10 @@ public class TestCustomOutput {
 	private CustomFactory factory = new CustomFactory();
 
 	@Test
-	public final void createCustomFileOutput() throws CustomOutputException, WriteException, FileNotFoundException {
+	public final void createCustomFileOutput() throws CustomOutputException, OutputException, FileNotFoundException {
 		String[] params = new String[1];
 		params[0] = "log.txt";
-		Writable output = factory.createCustomOutput(FileOutput.class.getName(), params);
+		Output output = factory.createCustomOutput(FileOutput.class.getName(), params);
 		output.write("chau");
 		File file = new File("log.txt");
 		assertTrue(helper.stringInFile("chau", file));
@@ -39,10 +39,10 @@ public class TestCustomOutput {
 	}
 
 	@Test
-	public final void createCustomConsoleOutput() throws CustomOutputException, WriteException {
+	public final void createCustomConsoleOutput() throws CustomOutputException, OutputException {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-		Writable output = factory.createCustomOutput(ConsoleOutput.class.getName(), new String[0]);
+		Output output = factory.createCustomOutput(ConsoleOutput.class.getName(), new String[0]);
 		output.write("hola");
 		assertTrue(outContent.toString().contains("hola"));
 		System.setOut(null);

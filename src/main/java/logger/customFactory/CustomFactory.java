@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import logger.filters.Filterer;
-import logger.writables.Writable;
+import logger.writables.Output;
 
 /**
  * A factory for creating Custom objects.
@@ -96,9 +96,9 @@ public class CustomFactory {
 	 * @return the writable object
 	 * @throws CustomOutputException the custom output exception
 	 */
-	public final Writable createCustomOutput(final String implementor, final String[] params) throws CustomOutputException {
-		Class<Writable> customClassToCreate = Writable.class;
-		Writable custom = customClassToCreate.cast(createCustom(implementor, params, customClassToCreate));
+	public final Output createCustomOutput(final String implementor, final String[] params) throws CustomOutputException {
+		Class<Output> customClassToCreate = Output.class;
+		Output custom = customClassToCreate.cast(createCustom(implementor, params, customClassToCreate));
 		if (custom == null) {
 			throw new CustomOutputException();
 		}

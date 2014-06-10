@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
-import logger.writables.WriteException;
+import logger.writables.OutputException;
 
 import org.junit.Test;
 
@@ -31,7 +31,7 @@ public class TestLogger {
 
 
 	@Test
-	public final void loggerCallerDistanceToGiveFormatMethodInStack() throws IOException, WriteException {
+	public final void loggerCallerDistanceToGiveFormatMethodInStack() throws IOException, OutputException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = DEBUG\n"
@@ -48,7 +48,7 @@ public class TestLogger {
 	}
 
 	@Test
-	public final void logInLevelDebug() throws IOException, WriteException {
+	public final void logInLevelDebug() throws IOException, OutputException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = DEBUG\n"
@@ -66,7 +66,7 @@ public class TestLogger {
 	}
 
 	@Test
-	public final void logInLevelInfo() throws IOException, WriteException {
+	public final void logInLevelInfo() throws IOException, OutputException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = INFO\n"
@@ -84,7 +84,7 @@ public class TestLogger {
 	}
 
 	@Test
-	public final void logInLevelOff() throws IOException, WriteException {
+	public final void logInLevelOff() throws IOException, OutputException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = OFF\n"
@@ -102,7 +102,7 @@ public class TestLogger {
 	}
 
 	@Test
-	public final void logInLevelTrace() throws IOException, WriteException {
+	public final void logInLevelTrace() throws IOException, OutputException {
 		File file = new File(LOG_PATH);
 		file.delete();
 		String textFile =	"level = TRACE\n"

@@ -4,8 +4,8 @@ import java.util.List;
 
 import logger.filters.Filterer;
 import logger.formatters.Formatter;
-import logger.writables.Writable;
-import logger.writables.WriteException;
+import logger.writables.Output;
+import logger.writables.OutputException;
 
 /**
  * The Class GenericLogger logs messages in the given outputs with the proper format.
@@ -22,7 +22,7 @@ public class GenericLogger {
 	private Filterer filter;
 
 	/** The outputs where to log. */
-	private List<Writable> outputs;
+	private List<Output> outputs;
 
 	/** The configuration level. */
 	private Level level;
@@ -47,7 +47,7 @@ public class GenericLogger {
 	 *
 	 * @param newOutput the new output to be add
 	 */
-	public final void addOutput(final Writable newOutput) {
+	public final void addOutput(final Output newOutput) {
 		outputs.add(newOutput);
 	}
 
@@ -74,10 +74,10 @@ public class GenericLogger {
 		}
 		String formatedLog = formatter.giveFormat(level, logMsg);
 		if (this.shouldFilter(formatedLog)) {
-			for (Writable output: outputs) {
+			for (Output output: outputs) {
 				try {
 					output.write(formatedLog);
-				} catch (WriteException e) {
+				} catch (OutputException e) {
 					e.printStackTrace();
 					handleException(output.getStringId(), exception);
 				}

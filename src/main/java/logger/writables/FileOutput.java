@@ -9,7 +9,7 @@ import java.nio.file.InvalidPathException;
 /**
  * The Class FileOutput manage the write of messages in Files.
  */
-public class FileOutput implements Writable {
+public class FileOutput implements Output {
 
 	/** The path of the file where to write. */
 	private String path;
@@ -57,7 +57,7 @@ public class FileOutput implements Writable {
 	}
 
 	@Override
-	public final void write(final String text) throws WriteException {
+	public final void write(final String text) throws OutputException {
 		FileWriter fileWriter = null;
 		BufferedWriter writer = null;
         try {
@@ -67,13 +67,13 @@ public class FileOutput implements Writable {
 			writer.newLine();
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new WriteException();
+			throw new OutputException();
 		} finally {
 			try {
 				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new WriteException();
+				throw new OutputException();
 			}
 		}
 	}

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import logger.writables.FileOutput;
-import logger.writables.WriteException;
+import logger.writables.OutputException;
 
 /**
  * The Class HelperForTests provides helper methods for tests.
@@ -39,10 +39,10 @@ public class HelperForTests {
 	 *
 	 * @param filePath the path of the file where to write the text
 	 * @param text the text to be written
-	 * @throws WriteException when an error occurs while writing
+	 * @throws OutputException when an error occurs while writing
 	 * @throws IOException when an error occurs in an I/O operation
 	 */
-	public final void writeNewFileWithText(final String filePath, final String text) throws WriteException, IOException {
+	public final void writeNewFileWithText(final String filePath, final String text) throws OutputException, IOException {
 		File file = new File(filePath);
 		file.delete();
 		FileOutput configFile = new FileOutput(filePath);
