@@ -13,8 +13,8 @@ import logger.customFactory.CustomOutputException;
 import logger.filters.RegexFilter;
 import logger.formatters.Formatter;
 import logger.formatters.SimpleFormatter;
-import logger.writables.ConsoleOutput;
-import logger.writables.FileOutput;
+import logger.outputs.ConsoleOutput;
+import logger.outputs.FileOutput;
 
 /**
  * The Class ConfigurationLoader loads the configuration of the logger from the configuration file.

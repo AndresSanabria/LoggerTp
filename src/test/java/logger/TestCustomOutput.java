@@ -7,12 +7,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
-import logger.writables.ConsoleOutput;
-import logger.writables.FileOutput;
+import logger.outputs.ConsoleOutput;
+import logger.outputs.FileOutput;
+import logger.outputs.Output;
+import logger.outputs.OutputException;
 import logger.customFactory.CustomFactory;
 import logger.customFactory.CustomOutputException;
-import logger.writables.Output;
-import logger.writables.OutputException;
 
 import org.junit.Test;
 

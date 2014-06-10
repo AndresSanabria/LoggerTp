@@ -1,4 +1,4 @@
-package logger.writables;
+package logger.outputs;
 
 import java.io.BufferedWriter;
 import java.io.File;

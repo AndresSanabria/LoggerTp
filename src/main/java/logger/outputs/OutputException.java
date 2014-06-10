@@ -1,4 +1,4 @@
-package logger.writables;
+package logger.outputs;
 
 /**
  * The Class OutputException thrown when writing error occurred.

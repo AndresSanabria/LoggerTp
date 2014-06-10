@@ -4,8 +4,8 @@ import java.util.List;
 
 import logger.filters.Filterer;
 import logger.formatters.Formatter;
-import logger.writables.Output;
-import logger.writables.OutputException;
+import logger.outputs.Output;
+import logger.outputs.OutputException;
 
 /**
  * The Class GenericLogger logs messages in the given outputs with the proper format.

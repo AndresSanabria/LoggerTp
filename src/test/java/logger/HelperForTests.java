@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import logger.writables.FileOutput;
-import logger.writables.OutputException;
+import logger.outputs.FileOutput;
+import logger.outputs.OutputException;
 
 /**
  * The Class HelperForTests provides helper methods for tests.

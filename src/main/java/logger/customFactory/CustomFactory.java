@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import logger.filters.Filterer;
-import logger.writables.Output;
+import logger.outputs.Output;
 
 /**
  * A factory for creating Custom objects.

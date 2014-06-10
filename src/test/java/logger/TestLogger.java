@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
-import logger.writables.OutputException;
+import logger.outputs.OutputException;
 
 import org.junit.Test;
 
@@ -48,6 +48,25 @@ public class TestLogger {
 	}
 
 	@Test
+	public final void logInLevelTrace() throws IOException, OutputException {
+		File file = new File(LOG_PATH);
+		file.delete();
+		String textFile =	"level = TRACE\n"
+							+ "messageFormat = Test %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = false";
+		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
+		Logger logger = new Logger(DEFAULT_NAME);
+		logger.trace(MESSAGE);
+		logger.info(MESSAGE);
+		String text1 = "Test" + " - TRACE - " + MESSAGE;
+		String text2 = "Test" + " - INFO - " + MESSAGE;
+		assertTrue(helper.stringInFile(text1, file));
+		assertTrue(helper.stringInFile(text2, file));
+	}
+
+	@Test
 	public final void logInLevelDebug() throws IOException, OutputException {
 		File file = new File(LOG_PATH);
 		file.delete();
@@ -62,7 +81,8 @@ public class TestLogger {
 		logger.info(MESSAGE);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - INFO - " + MESSAGE;
-		assertTrue(helper.stringInFile(text1, file) && helper.stringInFile(text2, file));
+		assertTrue(helper.stringInFile(text1, file));
+		assertTrue(helper.stringInFile(text2, file));
 	}
 
 	@Test
@@ -80,7 +100,65 @@ public class TestLogger {
 		logger.info(MESSAGE);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - INFO - " + MESSAGE;
-		assertTrue(!helper.stringInFile(text1, file) && helper.stringInFile(text2, file));
+		assertFalse(helper.stringInFile(text1, file));
+		assertTrue(helper.stringInFile(text2, file));
+	}
+
+	@Test
+	public final void logInLevelWarn() throws IOException, OutputException {
+		File file = new File(LOG_PATH);
+		file.delete();
+		String textFile =	"level = WARN\n"
+							+ "messageFormat = Test %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = false";
+		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
+		Logger logger = new Logger(DEFAULT_NAME);
+		logger.debug(MESSAGE);
+		logger.warn(MESSAGE);
+		String text1 = "Test" + " - DEBUG - " + MESSAGE;
+		String text2 = "Test" + " - WARN - " + MESSAGE;
+		assertFalse(helper.stringInFile(text1, file));
+		assertTrue(helper.stringInFile(text2, file));
+	}
+
+	@Test
+	public final void logInLevelError() throws IOException, OutputException {
+		File file = new File(LOG_PATH);
+		file.delete();
+		String textFile =	"level = ERROR\n"
+							+ "messageFormat = Test %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = false";
+		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
+		Logger logger = new Logger(DEFAULT_NAME);
+		logger.debug(MESSAGE);
+		logger.error(MESSAGE);
+		String text1 = "Test" + " - DEBUG - " + MESSAGE;
+		String text2 = "Test" + " - ERROR - " + MESSAGE;
+		assertFalse(helper.stringInFile(text1, file));
+		assertTrue(helper.stringInFile(text2, file));
+	}
+
+	@Test
+	public final void logInLevelFatal() throws IOException, OutputException {
+		File file = new File(LOG_PATH);
+		file.delete();
+		String textFile =	"level = FATAL\n"
+							+ "messageFormat = Test %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = false";
+		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
+		Logger logger = new Logger(DEFAULT_NAME);
+		logger.debug(MESSAGE);
+		logger.fatal(MESSAGE);
+		String text1 = "Test" + " - DEBUG - " + MESSAGE;
+		String text2 = "Test" + " - FATAL - " + MESSAGE;
+		assertFalse(helper.stringInFile(text1, file));
+		assertTrue(helper.stringInFile(text2, file));
 	}
 
 	@Test
@@ -98,25 +176,8 @@ public class TestLogger {
 		logger.info(MESSAGE);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - INFO - " + MESSAGE;
-		assertTrue(!helper.stringInFile(text1, file) && !helper.stringInFile(text2, file));
-	}
-
-	@Test
-	public final void logInLevelTrace() throws IOException, OutputException {
-		File file = new File(LOG_PATH);
-		file.delete();
-		String textFile =	"level = TRACE\n"
-							+ "messageFormat = Test %n %p %n %m\n"
-							+ "messageSeparator = -\n"
-							+ "logToFiles = log.txt\n"
-							+ "logToConsole = false";
-		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
-		Logger logger = new Logger(DEFAULT_NAME);
-		logger.trace(MESSAGE);
-		logger.info(MESSAGE);
-		String text1 = "Test" + " - TRACE - " + MESSAGE;
-		String text2 = "Test" + " - INFO - " + MESSAGE;
-		assertTrue(helper.stringInFile(text1, file) && helper.stringInFile(text2, file));
+		assertFalse(helper.stringInFile(text1, file));
+		assertFalse(helper.stringInFile(text2, file));
 	}
 
 }
