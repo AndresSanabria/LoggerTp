@@ -1,6 +1,7 @@
 package logger.configurationReaders;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,21 +65,27 @@ public class PropertiesFileReader implements ConfigurationReader {
 	}
 
 	@Override
-	public final Configuration readConfiguration() throws IOException {
-		Configuration config = new Configuration();
-		Properties properties = new Properties();
-		FileInputStream configFile;
-		configFile = new FileInputStream(this.filePath);
-		properties.load(configFile);
-		config.setLevel(this.getPropertyValue(properties, LEVEL_TAG, DEFAULT_LEVEL));
-		config.setMessageFormat(this.getPropertyValue(properties, MESSAGE_FORMAT_TAG, DEFAULT_MESSAGE_FORMAT));
-		config.setMessageSeparator(this.getPropertyValue(properties, MESSAGE_SEPARATOR_TAG, null));
-		config.setLogToFiles(this.getLogToFilesPropertyValue(properties));
-		config.setLogToConsole(Boolean.valueOf(this.getPropertyValue(properties, LOG_TO_CONSOLE_TAG, DEFAULT_CONSOLE)));
-		config.setCustomOutputs(this.getCustomOutputsPropertyValue(properties));
-		config.setRegExFilter(this.getPropertyValue(properties, REGEX_FILTER_TAG, null));
-		config.setCustomFilter(this.getCustomFilterPropertyValue(properties));
-		return config;
+	public final Configuration readConfiguration() throws ReaderException {
+		try {
+			Configuration config = new Configuration();
+			Properties properties = new Properties();
+			FileInputStream configFile;
+			configFile = new FileInputStream(this.filePath);
+			properties.load(configFile);
+			config.setLevel(this.getPropertyValue(properties, LEVEL_TAG, DEFAULT_LEVEL));
+			config.setMessageFormat(this.getPropertyValue(properties, MESSAGE_FORMAT_TAG, DEFAULT_MESSAGE_FORMAT));
+			config.setMessageSeparator(this.getPropertyValue(properties, MESSAGE_SEPARATOR_TAG, null));
+			config.setLogToFiles(this.getLogToFilesPropertyValue(properties));
+			config.setLogToConsole(Boolean.valueOf(this.getPropertyValue(properties, LOG_TO_CONSOLE_TAG, DEFAULT_CONSOLE)));
+			config.setCustomOutputs(this.getCustomOutputsPropertyValue(properties));
+			config.setRegExFilter(this.getPropertyValue(properties, REGEX_FILTER_TAG, null));
+			config.setCustomFilter(this.getCustomFilterPropertyValue(properties));
+			return config;
+		} catch (FileNotFoundException e1) {
+			throw new ReaderException();
+		} catch (IOException e2) {
+			throw new ReaderException();
+		}
 	}
 
 	/**

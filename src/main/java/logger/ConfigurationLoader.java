@@ -6,6 +6,7 @@ import java.util.List;
 import logger.configurationReaders.Configuration;
 import logger.configurationReaders.ConfigurationReader;
 import logger.configurationReaders.PropertiesFileReader;
+import logger.configurationReaders.ReaderException;
 import logger.configurationReaders.XMLFileReader;
 import logger.customFactory.CustomFactory;
 import logger.customFactory.CustomFilterException;
@@ -84,7 +85,7 @@ public class ConfigurationLoader {
 	private void loadConfigurationFromFile(final ConfigurationReader configReader) {
 		try {
 			this.configuration = configReader.readConfiguration();
-		} catch (IOException e) { }
+		} catch (ReaderException e) { }
 	}
 
 	/**

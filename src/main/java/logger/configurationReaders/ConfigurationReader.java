@@ -1,7 +1,5 @@
 package logger.configurationReaders;
 
-import java.io.IOException;
-
 /**
  * The Interface ConfigurationReader thought to read configuration files in different formats.
  */
@@ -11,8 +9,8 @@ public interface ConfigurationReader {
 	 * Read configuration.
 	 *
 	 * @return Configuration object with the configuration read from file
-	 * @throws IOException when an error occurs in an I/O operation
+	 * @throws ReaderException when an error occurs in the reading
 	 */
-	Configuration readConfiguration() throws IOException;
+	Configuration readConfiguration() throws ReaderException;
 
 }
