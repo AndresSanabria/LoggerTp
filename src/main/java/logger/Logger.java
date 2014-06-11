@@ -3,7 +3,7 @@ package logger;
 /**
  * The Class Logger logs messages in different levels.
  */
-public class Logger {
+public class Logger implements Logging {
 
 	/** The name. */
 	private String name;
@@ -28,31 +28,17 @@ public class Logger {
 		this.genericLogger = loggerManager.getLogger();
 	}
 
-	/**
-	 * Gets the name of the logger.
-	 *
-	 * @return the logger name
-	 */
+	@Override
 	public final String getName() {
 		return this.name;
 	}
 
-	/**
-	 * Log in Trace Level.
-	 *
-	 * @param logMsg the message to log
-	 * @param exception the exception to be thrown
-	 * @throws Throwable when there is an exception
-	 */
+	@Override
 	public final void trace(final String logMsg, final Throwable exception) throws Throwable {
 		this.genericLogger.log(new Level("TRACE", levelManager.getLevelValue("TRACE")), logMsg, exception);
 	}
 
-	/**
-	 * Log in Trace Level.
-	 *
-	 * @param logMsg the message to log
-	 */
+	@Override
 	public final void trace(final String logMsg) {
 		try {
 			this.genericLogger.log(new Level("TRACE", levelManager.getLevelValue("TRACE")), logMsg, null);
@@ -61,22 +47,12 @@ public class Logger {
 		}
 	}
 
-	/**
-	 * Log in Debug Level.
-	 *
-	 * @param logMsg the message to log
-	 * @param exception the exception to be thrown
-	 * @throws Throwable when there is an exception
-	 */
+	@Override
 	public final void debug(final String logMsg, final Throwable exception) throws Throwable {
 		this.genericLogger.log(new Level("DEBUG", levelManager.getLevelValue("DEBUG")), logMsg, exception);
 	}
 
-	/**
-	 * Log in Debug Level.
-	 *
-	 * @param logMsg the message to log
-	 */
+	@Override
 	public final void debug(final String logMsg) {
 		try {
 			this.genericLogger.log(new Level("DEBUG", levelManager.getLevelValue("DEBUG")), logMsg, null);
@@ -85,22 +61,12 @@ public class Logger {
 		}
 	}
 
-	/**
-	 * Log in Info Level.
-	 *
-	 * @param logMsg the message to log
-	 * @param exception the exception to be thrown
-	 * @throws Throwable when there is an exception
-	 */
+	@Override
 	public final void info(final String logMsg, final Throwable exception) throws Throwable {
 		this.genericLogger.log(new Level("INFO", levelManager.getLevelValue("INFO")), logMsg, exception);
 	}
 
-	/**
-	 * Log in Info Level.
-	 *
-	 * @param logMsg the message to log
-	 */
+	@Override
 	public final void info(final String logMsg) {
 		try {
 			this.genericLogger.log(new Level("INFO", levelManager.getLevelValue("INFO")), logMsg, null);
@@ -109,22 +75,12 @@ public class Logger {
 		}
 	}
 
-	/**
-	 * Log in Warn Level.
-	 *
-	 * @param logMsg the message to log
-	 * @param exception the exception to be thrown
-	 * @throws Throwable when there is an exception
-	 */
+	@Override
 	public final void warn(final String logMsg, final Throwable exception) throws Throwable {
 		this.genericLogger.log(new Level("WARN", levelManager.getLevelValue("WARN")), logMsg, exception);
 	}
 
-	/**
-	 * Log in Warn Level.
-	 *
-	 * @param logMsg the message to log
-	 */
+	@Override
 	public final void warn(final String logMsg) {
 		try {
 			this.genericLogger.log(new Level("WARN", levelManager.getLevelValue("WARN")), logMsg, null);
@@ -133,22 +89,12 @@ public class Logger {
 		}
 	}
 
-	/**
-	 * Log in Error Level.
-	 *
-	 * @param logMsg the message to log
-	 * @param exception the exception to be thrown
-	 * @throws Throwable when there is an exception
-	 */
+	@Override
 	public final void error(final String logMsg, final Throwable exception) throws Throwable {
 		this.genericLogger.log(new Level("ERROR", levelManager.getLevelValue("ERROR")), logMsg, exception);
 	}
 
-	/**
-	 * Log in Error Level.
-	 *
-	 * @param logMsg the message to log
-	 */
+	@Override
 	public final void error(final String logMsg) {
 		try {
 			this.genericLogger.log(new Level("ERROR", levelManager.getLevelValue("ERROR")), logMsg, null);
@@ -157,22 +103,12 @@ public class Logger {
 		}
 	}
 
-	/**
-	 * Log in Fatal Level.
-	 *
-	 * @param logMsg the message to log
-	 * @param exception the exception to be thrown
-	 * @throws Throwable when there is an exception
-	 */
+	@Override
 	public final void fatal(final String logMsg, final Throwable exception) throws Throwable {
 		this.genericLogger.log(new Level("FATAL", levelManager.getLevelValue("FATAL")), logMsg, exception);
 	}
 
-	/**
-	 * Log in Fatal Level.
-	 *
-	 * @param logMsg the message to log
-	 */
+	@Override
 	public final void fatal(final String logMsg) {
 		try {
 			this.genericLogger.log(new Level("FATAL", levelManager.getLevelValue("FATAL")), logMsg, null);
