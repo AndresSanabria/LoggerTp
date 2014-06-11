@@ -50,10 +50,38 @@ public class TestXMLFileReader {
 	}
 
 	@Test
+	public final void loadEmptyRexExFilterFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config5.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getRegExFilter());
+	}
+
+	@Test
 	public final void loadCustomFilterFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config5.xml");
 		Configuration config = reader.readConfiguration();
 		assertEquals(config.getCustomFilter()[0], "logger.Filter");
+	}
+
+	@Test
+	public final void loadMissingCustomFilterNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config7.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getCustomFilter());
+	}
+
+	@Test
+	public final void loadCustomFilterMissingImplementorFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config4.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getCustomFilter());
+	}
+
+	@Test
+	public final void loadCustomFilterEmptyImplementorFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config6.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getCustomFilter());
 	}
 
 	@Test
@@ -64,8 +92,29 @@ public class TestXMLFileReader {
 	}
 
 	@Test
-	public final void loadMissingLogToFilesNodeFromXMLFile() throws IOException {
+	public final void loadCustomOutputsEmptyImplementorFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config3.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getCustomOutputs());
+	}
+
+	@Test
+	public final void loadMissingFilesNodeFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getLogToFiles());
+	}
+
+	@Test
+	public final void loadEmptyFilesNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getLogToFiles());
+	}
+
+	@Test
+	public final void loadMissingOutputsNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config5.xml");
 		Configuration config = reader.readConfiguration();
 		assertNull(config.getLogToFiles());
 	}
@@ -85,10 +134,53 @@ public class TestXMLFileReader {
 	}
 
 	@Test
+	public final void loadMissingConsoleNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config2.xml");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getLogToConsole(), false);
+	}
+
+	@Test
+	public final void loadEmptyConsoleNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config3.xml");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getLogToConsole(), false);
+	}
+
+	@Test
 	public final void loadEmptyMessageFormatNodeFromXMLFile() throws IOException {
 		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config3.xml");
 		Configuration config = reader.readConfiguration();
 		assertEquals(config.getMessageFormat(), "%p %n %t %n %m");
+	}
+
+	@Test
+	public final void loadMissingMessageFormatNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config5.xml");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getMessageFormat(), "%p %n %t %n %m");
+	}
+
+	@Test
+	public final void loadMissingMessageNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config6.xml");
+		Configuration config = reader.readConfiguration();
+		assertEquals(config.getMessageFormat(), "%p %n %t %n %m");
+		assertNull(config.getMessageSeparator());
+	}
+
+	@Test
+	public final void loadMissingMessageSeparatorNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config5.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getMessageSeparator());
+	}
+
+	@Test
+	public final void loadEmptyMessageSeparatorNodeFromXMLFile() throws IOException {
+		XMLFileReader reader = new XMLFileReader("configFiles/testXMLFileReader/config3.xml");
+		Configuration config = reader.readConfiguration();
+		assertNull(config.getMessageSeparator());
 	}
 
 }

@@ -3,9 +3,14 @@
 	<level></level>
 	<message>
 		<format></format>
-		<separator>-</separator>
+		<separator></separator>
 	</message>
 	<outputs>
-		<console>true</console>
+		<console></console>
+		<custom>
+			<implementor></implementor>
+			<param>192.168.1.1</param>
+			<param>juan-perez</param>
+		</custom>
 	</outputs>
 </configuration>

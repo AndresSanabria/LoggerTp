@@ -1,13 +1,8 @@
 <?xml version="1.0"?>
 <configuration>
 	<level>INFO</level>
-	<message>
-		<format>%p %n %t %n %m</format>
-		<separator>-</separator>
-	</message>
 	<outputs>
-		<file>log1.txt</file>
-		<file>log2.txt</file>
+		<file></file>
 		<console>true</console>
 		<custom>
 			<implementor>logger.ConsoleOutput</implementor>
@@ -21,8 +16,8 @@
 		</custom>
 	</outputs>
 	<filter>
-		<regEx>.*TRACE.*</regEx>
 		<custom>
+			<implementor></implementor>
 			<param>.*TRACE.*</param>
 		</custom>
 	</filter>

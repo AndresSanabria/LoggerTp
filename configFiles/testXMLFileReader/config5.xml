@@ -2,25 +2,9 @@
 <configuration>
 	<level>INFO</level>
 	<message>
-		<format>%p %n %t %n %m</format>
-		<separator>-</separator>
 	</message>
-	<outputs>
-		<file>log1.txt</file>
-		<file>log2.txt</file>
-		<console>true</console>
-		<custom>
-			<implementor>logger.ConsoleOutput</implementor>
-			<param>192.168.1.1</param>
-			<param>juan-perez</param>
-		</custom>
-		<custom>
-			<implementor>logger.FileOutput</implementor>
-			<param>192.168.1.1</param>
-			<param>juan-perez-123</param>
-		</custom>
-	</outputs>
 	<filter>
+		<regEx></regEx>
 		<custom>
 			<implementor>logger.Filter</implementor>
 			<param>.*TRACE.*</param>

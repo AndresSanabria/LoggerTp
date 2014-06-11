@@ -123,4 +123,26 @@ public class TestConfigurationLoader {
 		assertFalse(helper.stringInFile(text2, logFile));
 	}
 
+	@Test
+	public final void loadRegExFilter() throws Throwable {
+		File logFile = new File(LOG_PATH);
+		logFile.delete();
+		String textFile =	"level = INFO\n"
+							+ "messageFormat = Properties %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "regExFilter = .*INFO.*\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = false";
+		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
+		ConfigurationLoader config = new ConfigurationLoader();
+		GenericLogger logger = config.getLogger();
+		LevelManager levelManager = new LevelManager();
+		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		logger.log(new Level("TRACE", levelManager.getLevelValue("TRACE")), MESSAGE, null);
+		String text1 = "Properties" + " - INFO - " + MESSAGE;
+		String text2 = "Properties" + " - TRACE - " + MESSAGE;
+		assertTrue(helper.stringInFile(text1, logFile));
+		assertFalse(helper.stringInFile(text2, logFile));
+	}
+
 }
