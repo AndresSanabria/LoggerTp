@@ -28,8 +28,14 @@ public class ConfigurationLoader {
 	/** The Constant PROPERTIES_FILE_PATH. */
 	private static final String PROPERTIES_FILE_PATH = "configFiles/config.properties";
 
+	/** The Constant PROPERTIES_FILE_EXTENSION. */
+	private static final String PROPERTIES_FILE_EXTENSION = "properties";
+
 	/** The Constant XML_FILE_PATH. */
 	private static final String XML_FILE_PATH = "configFiles/config.xml";
+
+	/** The Constant XML_FILE_EXTENSION. */
+	private static final String XML_FILE_EXTENSION = "xml";
 
 	/** The Constant DEFAULT_CONSOLE. */
 	private static final Boolean DEFAULT_CONSOLE = true;
@@ -56,6 +62,21 @@ public class ConfigurationLoader {
 	}
 
 	/**
+	 * Instantiates a new configuration loader.
+	 *
+	 * @param configPath the path of the configuration file
+	 */
+	public ConfigurationLoader(final String configPath) {
+		try {
+			this.loadConfiguration(configPath);
+		} catch (ReaderException e) {
+			handleException("There was a ReaderException when reading the configuration file: " + e.getMessage() + "\n Check your configuration file");
+			this.initializeByDefault();
+		}
+		this.initializeLogger();
+	}
+
+	/**
 	 * Gets the logger.
 	 *
 	 * @return the logger
@@ -68,24 +89,67 @@ public class ConfigurationLoader {
 	 * Loads the configuration from .properties or .xml files or by default.
 	 */
 	private void loadConfiguration() {
-		this.loadConfigurationFromFile(new PropertiesFileReader(PROPERTIES_FILE_PATH));
-		if (this.configuration == null) {
-			this.loadConfigurationFromFile(new XMLFileReader(XML_FILE_PATH));
+		try {
+			this.loadConfigurationFromFile(new PropertiesFileReader(PROPERTIES_FILE_PATH));
+		} catch (ReaderException e) {
 			if (this.configuration == null) {
-				this.initializeByDefault();
+				try {
+					this.loadConfigurationFromFile(new XMLFileReader(XML_FILE_PATH));
+				} catch (ReaderException e1) {
+					if (this.configuration == null) {
+						this.initializeByDefault();
+					}
+				}
 			}
 		}
 	}
 
 	/**
-	 * Load configuration.
+	 * Loads the configuration from a .properties or an .xml file.
+	 *
+	 * @param configPath the path of the configuration file
+	 */
+	private void loadConfiguration(final String configPath) throws ReaderException {
+		if (this.isAPropertiesFile(configPath)) {
+			this.loadConfigurationFromFile(new PropertiesFileReader(configPath));
+		} else if (this.isAnXMLFile(configPath)) {
+			this.loadConfigurationFromFile(new XMLFileReader(configPath));
+		} else {
+			throw new ReaderException();
+		}
+	}
+
+	/**
+	 * Checks if the file is a properties file.
+	 *
+	 * @param filePath the file path
+	 */
+	private Boolean isAPropertiesFile(final String filePath) {
+		if ((filePath.split(".")[1]) == PROPERTIES_FILE_EXTENSION) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if the file is an xml file.
+	 *
+	 * @param filePath the file path
+	 */
+	private Boolean isAnXMLFile(final String filePath) {
+		if ((filePath.split(".")[1]) == XML_FILE_EXTENSION) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Loads configuration.
 	 *
 	 * @param configReader the configuration reader
 	 */
-	private void loadConfigurationFromFile(final ConfigurationReader configReader) {
-		try {
-			this.configuration = configReader.readConfiguration();
-		} catch (ReaderException e) { }
+	private void loadConfigurationFromFile(final ConfigurationReader configReader) throws ReaderException {
+		this.configuration = configReader.readConfiguration();
 	}
 
 	/**
@@ -116,11 +180,11 @@ public class ConfigurationLoader {
 			this.initializeOutputs();
 			this.initializeFilter();
 		} catch (IOException e) {
-			handleException("There was an IOException when Intializing outputs: " + e.getMessage() + "\n Check your Configuration file");
+			handleException("There was an IOException when intializing outputs: " + e.getMessage() + "\n Check your configuration file");
 		} catch (CustomOutputException e) {
-			handleException("There was an CustomOutputException when Intializing outputs: " + e.getMessage() + "\n Check your Configuration file");
+			handleException("There was a CustomOutputException when intializing outputs: " + e.getMessage() + "\n Check your configuration file");
 		} catch (CustomFilterException e) {
-			handleException("There was an CustomFilterException when Intializing filter: " + e.getMessage() + "\n Check your Configuration file");
+			handleException("There was a CustomFilterException when intializing filter: " + e.getMessage() + "\n Check your configuration file");
 		}
 	}
 

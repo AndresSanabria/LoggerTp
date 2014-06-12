@@ -80,6 +80,7 @@ public class PropertiesFileReader implements ConfigurationReader {
 			config.setCustomOutputs(this.getCustomOutputsPropertyValue(properties));
 			config.setRegExFilter(this.getPropertyValue(properties, REGEX_FILTER_TAG, null));
 			config.setCustomFilter(this.getCustomFilterPropertyValue(properties));
+			configFile.close();
 			return config;
 		} catch (FileNotFoundException e1) {
 			throw new ReaderException();

@@ -24,8 +24,22 @@ public class Logger implements Logging {
 		super();
 		this.name = name;
 		this.levelManager = new LevelManager();
-		ConfigurationLoader loggerManager = new ConfigurationLoader();
-		this.genericLogger = loggerManager.getLogger();
+		ConfigurationLoader configLoader = new ConfigurationLoader();
+		this.genericLogger = configLoader.getLogger();
+	}
+
+	/**
+	 * Instantiates a new logger.
+	 *
+	 * @param name the name of the logger
+	 * @param configPath the path of the configuration file
+	 */
+	public Logger(final String name, final String configPath) {
+		super();
+		this.name = name;
+		this.levelManager = new LevelManager();
+		ConfigurationLoader configLoader = new ConfigurationLoader(configPath);
+		this.genericLogger = configLoader.getLogger();
 	}
 
 	@Override
