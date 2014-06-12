@@ -85,6 +85,44 @@ public class TestConfigurationLoader {
 	}
 
 	@Test
+	public final void loadConfigurationFromSpecifiedPropertiesFile() throws Throwable {
+		File logFile = new File(LOG_PATH);
+		logFile.delete();
+		String textFile =	"level = DEBUG\n"
+							+ "messageFormat = Properties %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = false";
+		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
+		ConfigurationLoader config = new ConfigurationLoader(PROPERTIES_FILE_PATH);
+		GenericLogger logger = config.getLogger();
+		LevelManager levelManager = new LevelManager();
+		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		String text = "Properties - INFO - " + MESSAGE;
+		assertTrue(helper.stringInFile(text, logFile));
+	}
+
+	@Test
+	public final void loadConfigurationFromSpecifiedXMLFile() throws Throwable {
+		File logFile = new File(LOG_PATH);
+		logFile.delete();
+		String textFile =	"<configuration>"
+							+ "<level>DEBUG</level>"
+							+ "<message><format>XML %n %p %n %m</format>"
+							+ "<separator>-</separator></message>"
+							+ "<outputs><file>log.txt</file>"
+							+ "<console>false</console></outputs>"
+							+ "</configuration>";
+		this.helper.writeNewFileWithText(XML_FILE_PATH, textFile);
+		ConfigurationLoader config = new ConfigurationLoader(XML_FILE_PATH);
+		GenericLogger logger = config.getLogger();
+		LevelManager levelManager = new LevelManager();
+		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		String text = "XML - INFO - " + MESSAGE;
+		assertTrue(helper.stringInFile(text, logFile));
+	}
+
+	@Test
 	public final void loadCustomOutput() throws Throwable {
 		File logFile = new File(LOG_PATH);
 		logFile.delete();

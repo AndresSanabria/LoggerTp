@@ -125,7 +125,7 @@ public class ConfigurationLoader {
 	 * @param filePath the file path
 	 */
 	private Boolean isAPropertiesFile(final String filePath) {
-		if ((filePath.split(".")[1]) == PROPERTIES_FILE_EXTENSION) {
+		if (((filePath.split("\\."))[1]).compareTo(PROPERTIES_FILE_EXTENSION) == 0) {
 			return true;
 		}
 		return false;
@@ -137,7 +137,7 @@ public class ConfigurationLoader {
 	 * @param filePath the file path
 	 */
 	private Boolean isAnXMLFile(final String filePath) {
-		if ((filePath.split(".")[1]) == XML_FILE_EXTENSION) {
+		if (((filePath.split("\\."))[1]).compareTo(XML_FILE_EXTENSION) == 0) {
 			return true;
 		}
 		return false;
