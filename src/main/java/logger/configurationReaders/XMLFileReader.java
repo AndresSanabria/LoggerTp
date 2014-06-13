@@ -98,11 +98,7 @@ public class XMLFileReader implements ConfigurationReader {
 			config.setRegExFilter(this.getRegExFilterNodeValue(doc));
 			config.setCustomFilter(this.getCustomFilterNodeValue(doc));
 			return config;
-		} catch (ParserConfigurationException e1) {
-			throw new ReaderException();
-		} catch (SAXException e2) {
-			throw new ReaderException();
-		} catch (IOException e3) {
+		} catch (ParserConfigurationException | SAXException | IOException e1) {
 			throw new ReaderException();
 		}
 	}

@@ -10,27 +10,11 @@ public class RegexFilter implements Filterer {
 
 	/**
 	 * Instantiates a new regex filter.
-	 */
-	public RegexFilter() {
-		super();
-	}
-
-	/**
-	 * Instantiates a new regex filter.
 	 *
 	 * @param regex the regex
 	 */
 	public RegexFilter(final String regex) {
 		super();
-		this.regex = regex;
-	}
-
-	/**
-	 * Sets the regular expression.
-	 *
-	 * @param regex the regex to filter by
-	 */
-	public final void setRegex(final String regex) {
 		this.regex = regex;
 	}
 

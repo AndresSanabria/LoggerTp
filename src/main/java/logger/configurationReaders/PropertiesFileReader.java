@@ -82,9 +82,7 @@ public class PropertiesFileReader implements ConfigurationReader {
 			config.setCustomFilter(this.getCustomFilterPropertyValue(properties));
 			configFile.close();
 			return config;
-		} catch (FileNotFoundException e1) {
-			throw new ReaderException();
-		} catch (IOException e2) {
+		} catch (IOException e1) {
 			throw new ReaderException();
 		}
 	}
