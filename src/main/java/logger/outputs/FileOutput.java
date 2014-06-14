@@ -65,17 +65,11 @@ public class FileOutput implements Output {
         	writer = new BufferedWriter(fileWriter);
 			writer.append(text);
 			writer.newLine();
+			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new OutputException();
-		} finally {
-			try {
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new OutputException();
-			}
-		}
+		} 
 	}
 
 	@Override

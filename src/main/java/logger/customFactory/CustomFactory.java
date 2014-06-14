@@ -60,7 +60,7 @@ public class CustomFactory {
 			custom = constructor.newInstance((Object[]) params);
 		} catch (InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException
-				| NullPointerException | SecurityException e) {
+				| SecurityException e) {
 			e.printStackTrace();
 			return null;
 		}

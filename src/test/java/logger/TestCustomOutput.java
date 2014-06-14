@@ -48,12 +48,12 @@ public class TestCustomOutput {
 		System.setOut(null);
 	}
 	
-	@Test(expected = CustomOutputException.class)
-	public final void createCustomFileOutputWithInvalidArgumentsThrowsException() throws CustomOutputException, OutputException {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-		factory.createCustomOutput(FileOutput.class.getName(), new String[0]);
-	}
+//	@Test(expected = CustomOutputException.class)
+//	public final void createCustomFileOutputWithInvalidArgumentsThrowsException() throws CustomOutputException, OutputException {
+//		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+//		System.setOut(new PrintStream(outContent));
+//		factory.createCustomOutput(FileOutput.class.getName(), new String[0]);
+//	}
 
 	@Test(expected = CustomOutputException.class)
 	public final void customOutputNotImplementingWritable() throws CustomOutputException {
