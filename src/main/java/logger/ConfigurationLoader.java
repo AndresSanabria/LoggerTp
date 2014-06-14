@@ -125,7 +125,8 @@ public class ConfigurationLoader {
 	 * @param filePath the file path
 	 */
 	private Boolean isAPropertiesFile(final String filePath) {
-		if (((filePath.split("\\."))[1]).compareTo(PROPERTIES_FILE_EXTENSION) == 0) {
+		String[] splitted = filePath.split("\\.");
+		if ((splitted.length > 1) && (splitted[1]).compareTo(PROPERTIES_FILE_EXTENSION) == 0) {
 			return true;
 		}
 		return false;
@@ -137,7 +138,8 @@ public class ConfigurationLoader {
 	 * @param filePath the file path
 	 */
 	private Boolean isAnXMLFile(final String filePath) {
-		if (((filePath.split("\\."))[1]).compareTo(XML_FILE_EXTENSION) == 0) {
+		String[] splitted = filePath.split("\\.");
+		if ((splitted.length > 1) && (splitted[1]).compareTo(XML_FILE_EXTENSION) == 0) {
 			return true;
 		}
 		return false;
@@ -180,11 +182,11 @@ public class ConfigurationLoader {
 			this.initializeOutputs();
 			this.initializeFilter();
 		} catch (IOException e) {
-			handleException("There was an IOException when intializing outputs: " + e.getMessage() + "\n Check your configuration file");
+			handleException("There was an IOException when initializing outputs: " + e.getMessage() + "\n Check your configuration file");
 		} catch (CustomOutputException e) {
-			handleException("There was a CustomOutputException when intializing outputs: " + e.getMessage() + "\n Check your configuration file");
+			handleException("There was a CustomOutputException when initializing outputs: " + e.getMessage() + "\n Check your configuration file");
 		} catch (CustomFilterException e) {
-			handleException("There was a CustomFilterException when intializing filter: " + e.getMessage() + "\n Check your configuration file");
+			handleException("There was a CustomFilterException when initializing filter: " + e.getMessage() + "\n Check your configuration file");
 		}
 	}
 

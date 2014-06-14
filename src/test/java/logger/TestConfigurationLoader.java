@@ -2,10 +2,19 @@ package logger;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 
 import logger.ConfigurationLoader;
+import logger.customFactory.CustomFilterException;
+import logger.customFactory.CustomOutputException;
+import logger.outputs.OutputException;
+import logger.configurationReaders.ReaderException;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -27,7 +36,19 @@ public class TestConfigurationLoader {
 
 	/** The helper. */
 	private HelperForTests helper = new HelperForTests();
+	
+	/** The error content. */
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
+	@Before
+	public final void setUpStreams() {
+	    System.setErr(new PrintStream(errContent));
+	}
+
+	@After
+	public final void cleanUpStreams() {
+	    System.setErr(null);
+	}
 
 	@Test
 	public final void loadConfigurationFromPropertiesFileFirst() throws Throwable {
@@ -83,6 +104,22 @@ public class TestConfigurationLoader {
 		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
 		assertFalse(logFile.exists());
 	}
+	
+	@Test
+	public final void loadConfigurationFromNonPropertiesOrXmlFileLogError() throws Throwable {
+		File logFile = new File(LOG_PATH);
+		logFile.delete();
+		String textFile =	"level = DEBUG\n"
+							+ "messageFormat = Properties %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = false";
+		this.helper.writeNewFileWithText("configFiles/NonExtensionFile", textFile);
+		new ConfigurationLoader("configFiles/NonExtensionFile");
+		ReaderException e = new ReaderException();
+		String text = "There was a ReaderException when reading the configuration file: " + e.getMessage() + "\n Check your configuration file"; 
+		assertTrue(errContent.toString().contains(text));
+	}
 
 	@Test
 	public final void loadConfigurationFromSpecifiedPropertiesFile() throws Throwable {
@@ -121,6 +158,21 @@ public class TestConfigurationLoader {
 		String text = "XML - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text, logFile));
 	}
+	
+	@Test
+	public final void loadNonExistingDirectoryForConfigurationOutputLogError() throws Throwable {
+		File file = new File(LOG_PATH);
+		file.delete();
+		String textFile =	"level = DEBUG\n"
+							+ "messageFormat = Properties %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = /dontExist/log.txt\n"
+							+ "logToConsole = false";
+		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
+		new ConfigurationLoader();
+		String text = "There was an IOException when initializing outputs: No such file or directory" + "\n Check your configuration file"; 
+		assertTrue(errContent.toString().contains(text));
+	}
 
 	@Test
 	public final void loadCustomOutput() throws Throwable {
@@ -137,6 +189,22 @@ public class TestConfigurationLoader {
 		LevelManager levelManager = new LevelManager();
 		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
 		assertTrue(logFile.exists());
+	}
+	
+	@Test
+	public final void loadNonExistingCustomOutputLogError() throws CustomFilterException, OutputException, IOException {
+		File logFile = new File(LOG_PATH);
+		logFile.delete();
+		String textFile =	"level = INFO\n"
+							+ "messageFormat = Properties %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "customOutputs = logger.outputs.ComplexOutput\n"
+							+ "logToConsole = true";
+		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
+		new ConfigurationLoader();
+		CustomOutputException e = new CustomOutputException();
+		String text = "There was a CustomOutputException when initializing outputs: " + e.getMessage() + "\n Check your configuration file"; 
+		assertTrue(errContent.toString().contains(text));
 	}
 
 	@Test
@@ -159,6 +227,23 @@ public class TestConfigurationLoader {
 		String text2 = "Properties" + " - TRACE - " + MESSAGE;
 		assertTrue(helper.stringInFile(text1, logFile));
 		assertFalse(helper.stringInFile(text2, logFile));
+	}
+	
+	@Test
+	public final void loadNonExistingCustomFilterLogError() throws CustomFilterException, OutputException, IOException {
+		File logFile = new File(LOG_PATH);
+		logFile.delete();
+		String textFile =	"level = INFO\n"
+							+ "messageFormat = Properties %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "customFilter = logger.filters.ComplexFilter,.*INFO.*\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = true";
+		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
+		new ConfigurationLoader();
+		CustomFilterException e = new CustomFilterException();
+		String text = "There was a CustomFilterException when initializing filter: " + e.getMessage() + "\n Check your configuration file"; 
+		assertTrue(errContent.toString().contains(text));
 	}
 
 	@Test
