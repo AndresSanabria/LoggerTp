@@ -49,6 +49,7 @@ public class CustomFactory {
 		}
 		Constructor<?>[] allConstructors;
 		Constructor<?> constructor = null;
+		Object custom;
 		try {
 			allConstructors = customClass.getDeclaredConstructors();
 			for (Constructor<?> oneConstructor: allConstructors) {
@@ -56,15 +57,10 @@ public class CustomFactory {
 					constructor = oneConstructor;
 				}
 			}
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-			return null;
-		}
-		Object custom;
-		try {
 			custom = constructor.newInstance((Object[]) params);
 		} catch (InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException e) {
+				| IllegalArgumentException | InvocationTargetException
+				| NullPointerException | SecurityException e) {
 			e.printStackTrace();
 			return null;
 		}
