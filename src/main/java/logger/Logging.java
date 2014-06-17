@@ -13,6 +13,13 @@ public interface Logging {
 	String getName();
 
 	/**
+	 * Initializes the logger from a specific configuration file.
+	 *
+	 * @param configFile the configuration file
+	 */
+	void initializeFromConfigFile(final String configFile);
+
+	/**
 	 * Log in Trace Level.
 	 *
 	 * @param logMsg the message to log

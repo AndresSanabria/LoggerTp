@@ -69,7 +69,7 @@ public class FileOutput implements Output {
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new OutputException();
-		} 
+		}
 	}
 
 	@Override

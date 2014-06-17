@@ -16,7 +16,8 @@ public class Logger implements Logging {
 
 
 	/**
-	 * Instantiates a new logger.
+	 * Instantiates a new logger with its configuration loaded from default files
+	 * or by default.
 	 *
 	 * @param name the name of the logger
 	 */
@@ -25,6 +26,12 @@ public class Logger implements Logging {
 		this.name = name;
 		this.levelManager = new LevelManager();
 		ConfigurationLoader configLoader = new ConfigurationLoader();
+		this.genericLogger = configLoader.getLogger();
+	}
+
+	@Override
+	public final void initializeFromConfigFile(final String configFile) {
+		ConfigurationLoader configLoader = new ConfigurationLoader(configFile);
 		this.genericLogger = configLoader.getLogger();
 	}
 

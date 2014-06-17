@@ -36,7 +36,7 @@ public class TestConfigurationLoader {
 
 	/** The helper. */
 	private HelperForTests helper = new HelperForTests();
-	
+
 	/** The error content. */
 	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
@@ -104,7 +104,7 @@ public class TestConfigurationLoader {
 		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
 		assertFalse(logFile.exists());
 	}
-	
+
 	@Test
 	public final void loadConfigurationFromNonPropertiesOrXmlFileLogError() throws Throwable {
 		File logFile = new File(LOG_PATH);
@@ -117,7 +117,7 @@ public class TestConfigurationLoader {
 		this.helper.writeNewFileWithText("configFiles/NonExtensionFile", textFile);
 		new ConfigurationLoader("configFiles/NonExtensionFile");
 		ReaderException e = new ReaderException();
-		String text = "There was a ReaderException when reading the configuration file: " + e.getMessage() + "\n Check your configuration file"; 
+		String text = "There was a ReaderException when reading the configuration file: " + e.getMessage() + "\n Check your configuration file";
 		assertTrue(errContent.toString().contains(text));
 	}
 
@@ -158,7 +158,7 @@ public class TestConfigurationLoader {
 		String text = "XML - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text, logFile));
 	}
-	
+
 	@Test
 	public final void loadNonExistingDirectoryForConfigurationOutputLogError() throws Throwable {
 		File file = new File(LOG_PATH);
@@ -170,7 +170,7 @@ public class TestConfigurationLoader {
 							+ "logToConsole = false";
 		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
 		new ConfigurationLoader();
-		String text = "There was an IOException when initializing outputs: No such file or directory" + "\n Check your configuration file"; 
+		String text = "There was an IOException when initializing outputs:";
 		assertTrue(errContent.toString().contains(text));
 	}
 
@@ -190,7 +190,7 @@ public class TestConfigurationLoader {
 		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
 		assertTrue(logFile.exists());
 	}
-	
+
 	@Test
 	public final void loadNonExistingCustomOutputLogError() throws CustomFilterException, OutputException, IOException {
 		File logFile = new File(LOG_PATH);
@@ -203,7 +203,7 @@ public class TestConfigurationLoader {
 		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
 		new ConfigurationLoader();
 		CustomOutputException e = new CustomOutputException();
-		String text = "There was a CustomOutputException when initializing outputs: " + e.getMessage() + "\n Check your configuration file"; 
+		String text = "There was a CustomOutputException when initializing outputs: " + e.getMessage() + "\n Check your configuration file";
 		assertTrue(errContent.toString().contains(text));
 	}
 
@@ -228,7 +228,7 @@ public class TestConfigurationLoader {
 		assertTrue(helper.stringInFile(text1, logFile));
 		assertFalse(helper.stringInFile(text2, logFile));
 	}
-	
+
 	@Test
 	public final void loadNonExistingCustomFilterLogError() throws CustomFilterException, OutputException, IOException {
 		File logFile = new File(LOG_PATH);
@@ -242,7 +242,7 @@ public class TestConfigurationLoader {
 		this.helper.writeNewFileWithText(PROPERTIES_FILE_PATH, textFile);
 		new ConfigurationLoader();
 		CustomFilterException e = new CustomFilterException();
-		String text = "There was a CustomFilterException when initializing filter: " + e.getMessage() + "\n Check your configuration file"; 
+		String text = "There was a CustomFilterException when initializing filter: " + e.getMessage() + "\n Check your configuration file";
 		assertTrue(errContent.toString().contains(text));
 	}
 

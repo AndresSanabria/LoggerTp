@@ -65,7 +65,7 @@ public class TestLogger {
 		assertTrue(helper.stringInFile(text1, file));
 		assertTrue(helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
 	public final void logInLevelTraceWithExceptionToThrowNotThrown() throws Throwable {
 		File file = new File(LOG_PATH);
@@ -78,8 +78,8 @@ public class TestLogger {
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
 		Logger logger = new Logger(DEFAULT_NAME);
 		OutputException e = new OutputException();
-		logger.trace(MESSAGE,e);
-		logger.info(MESSAGE,e);
+		logger.trace(MESSAGE, e);
+		logger.info(MESSAGE, e);
 		String text1 = "Test" + " - TRACE - " + MESSAGE;
 		String text2 = "Test" + " - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text1, file));
@@ -104,7 +104,7 @@ public class TestLogger {
 		assertTrue(helper.stringInFile(text1, file));
 		assertTrue(helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
 	public final void logInLevelDebugWithExceptionToThrowNotThrown() throws Throwable {
 		File file = new File(LOG_PATH);
@@ -117,8 +117,8 @@ public class TestLogger {
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
 		Logger logger = new Logger(DEFAULT_NAME);
 		OutputException e = new OutputException();
-		logger.debug(MESSAGE,e);
-		logger.info(MESSAGE,e);
+		logger.debug(MESSAGE, e);
+		logger.info(MESSAGE, e);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text1, file));
@@ -143,7 +143,7 @@ public class TestLogger {
 		assertFalse(helper.stringInFile(text1, file));
 		assertTrue(helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
 	public final void logInLevelInfoWithExceptionToThrowNotThrown() throws Throwable {
 		File file = new File(LOG_PATH);
@@ -156,8 +156,8 @@ public class TestLogger {
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
 		Logger logger = new Logger(DEFAULT_NAME);
 		OutputException e = new OutputException();
-		logger.debug(MESSAGE,e);
-		logger.info(MESSAGE,e);
+		logger.debug(MESSAGE, e);
+		logger.info(MESSAGE, e);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - INFO - " + MESSAGE;
 		assertFalse(helper.stringInFile(text1, file));
@@ -182,7 +182,7 @@ public class TestLogger {
 		assertFalse(helper.stringInFile(text1, file));
 		assertTrue(helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
 	public final void logInLevelWarnWithExceptionToThrowNotThrown() throws Throwable {
 		File file = new File(LOG_PATH);
@@ -195,8 +195,8 @@ public class TestLogger {
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
 		Logger logger = new Logger(DEFAULT_NAME);
 		OutputException e = new OutputException();
-		logger.debug(MESSAGE,e);
-		logger.warn(MESSAGE,e);
+		logger.debug(MESSAGE, e);
+		logger.warn(MESSAGE, e);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - WARN - " + MESSAGE;
 		assertFalse(helper.stringInFile(text1, file));
@@ -221,7 +221,7 @@ public class TestLogger {
 		assertFalse(helper.stringInFile(text1, file));
 		assertTrue(helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
 	public final void logInLevelErrorWithExceptionToThrowNotThrown() throws Throwable {
 		File file = new File(LOG_PATH);
@@ -234,8 +234,8 @@ public class TestLogger {
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
 		Logger logger = new Logger(DEFAULT_NAME);
 		OutputException e = new OutputException();
-		logger.debug(MESSAGE,e);
-		logger.error(MESSAGE,e);
+		logger.debug(MESSAGE, e);
+		logger.error(MESSAGE, e);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - ERROR - " + MESSAGE;
 		assertFalse(helper.stringInFile(text1, file));
@@ -260,7 +260,7 @@ public class TestLogger {
 		assertFalse(helper.stringInFile(text1, file));
 		assertTrue(helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
 	public final void logInLevelFatalWithExceptionToThrowNotThrown() throws Throwable {
 		File file = new File(LOG_PATH);
@@ -273,8 +273,8 @@ public class TestLogger {
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
 		Logger logger = new Logger(DEFAULT_NAME);
 		OutputException e = new OutputException();
-		logger.debug(MESSAGE,e);
-		logger.fatal(MESSAGE,e);
+		logger.debug(MESSAGE, e);
+		logger.fatal(MESSAGE, e);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - FATAL - " + MESSAGE;
 		assertFalse(helper.stringInFile(text1, file));
@@ -299,7 +299,7 @@ public class TestLogger {
 		assertFalse(helper.stringInFile(text1, file));
 		assertFalse(helper.stringInFile(text2, file));
 	}
-	
+
 	@Test
 	public final void logInLevelOffWithExceptionToThrowNotThrown() throws Throwable {
 		File file = new File(LOG_PATH);
@@ -312,14 +312,14 @@ public class TestLogger {
 		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
 		Logger logger = new Logger(DEFAULT_NAME);
 		OutputException e = new OutputException();
-		logger.debug(MESSAGE,e);
-		logger.info(MESSAGE,e);
+		logger.debug(MESSAGE, e);
+		logger.info(MESSAGE, e);
 		String text1 = "Test" + " - DEBUG - " + MESSAGE;
 		String text2 = "Test" + " - INFO - " + MESSAGE;
 		assertFalse(helper.stringInFile(text1, file));
 		assertFalse(helper.stringInFile(text2, file));
 	}
-	
+
 //	@Test(expected = OutputException.class)
 //	public final void logInLevelFatalWithExceptionToThrowThrown() throws Throwable {
 //		File file = new File(LOG_PATH);

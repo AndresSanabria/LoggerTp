@@ -106,7 +106,7 @@ public class TestSimpleFormatter {
 
 	@Test
 	public final void simpleFormatterWithoutMsg() {
-		SimpleFormatter formatter = new SimpleFormatter("", "LoggerName",DISTANCE_TEST_GIVE_FORMAT);
+		SimpleFormatter formatter = new SimpleFormatter("", "LoggerName", DISTANCE_TEST_GIVE_FORMAT);
 		String formattedMsg = formatter.giveFormat(new Level(levelValues.WARN.name(), levelValues.WARN.ordinal()), MESSAGE);
 		assertEquals(formattedMsg, "");
 	}
