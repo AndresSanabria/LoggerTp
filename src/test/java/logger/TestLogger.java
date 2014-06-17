@@ -320,7 +320,7 @@ public class TestLogger {
 		assertFalse(helper.stringInFile(text2, file));
 	}
 	
-//	@Test(expected = OutputException.class)
+//	TODO:@Test(expected = OutputException.class)
 //	public final void logInLevelFatalWithExceptionToThrowThrown() throws Throwable {
 //		File file = new File(LOG_PATH);
 //		file.delete();

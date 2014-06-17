@@ -48,7 +48,7 @@ public class TestCustomOutput {
 		System.setOut(null);
 	}
 	
-//	@Test(expected = CustomOutputException.class)
+//	TODO:@Test(expected = CustomOutputException.class)
 //	public final void createCustomFileOutputWithInvalidArgumentsThrowsException() throws CustomOutputException, OutputException {
 //		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 //		System.setOut(new PrintStream(outContent));
