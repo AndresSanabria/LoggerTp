@@ -1,0 +1,5 @@
+level = DEBUG
+messageFormat = Properties %n %p %n %m
+messageSeparator = -
+logToFiles = log.txt
+logToConsole = false
