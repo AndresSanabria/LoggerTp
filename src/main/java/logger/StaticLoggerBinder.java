@@ -33,7 +33,7 @@ public class StaticLoggerBinder implements LoggerFactoryBinder {
 	/**
 	 * Binding specific code.
 	 */
-	private static final String LOGGER_FACTORY_CLASS_STR = logger.LoggerFactory.class
+	private static final String LOGGER_FACTORY_CLASS_STR = logger.LoggerSLF4JFactory.class
 			.getName();
 
 	/**
@@ -44,7 +44,7 @@ public class StaticLoggerBinder implements LoggerFactoryBinder {
 
 	private StaticLoggerBinder() {
 		// Binding specific code:
-		loggerFactory = new logger.LoggerFactory();
+		loggerFactory = new logger.LoggerSLF4JFactory();
 	}
 
 	public ILoggerFactory getLoggerFactory() {

@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 /**
  * The Class LoggerFactory generates the SLF4J Logger.
  */
-public class LoggerFactory implements ILoggerFactory {
+public class LoggerSLF4JFactory implements ILoggerFactory {
 
 	/** The map with loggers. */
 	private Map<String, Logger> loggerMap;
@@ -18,7 +18,7 @@ public class LoggerFactory implements ILoggerFactory {
 	/**
 	 * Instantiates a new logger factory.
 	 */
-	public LoggerFactory() {
+	public LoggerSLF4JFactory() {
 		loggerMap = new HashMap<String, Logger>();
 	}
 

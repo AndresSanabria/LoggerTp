@@ -320,22 +320,4 @@ public class TestLogger {
 		assertFalse(helper.stringInFile(text2, file));
 	}
 
-//	TODO: @Test(expected = OutputException.class)
-//	public final void logInLevelFatalWithExceptionToThrowThrown() throws Throwable {
-//		File file = new File(LOG_PATH);
-//		file.delete();
-//		String textFile =	"level = FATAL\n"
-//							+ "messageFormat = Test %n %p %n %m\n"
-//							+ "messageSeparator = -\n"
-//							+ "logToFiles = log2.txt\n"
-//							+ "logToConsole = true";
-//		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
-//		Logger logger = new Logger(DEFAULT_NAME);
-//		OutputException e = new OutputException();
-//		File output_file = new File("log2.txt");
-//		output_file.setReadOnly();
-//		logger.fatal(MESSAGE,e);
-//		output_file.delete();
-//	}
-
 }

@@ -44,6 +44,7 @@ public class LoggerAdapter extends MarkerIgnoringBase {
 			this.logger.debug(message, exception);
 		} catch (Throwable e) {
 			e.printStackTrace();
+			System.err.println("Error while logging:" + exception + " Exception thrown");
 		}
 	}
 
@@ -73,6 +74,7 @@ public class LoggerAdapter extends MarkerIgnoringBase {
 			this.logger.error(message, exception);
 		} catch (Throwable e) {
 			e.printStackTrace();
+			System.err.println("Error while logging:" + exception + " Exception thrown");
 		}
 	}
 
@@ -102,6 +104,7 @@ public class LoggerAdapter extends MarkerIgnoringBase {
 			this.logger.info(message, exception);
 		} catch (Throwable e) {
 			e.printStackTrace();
+			System.err.println("Error while logging:" + exception + " Exception thrown");
 		}
 	}
 
@@ -112,31 +115,26 @@ public class LoggerAdapter extends MarkerIgnoringBase {
 
 	@Override
 	public final boolean isDebugEnabled() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public final boolean isErrorEnabled() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public final boolean isInfoEnabled() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public final boolean isTraceEnabled() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public final boolean isWarnEnabled() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -161,6 +159,7 @@ public class LoggerAdapter extends MarkerIgnoringBase {
 			this.logger.trace(message, exception);
 		} catch (Throwable e) {
 			e.printStackTrace();
+			System.err.println("Error while logging:" + exception + " Exception thrown");
 		}
 	}
 
@@ -190,6 +189,7 @@ public class LoggerAdapter extends MarkerIgnoringBase {
 			this.logger.warn(message, exception);
 		} catch (Throwable e) {
 			e.printStackTrace();
+			System.err.println("Error while logging:" + exception + " Exception thrown");
 		}
 	}
 
