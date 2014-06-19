@@ -63,7 +63,7 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		GenericLogger logger = config.getLogger();
 		LevelManager levelManager = new LevelManager();
-		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		logger.log(levelManager.getLevel("INFO"), MESSAGE, null);
 		String text = "Properties - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text, file));
 	}
@@ -85,7 +85,7 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		GenericLogger logger = config.getLogger();
 		LevelManager levelManager = new LevelManager();
-		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		logger.log(levelManager.getLevel("INFO"), MESSAGE, null);
 		String text = "XML - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text, logFile));
 	}
@@ -101,7 +101,7 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		GenericLogger logger = config.getLogger();
 		LevelManager levelManager = new LevelManager();
-		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		logger.log(levelManager.getLevel("INFO"), MESSAGE, null);
 		assertFalse(logFile.exists());
 	}
 
@@ -134,7 +134,7 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader(PROPERTIES_FILE_PATH);
 		GenericLogger logger = config.getLogger();
 		LevelManager levelManager = new LevelManager();
-		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		logger.log(levelManager.getLevel("INFO"), MESSAGE, null);
 		String text = "Properties - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text, logFile));
 	}
@@ -154,7 +154,7 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader(XML_FILE_PATH);
 		GenericLogger logger = config.getLogger();
 		LevelManager levelManager = new LevelManager();
-		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		logger.log(levelManager.getLevel("INFO"), MESSAGE, null);
 		String text = "XML - INFO - " + MESSAGE;
 		assertTrue(helper.stringInFile(text, logFile));
 	}
@@ -187,7 +187,7 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		GenericLogger logger = config.getLogger();
 		LevelManager levelManager = new LevelManager();
-		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
+		logger.log(levelManager.getLevel("INFO"), MESSAGE, null);
 		assertTrue(logFile.exists());
 	}
 
@@ -221,8 +221,8 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		GenericLogger logger = config.getLogger();
 		LevelManager levelManager = new LevelManager();
-		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
-		logger.log(new Level("TRACE", levelManager.getLevelValue("TRACE")), MESSAGE, null);
+		logger.log(levelManager.getLevel("INFO"), MESSAGE, null);
+		logger.log(levelManager.getLevel("TRACE"), MESSAGE, null);
 		String text1 = "Properties" + " - INFO - " + MESSAGE;
 		String text2 = "Properties" + " - TRACE - " + MESSAGE;
 		assertTrue(helper.stringInFile(text1, logFile));
@@ -260,8 +260,8 @@ public class TestConfigurationLoader {
 		ConfigurationLoader config = new ConfigurationLoader();
 		GenericLogger logger = config.getLogger();
 		LevelManager levelManager = new LevelManager();
-		logger.log(new Level("INFO", levelManager.getLevelValue("INFO")), MESSAGE, null);
-		logger.log(new Level("TRACE", levelManager.getLevelValue("TRACE")), MESSAGE, null);
+		logger.log(levelManager.getLevel("INFO"), MESSAGE, null);
+		logger.log(levelManager.getLevel("TRACE"), MESSAGE, null);
 		String text1 = "Properties" + " - INFO - " + MESSAGE;
 		String text2 = "Properties" + " - TRACE - " + MESSAGE;
 		assertTrue(helper.stringInFile(text1, logFile));

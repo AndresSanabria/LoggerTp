@@ -42,13 +42,13 @@ public class Logger implements Logging {
 
 	@Override
 	public final void trace(final String logMsg, final Throwable exception) throws Throwable {
-		this.genericLogger.log(new Level("TRACE", levelManager.getLevelValue("TRACE")), logMsg, exception);
+		this.genericLogger.log(levelManager.getLevel("TRACE"), logMsg, exception);
 	}
 
 	@Override
 	public final void trace(final String logMsg) {
 		try {
-			this.genericLogger.log(new Level("TRACE", levelManager.getLevelValue("TRACE")), logMsg, null);
+			this.genericLogger.log(levelManager.getLevel("TRACE"), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -56,13 +56,13 @@ public class Logger implements Logging {
 
 	@Override
 	public final void debug(final String logMsg, final Throwable exception) throws Throwable {
-		this.genericLogger.log(new Level("DEBUG", levelManager.getLevelValue("DEBUG")), logMsg, exception);
+		this.genericLogger.log(levelManager.getLevel("DEBUG"), logMsg, exception);
 	}
 
 	@Override
 	public final void debug(final String logMsg) {
 		try {
-			this.genericLogger.log(new Level("DEBUG", levelManager.getLevelValue("DEBUG")), logMsg, null);
+			this.genericLogger.log(levelManager.getLevel("DEBUG"), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -70,13 +70,13 @@ public class Logger implements Logging {
 
 	@Override
 	public final void info(final String logMsg, final Throwable exception) throws Throwable {
-		this.genericLogger.log(new Level("INFO", levelManager.getLevelValue("INFO")), logMsg, exception);
+		this.genericLogger.log(levelManager.getLevel("INFO"), logMsg, exception);
 	}
 
 	@Override
 	public final void info(final String logMsg) {
 		try {
-			this.genericLogger.log(new Level("INFO", levelManager.getLevelValue("INFO")), logMsg, null);
+			this.genericLogger.log(levelManager.getLevel("INFO"), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -84,13 +84,13 @@ public class Logger implements Logging {
 
 	@Override
 	public final void warn(final String logMsg, final Throwable exception) throws Throwable {
-		this.genericLogger.log(new Level("WARN", levelManager.getLevelValue("WARN")), logMsg, exception);
+		this.genericLogger.log(levelManager.getLevel("WARN"), logMsg, exception);
 	}
 
 	@Override
 	public final void warn(final String logMsg) {
 		try {
-			this.genericLogger.log(new Level("WARN", levelManager.getLevelValue("WARN")), logMsg, null);
+			this.genericLogger.log(levelManager.getLevel("WARN"), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -98,13 +98,13 @@ public class Logger implements Logging {
 
 	@Override
 	public final void error(final String logMsg, final Throwable exception) throws Throwable {
-		this.genericLogger.log(new Level("ERROR", levelManager.getLevelValue("ERROR")), logMsg, exception);
+		this.genericLogger.log(levelManager.getLevel("ERROR"), logMsg, exception);
 	}
 
 	@Override
 	public final void error(final String logMsg) {
 		try {
-			this.genericLogger.log(new Level("ERROR", levelManager.getLevelValue("ERROR")), logMsg, null);
+			this.genericLogger.log(levelManager.getLevel("ERROR"), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
@@ -112,16 +112,21 @@ public class Logger implements Logging {
 
 	@Override
 	public final void fatal(final String logMsg, final Throwable exception) throws Throwable {
-		this.genericLogger.log(new Level("FATAL", levelManager.getLevelValue("FATAL")), logMsg, exception);
+		this.genericLogger.log(levelManager.getLevel("FATAL"), logMsg, exception);
 	}
 
 	@Override
 	public final void fatal(final String logMsg) {
 		try {
-			this.genericLogger.log(new Level("FATAL", levelManager.getLevelValue("FATAL")), logMsg, null);
+			this.genericLogger.log(levelManager.getLevel("FATAL"), logMsg, null);
 		} catch (Throwable e) {
 			// already handled exception in log method
 		}
+	}
+	
+	@Override
+	public Boolean shouldLog(final Level level) {
+		return this.genericLogger.shouldLog(level);
 	}
 
 }

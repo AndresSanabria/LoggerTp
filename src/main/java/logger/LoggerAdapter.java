@@ -13,6 +13,8 @@ public class LoggerAdapter extends MarkerIgnoringBase {
 	/** The logger. */
 	private Logger logger;
 
+	/** The Level manager. */
+	private LevelManager levelManager = new LevelManager();
 
 	/**
 	 * Instantiates a new logger adapter.
@@ -115,27 +117,27 @@ public class LoggerAdapter extends MarkerIgnoringBase {
 
 	@Override
 	public final boolean isDebugEnabled() {
-		return false;
+		return this.logger.shouldLog(levelManager.getLevel("DEBUG"));
 	}
 
 	@Override
 	public final boolean isErrorEnabled() {
-		return false;
+		return this.logger.shouldLog(levelManager.getLevel("ERROR"));
 	}
 
 	@Override
 	public final boolean isInfoEnabled() {
-		return false;
+		return this.logger.shouldLog(levelManager.getLevel("INFO"));
 	}
 
 	@Override
 	public final boolean isTraceEnabled() {
-		return false;
+		return this.logger.shouldLog(levelManager.getLevel("TRACE"));
 	}
 
 	@Override
 	public final boolean isWarnEnabled() {
-		return false;
+		return this.logger.shouldLog(levelManager.getLevel("WARN"));
 	}
 
 	@Override

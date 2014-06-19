@@ -27,7 +27,6 @@ public class GenericLogger {
 	/** The configuration level. */
 	private Level level;
 
-
 	/**
 	 * Instantiates a new generic logger.
 	 *
@@ -91,7 +90,7 @@ public class GenericLogger {
 	 * @param level the level to check if should log
 	 * @return true if should log, otherwise false
 	 */
-	private Boolean shouldLog(final Level level) {
+	public Boolean shouldLog(final Level level) {
 		return this.level.isGreaterThan(level);
 	}
 

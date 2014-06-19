@@ -521,5 +521,23 @@ public class TestLoggerSLF4J{
 		output_file.delete();
 		assertTrue(errContent.toString().contains("Error while logging:" + e + " Exception thrown"));
 	}
+	
+	@Test
+	public final void shouldLogInDifferentLevels() throws OutputException, IOException {
+		File file = new File(LOG_PATH);
+		file.delete();
+		String textFile =	"level = WARN\n"
+							+ "messageFormat = Test %n %p %n %m\n"
+							+ "messageSeparator = -\n"
+							+ "logToFiles = log.txt\n"
+							+ "logToConsole = true";
+		this.helper.writeNewFileWithText(CONFIG_FILE_PATH, textFile);
+		Logger logger = factory.getLogger("SLF4J Warn Logger");
+		assertTrue(logger.isErrorEnabled());
+		assertTrue(logger.isWarnEnabled());
+		assertFalse(logger.isDebugEnabled());
+		assertFalse(logger.isInfoEnabled());
+		assertFalse(logger.isTraceEnabled());
+	}
 
 }

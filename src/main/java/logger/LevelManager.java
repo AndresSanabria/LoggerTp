@@ -6,7 +6,21 @@ package logger;
 public class LevelManager {
 
 	/** The enum levels. */
-	private enum levels { OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE }
+	private enum levels { 
+ /** The off. */
+ OFF, 
+ /** The fatal. */
+ FATAL, 
+ /** The error. */
+ ERROR, 
+ /** The warn. */
+ WARN, 
+ /** The info. */
+ INFO, 
+ /** The debug. */
+ DEBUG, 
+ /** The trace. */
+ TRACE }
 
 
 	/**
@@ -15,15 +29,15 @@ public class LevelManager {
 	public LevelManager() {
 		super();
 	}
-
+	
 	/**
-	 * Gets the value of a level.
+	 * Gets the level.
 	 *
-	 * @param level the level from which to get the value
-	 * @return the value of the level
+	 * @param String from which to get the Level
+	 * @return the level
 	 */
-	public final int getLevelValue(final String level) {
-		return levels.valueOf(level).ordinal();
+	public final Level getLevel(final String level) {
+		return new Level(level, levels.valueOf(level).ordinal());
 	}
 
 }

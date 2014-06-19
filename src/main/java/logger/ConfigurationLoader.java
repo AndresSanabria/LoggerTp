@@ -176,7 +176,7 @@ public class ConfigurationLoader {
 		Formatter formatter = this.initializeFormatter();
 		String levelName = this.configuration.getLevel();
 		LevelManager levelManager = new LevelManager();
-		Level level = new Level(levelName, levelManager.getLevelValue(levelName));
+		Level level = levelManager.getLevel(levelName);
 		this.logger = new GenericLogger(level, formatter);
 		try {
 			this.initializeOutputs();

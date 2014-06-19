@@ -115,4 +115,12 @@ public interface Logging {
 	 */
 	void fatal(final String logMsg, final Throwable exception) throws Throwable;
 
+	/**
+	 * Should log.
+	 *
+	 * @param level in which to log
+	 * @return the True if logger has to log
+	 */
+	Boolean shouldLog(Level level);
+
 }
